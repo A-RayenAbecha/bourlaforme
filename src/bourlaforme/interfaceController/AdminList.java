@@ -65,6 +65,8 @@ public class AdminList implements Initializable{
     TextField txtNNom;
     @FXML
     TextField txtNPrenom;
+    @FXML
+    Button btnAdd;
     
     AdminController Lc = new AdminController();
 
@@ -118,5 +120,14 @@ public class AdminList implements Initializable{
             AC.updateUser(user);
             resetTableData();
          }
+    }
+    @FXML
+    public void redirectAddUser(Event e) throws IOException{
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/AdminAddUser.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

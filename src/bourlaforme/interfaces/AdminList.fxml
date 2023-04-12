@@ -27,7 +27,12 @@
             <TextField fx:id="txtNEmail" layoutX="28.0" layoutY="343.0" prefHeight="43.0" prefWidth="277.0" promptText="New Email" />
             <TextField fx:id="txtNNom" layoutX="28.0" layoutY="398.0" prefHeight="43.0" prefWidth="277.0" promptText="New Name" />
             <TextField fx:id="txtNPrenom" layoutX="28.0" layoutY="459.0" prefHeight="43.0" prefWidth="277.0" promptText="New Family-NAME" />
-            <Button fx:id="btnupdate" layoutX="112.0" layoutY="582.0" mnemonicParsing="false" onAction="#update" prefHeight="57.0" prefWidth="110.0" style="-fx-background-color: black;" text="Update" textFill="#fffefe">
+            <Button fx:id="btnupdate" layoutX="112.0" layoutY="513.0" mnemonicParsing="false" onAction="#update" prefHeight="57.0" prefWidth="110.0" style="-fx-background-color: black;" text="Update" textFill="#fffefe">
+               <font>
+                  <Font name="Webdings" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAdd" layoutX="112.0" layoutY="579.0" mnemonicParsing="false" onAction="#redirectAddUser" prefHeight="57.0" prefWidth="110.0" style="-fx-background-color: black;" text="AddUser" textFill="#fffefe">
                <font>
                   <Font name="Webdings" size="18.0" />
                </font>

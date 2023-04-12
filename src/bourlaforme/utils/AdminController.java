@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,5 +77,16 @@ public class AdminController {
             DataSource.closeConnection();
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+    
+    public boolean AddUser(User us) throws SQLException{
+        
+        st = DataSource.openConnection().createStatement();
+        System.out.println(us.getEmail()+"+"+us.getPassword()+"+"+us.getNom()+"+"+us.getPrenom());
+        String[] rolesArray = {us.getRole()};
+        String rolesString = Arrays.toString(rolesArray);
+        st.executeUpdate("insert into user(email,password,roles,nom,prenom,is_coach,approved) values('"+us.getEmail()+"','"+us.getPassword()+"','"+rolesString+"','"+us.getNom()+"','"+us.getPrenom()+"','"+us.getIs_coach()+"','"+us.getApproved()+"')");
+
+        return true;
     }
 }

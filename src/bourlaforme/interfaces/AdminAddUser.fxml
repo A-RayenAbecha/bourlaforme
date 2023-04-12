@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bourlaforme.interfaceController.AdminAddUserController">
+   <children>
+      <Pane prefHeight="508.0" prefWidth="409.0" style="-fx-background-color: ababac;">
+         <children>
+            <TextField fx:id="txtEmail" layoutX="29.0" layoutY="39.0" prefHeight="51.0" prefWidth="351.0" promptText="Enter E-mail" />
+            <TextField fx:id="txtPrenom" layoutX="29.0" layoutY="185.0" prefHeight="51.0" prefWidth="351.0" promptText="Enter Family-Name" />
+            <TextField fx:id="txtNom" layoutX="29.0" layoutY="110.0" prefHeight="51.0" prefWidth="351.0" promptText="Enter Name" />
+            <PasswordField fx:id="txtPassword" layoutX="29.0" layoutY="258.0" prefHeight="51.0" prefWidth="351.0" promptText="Enter Password" />
+            <Label layoutX="80.0" layoutY="339.0" prefHeight="24.0" prefWidth="60.0" text="Role:">
+               <font>
+                  <Font name="Webdings" size="18.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="rb_client" layoutX="164.0" layoutY="339.0" mnemonicParsing="false" text="Client">
+               <font>
+                  <Font name="Webdings" size="18.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rb_coach" layoutX="164.0" layoutY="373.0" mnemonicParsing="false" text="Coach">
+               <font>
+                  <Font name="Webdings" size="18.0" />
+               </font>
+            </RadioButton>
+            <Button fx:id="btnSignUp" layoutX="119.0" layoutY="408.0" mnemonicParsing="false" onAction="#CreationSuccess" prefHeight="33.0" prefWidth="185.0" style="-fx-background-color: black;" text="AddUser" textFill="WHITE">
+               <font>
+                  <Font name="Webdings" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCancel" layoutX="119.0" layoutY="459.0" mnemonicParsing="false" onAction="#redirectAdminList" prefHeight="33.0" prefWidth="185.0" style="-fx-background-color: transparent;" text="Cancel" textFill="#0d0000">
+               <font>
+                  <Font name="Webdings" size="19.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
