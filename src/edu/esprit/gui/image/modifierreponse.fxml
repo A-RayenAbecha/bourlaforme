@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.image.ModifierreponseController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffca32" height="575.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="423.0" layoutX="328.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="425.0" />
+      <Label layoutX="435.0" layoutY="21.0" prefHeight="65.0" prefWidth="195.0" text="Modifier Reponse" textAlignment="JUSTIFY" textFill="#ffca32">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="395.0" layoutY="125.0" prefHeight="17.0" prefWidth="59.0" text="noms">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="395.0" layoutY="320.0" text="horaires">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="395.0" layoutY="255.0" text="aviss">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="395.0" layoutY="190.0" text="motiff">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
+      
+      <TextField fx:id="noms2" layoutX="502.0" layoutY="121.0" />
+      <TextField fx:id="motiff2" layoutX="502.0" layoutY="186.0" />
+      <TextField fx:id="aviss2" layoutX="512.0" layoutY="251.0" />
+      
+      <DatePicker fx:id="horaires2" layoutX="510.0" layoutY="316.0" />
+      <Button fx:id="enregitrementbtn" layoutX="651.0" layoutY="536.0" mnemonicParsing="false" onAction="#enregitrement" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: #1032c9;" text="enregitrement" textFill="#f5efef" />
+      <Button fx:id="annuler" layoutX="328.0" layoutY="536.0" mnemonicParsing="false" onAction="#annuler" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: #1032c9;" text="annuler" textFill="#fffbfb" />
+   </children>
+</AnchorPane>

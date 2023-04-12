@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="444.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.image.AfficherreponseController">
+   <children>
+      <TableView fx:id="tv" layoutX="247.0" layoutY="104.0" prefHeight="200.0" prefWidth="451.0">
+        <columns>
+          <TableColumn fx:id="sujet" prefWidth="75.0" text="sujet" />
+          <TableColumn fx:id="motif" prefWidth="98.0" text="motif" />
+            <TableColumn fx:id="avis" prefWidth="75.0" text="avis" />
+            <TableColumn fx:id="date" prefWidth="89.0" text="date" />
+            
+        </columns>
+      </TableView>
+      <Button fx:id="supprimer" layoutX="247.0" layoutY="361.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: #1032c9;" text="supprimer" textFill="#f5f0f0" />
+      <Button fx:id="modifier" layoutX="560.0" layoutY="361.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: #1032c9;" text="modifier" textFill="#ebe4e4" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffca32" height="445.0" layoutX="-7.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="244.0" />
+      <Label layoutX="391.0" layoutY="44.0" text="Afficher Reponse" textFill="#ffca32">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="filtree" layoutX="-7.0" onKeyPressed="#handlesearch" prefHeight="44.0" prefWidth="244.0" promptText="Rechercher...." style="-fx-background-color: black;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
