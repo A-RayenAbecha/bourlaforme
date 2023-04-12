@@ -28,6 +28,7 @@ import bourlaforme.utils.AdminController;
 import java.sql.SQLException;
 import java.sql.SQLDataException;
 import java.util.List;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -56,6 +57,14 @@ public class AdminList implements Initializable{
     private TableColumn<?, ?> description;
     @FXML
     Button btnsupp;
+    @FXML
+    Button btnupdate;
+    @FXML
+    TextField txtNEmail;
+    @FXML
+    TextField txtNNom;
+    @FXML
+    TextField txtNPrenom;
     
     AdminController Lc = new AdminController();
 
@@ -95,7 +104,19 @@ public class AdminList implements Initializable{
             resetTableData();
  
         }
- 
+         
     }
     
+    @FXML
+    private void update(ActionEvent event) throws SQLException {
+         if (event.getSource() == btnupdate) {
+            User user = table.getSelectionModel().getSelectedItem();
+            user.setEmail(txtNEmail.getText());
+            user.setNom(txtNNom.getText());
+            user.setPrenom(txtNPrenom.getText());
+            AdminController AC = new AdminController();
+            AC.updateUser(user);
+            resetTableData();
+         }
+    }
 }

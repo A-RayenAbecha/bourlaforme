@@ -62,24 +62,19 @@ public class AdminController {
         }
     }
      
-    public List<User> updateUser(User u ){
-        List<User> utilisateur = new ArrayList<>();
-        String sql="UPDATE user SET id=?,email=?,nom=?,prenom=?,password=? WHERE id ="+ u.getId();
+    public void updateUser(User u){
          try {
-            ste=connection.prepareStatement(sql);
-            ste.setInt(1, u.getId());
-            ste.setString(2, u.getEmail());
-            ste.setString(6, u.getNom());
-            ste.setString(5, u.getPrenom());
-            ste.setString(4, u.getPassword());
-            ste.executeUpdate();
-            System.out.println("Utilisateur Modifiée");
+            Connection conn = DataSource.openConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE user SET email=?, nom=?, prenom=? WHERE id=?");
+            ps.setString(1, u.getEmail());
+            ps.setString(2, u.getNom());
+            ps.setString(3, u.getPrenom());
+            ps.setInt(4, u.getId());
+            ps.executeUpdate();
+            DataSource.closeConnection();
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
-        return utilisateur;
-        
-        
-      }
+            DataSource.closeConnection();
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
 }
