@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="661.0" prefWidth="1596.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bourlaforme.interfaceController.AdminList">
+   <children>
+      <Pane layoutX="1261.0" prefHeight="659.0" prefWidth="334.0" style="-fx-background-color: ababac;">
+         <children>
+            <ImageView fitHeight="262.0" fitWidth="245.0" layoutX="52.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Logo.PNG" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtName" layoutX="18.0" layoutY="305.0" prefHeight="43.0" prefWidth="291.0" promptText="Enter Name" />
+            <Button fx:id="btnsupp" layoutX="109.0" layoutY="415.0" mnemonicParsing="false" onAction="#supp" prefHeight="57.0" prefWidth="110.0" style="-fx-background-color: black;" text="Delete" textFill="#fffefe">
+               <font>
+                  <Font name="Webdings" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="7.0" prefHeight="659.0" prefWidth="1252.0">
+         <children>
+            <TableView fx:id="table" prefHeight="659.0" prefWidth="1254.0">
+               <columns>
+                  <TableColumn fx:id="id" prefWidth="125.60003662109375" text="id" />
+                  <TableColumn fx:id="email" prefWidth="177.5999755859375" text="email" />
+                  <TableColumn fx:id="nom" prefWidth="122.4000244140625" text="Name" />
+                  <TableColumn fx:id="prenom" prefWidth="159.20001220703125" text="Family-Name" />
+                  <TableColumn fx:id="certificates" prefWidth="159.99993896484375" text="certificates" />
+                  <TableColumn fx:id="specialite" prefWidth="159.99993896484375" text="specialite" />
+                  <TableColumn fx:id="experiance" prefWidth="159.99993896484375" text="experiance" />
+                  <TableColumn fx:id="description" prefWidth="185.5999755859375" text="description" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
