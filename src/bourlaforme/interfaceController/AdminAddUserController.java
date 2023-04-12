@@ -21,6 +21,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -45,7 +46,7 @@ public class AdminAddUserController {
     private Button btnSignUp;
     @FXML
     private Button btnCancel;
-
+    
     
     User us= new User();
     AdminController AC= new AdminController();

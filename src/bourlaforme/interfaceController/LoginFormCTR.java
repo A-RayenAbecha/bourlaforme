@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -48,6 +49,44 @@ public class LoginFormCTR {
     @FXML
     RadioButton rb_coach;
     
+    /*
+    public void initialize() {
+        
+        txtNom.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z]+")) {
+                txtNom.setText(oldValue);
+                showAlert("First name should contain only letters.");
+            }
+        });
+        txtPrenom.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z]+")) {
+                txtPrenom.setText(oldValue);
+                showAlert("Last name should contain only letters.");
+            }
+        });
+        txtEmail.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+                txtEmail.setText(oldValue);
+                showAlert("Please enter a valid email address.");
+            }
+        });
+        txtPassword.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+                txtPassword.setText(oldValue);
+                showAlert("Password should be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, one special character, and no whitespaces.");
+            }
+        });
+    
+    }
+    
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Input Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    */
     User us= new User();
     LoginController Lc = new LoginController();
     
