@@ -112,15 +112,31 @@ public class AdminList implements Initializable{
     
     @FXML
     private void update(ActionEvent event) throws SQLException {
-         if (event.getSource() == btnupdate) {
-            User user = table.getSelectionModel().getSelectedItem();
-            user.setEmail(txtNEmail.getText());
-            user.setNom(txtNNom.getText());
-            user.setPrenom(txtNPrenom.getText());
-            AdminController AC = new AdminController();
-            AC.updateUser(user);
-            resetTableData();
-         }
+        if(txtNEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+            if(txtNNom.getText().matches("[a-zA-Z]+")){
+                if(txtNPrenom.getText().matches("[a-zA-Z]+")){
+                    if (event.getSource() == btnupdate) {
+                       User user = table.getSelectionModel().getSelectedItem();
+                       user.setEmail(txtNEmail.getText());
+                       user.setNom(txtNNom.getText());
+                       user.setPrenom(txtNPrenom.getText());
+                       AdminController AC = new AdminController();
+                       AC.updateUser(user);
+                       resetTableData();
+                    }
+                }else
+                    showAlert("Family name should contain only letters.");
+            }else
+                showAlert("First name should contain only letters.");
+        }else
+            showAlert("Please enter a valid email address.");
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Input Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
     @FXML
     public void redirectAddUser(Event e) throws IOException{

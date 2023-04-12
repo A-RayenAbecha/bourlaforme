@@ -97,19 +97,31 @@ public class LoginFormCTR {
         
         us.setEmail(txtEmail.getText());
         us.setPassword(txtPassword.getText());
-        
-        if(Lc.isLoggedIn(us)){
-            Node node = (Node) e.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            
-            Parent root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/Home.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else
-            labelMSG.setText("email or password is uncorrect");
-        
+        if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+            if(txtPassword.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")){
+                if(Lc.isLoggedIn(us)){
+                    Node node = (Node) e.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+
+                    Parent root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/Home.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+                else
+                    labelMSG.setText("email or password is uncorrect");
+            }
+            else
+                showAlert("Please enter a password.");
+        }else
+            showAlert("Please enter a valid email address.");
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Input Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
     public void redirectSignUp(Event e) throws IOException{
         Node node = (Node) e.getSource();
@@ -133,8 +145,8 @@ public class LoginFormCTR {
     public void CreationSuccess(Event e) throws SQLException, IOException{
         us.setEmail(txtEmail.getText());
         us.setPassword(txtPassword.getText());
-        us.setNom(txtPrenom.getText());
-        us.setPrenom(txtNom.getText());
+        us.setNom(txtNom.getText());
+        us.setPrenom(txtPrenom.getText());
         toggleGroup = new ToggleGroup();
         rb_client.setToggleGroup(toggleGroup);
         rb_coach.setToggleGroup(toggleGroup);
@@ -154,16 +166,27 @@ public class LoginFormCTR {
                 us.setApproved(0);
             }
         });
-        if(Lc.RegisterAccount(us)){
-            Node node = (Node) e.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            
-            Parent root = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/Home.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-          
+        if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+            if(txtNom.getText().matches("[a-zA-Z]+")){
+                if(txtPrenom.getText().matches("[a-zA-Z]+")){
+                    if(txtPassword.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")){
+                        if(Lc.RegisterAccount(us)){
+                            Node node = (Node) e.getSource();
+                            Stage stage = (Stage) node.getScene().getWindow();
+
+                            Parent root = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/Home.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        }
+                    }else
+                        showAlert("Please enter a password.");
+                }else
+                    showAlert("Family name should contain only letters.");
+            }else
+                showAlert("First name should contain only letters.");
+        }else
+            showAlert("Please enter a valid email address.");
     }
         
 }
