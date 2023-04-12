@@ -98,7 +98,7 @@ public class LoginFormCTR {
         us.setEmail(txtEmail.getText());
         us.setPassword(txtPassword.getText());
         if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
-            if(txtPassword.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")){
+            if(txtPassword.getText().matches("^.{6,}$")){
                 if(Lc.isLoggedIn(us)){
                     Node node = (Node) e.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
@@ -169,7 +169,7 @@ public class LoginFormCTR {
         if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
             if(txtNom.getText().matches("[a-zA-Z]+")){
                 if(txtPrenom.getText().matches("[a-zA-Z]+")){
-                    if(txtPassword.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")){
+                    if(txtPassword.getText().matches("^.{6,}$")){
                         if(Lc.RegisterAccount(us)){
                             Node node = (Node) e.getSource();
                             Stage stage = (Stage) node.getScene().getWindow();
