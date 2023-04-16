@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+////
 
 import java.io.IOException;
 import java.net.URL;
@@ -132,7 +133,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
    
-        connectedUser = new User(2);
+        connectedUser = new User(4);
     }
 
     void displaySessions(List<Seance> seances) throws IOException, SQLException {

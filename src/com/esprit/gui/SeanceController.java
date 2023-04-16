@@ -68,6 +68,8 @@ public class SeanceController implements Initializable {
         reservationService.ajouter(reservation);
         // Afficher une alerte de succès
         reserver.setDisable(true);
+        reserver.setText("groupe complet");
+         reserver.prefWidthProperty().bind(reserver.textProperty().length().multiply(7));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Réservation ajoutée");
         alert.setHeaderText(null);
@@ -98,8 +100,14 @@ public class SeanceController implements Initializable {
                 "-fx-background-color: #fff;"
                 );
         // Vérification de l'existence d'une réservation pour cette séance et cet utilisateur
-        if (reservationService.existeReservation(seance.getId(), user.getId()) || nbr_reser==seance.getNbr_grp()) {
+        if (reservationService.existeReservation(seance.getId(), user.getId())) {
             reserver.setDisable(true);
+            reserver.setText("vous avez deja reservé");
+            reserver.prefWidthProperty().bind(reserver.textProperty().length().multiply(7));
+
+        } else if (nbr_reser==seance.getNbr_grp()) {
+            reserver.setDisable(true);
+            reserver.setText("groupe complet");
         }
 
 

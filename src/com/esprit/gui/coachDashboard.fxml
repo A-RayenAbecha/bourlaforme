@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="518.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.CoachDashboard">
+<AnchorPane prefHeight="518.0" prefWidth="855.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.gui.CoachDashboard">
    <children>
       <TabPane layoutX="6.0" prefHeight="518.0" prefWidth="846.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -38,7 +38,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="titreField" prefHeight="19.0" prefWidth="225.0" />
+                                          <TextField fx:id="titreField" prefHeight="19.0" prefWidth="225.0" style="-fx-background-radius: 20;" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="414.0">
@@ -150,13 +150,17 @@
                         </Pane>
                         <TableView fx:id="tableViewSeance" layoutX="334.0" layoutY="84.0" onMouseClicked="#selection" prefHeight="270.0" prefWidth="498.0">
                           <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="titrecolumn" prefWidth="75.0" text="titre" />
                               <TableColumn fx:id="descripttion" prefWidth="117.0" text="description" />
                               <TableColumn fx:id="seancesColumn" prefWidth="93.0" text="seances" />
                               <TableColumn fx:id="groupeColumn" prefWidth="141.0" text="groupe" />
                           </columns>
                         </TableView>
+                        <Pane layoutX="334.0" layoutY="366.0" prefHeight="55.0" prefWidth="436.0">
+                           <children>
+                              <Button fx:id="btnInviter" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#inviter" prefHeight="34.0" prefWidth="104.0" text="Inviter" />
+                           </children>
+                        </Pane>
                      </children>
                   </AnchorPane>
             </content>

@@ -17,12 +17,23 @@ import java.util.regex.*;
 
 
 import com.esprit.services.ServiceSeance;
+import java.net.Authenticator;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class CoachDashboard implements Initializable {
 
@@ -41,8 +52,7 @@ public class CoachDashboard implements Initializable {
     @FXML
     private TableColumn<?, ?> groupeColumn;
 
-    @FXML
-    private TableColumn<?, ?> idColumn;
+
 
     @FXML
     private Spinner<Integer> nbr_grpField;
@@ -73,6 +83,9 @@ public class CoachDashboard implements Initializable {
     private TableColumn<?, ?> titrecolumn;
     
     private ObservableList<Seance> seancesdata;
+    
+      @FXML
+    private Button btnInviter;
 
     @FXML
 void ajouter(ActionEvent event) {
@@ -239,6 +252,11 @@ void supprimer(ActionEvent event) {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            sendmail() ;
+        } catch (MessagingException ex) {
+            Logger.getLogger(CoachDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         connectedUser = new User(2);
            ServiceSeance serviceSeance = new ServiceSeance();
            nbr_grpField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 30, 5));
@@ -252,12 +270,56 @@ void supprimer(ActionEvent event) {
             tableViewSeance.setItems(seancesdata);
 
            
-            idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
             titrecolumn.setCellValueFactory(new PropertyValueFactory<>("titre"));
             descripttion.setCellValueFactory(new PropertyValueFactory<>("description"));
             seancesColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_seance"));
             groupeColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_grp"));
 
     }
+    
+    
+    @FXML
+    void inviter(ActionEvent event) {
+        
+   
+    }
+    
+    
+    public void sendmail() throws MessagingException {
+	String host = "smtp.gmail.com";
+	String username = "coachkhalifa31@gmail.com";
+	String password = "jzaisjegdwuldnmk";
+
+	Properties props = new Properties();
+
+        
+        props.put("mail.smtp.user","username"); 
+props.put("mail.smtp.host", "smtp.gmail.com"); 
+props.put("mail.smtp.port", "25"); 
+props.put("mail.debug", "true"); 
+props.put("mail.smtp.auth", "true"); 
+props.put("mail.smtp.starttls.enable","true"); 
+props.put("mail.smtp.EnableSSL.enable","true");
+
+props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
+props.setProperty("mail.smtp.socketFactory.fallback", "false");   
+props.setProperty("mail.smtp.port", "465");   
+props.setProperty("mail.smtp.socketFactory.port", "465"); 
+
+	Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+
+	Message message = new MimeMessage(session);
+	message.setFrom(new InternetAddress("coachkhalifa31@gmail.com"));
+	message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hadil.khalifa@esprit.tn"));
+	message.setSubject("Subject line");
+	message.setText("Body of the email");
+
+	Transport.send(message);
+}
 
 }

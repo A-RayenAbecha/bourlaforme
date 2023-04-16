@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="ox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="348.0" style="-fx-background-color: E4E4E4;" styleClass="shadow" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ReservationController">
+<VBox fx:id="ox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="348.0" style="-fx-background-color: E4E4E4;" styleClass="shadow" stylesheets="@style.css"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ReservationController">
     <children>
         <Pane>
             <children>
