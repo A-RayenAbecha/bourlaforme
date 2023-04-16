@@ -18,6 +18,7 @@ import java.util.regex.*;
 
 import com.esprit.services.ServiceSeance;
 import java.net.Authenticator;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,11 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.co
+import javafx.geometry.Pos;
+import javafx.util.Duration;
+import javax.management.Notification;
 
 public class CoachDashboard implements Initializable {
 
@@ -252,11 +258,7 @@ void supprimer(ActionEvent event) {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            sendmail() ;
-        } catch (MessagingException ex) {
-            Logger.getLogger(CoachDashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     //   sendmail() ;
         connectedUser = new User(2);
            ServiceSeance serviceSeance = new ServiceSeance();
            nbr_grpField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 30, 5));
@@ -274,52 +276,92 @@ void supprimer(ActionEvent event) {
             descripttion.setCellValueFactory(new PropertyValueFactory<>("description"));
             seancesColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_seance"));
             groupeColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_grp"));
+            
+            TrayNotification tray = new Notification("titre","ze", 5);
+tray.setTitle("Title of notification");
+tray.setMessage("Message of notification");
+tray.setNotificationType(NotificationType.INFORMATION);
+tray.setAnimationType(AnimationType.POPUP);
+tray.showAndDismiss(Duration.seconds(5));
+
+            
 
     }
     
     
     @FXML
     void inviter(ActionEvent event) {
-        
+        Seance selectedSeance = tableViewSeance.getSelectionModel().getSelectedItem();
+
+    if (selectedSeance != null) {
+            ServiceSeance serviceSeance = new ServiceSeance();
+            ArrayList<String> recipients;
+            recipients= serviceSeance.getEmailsForSeance(selectedSeance.getId());
+            try {
+                sendmail(recipients);
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("envoie");
+                alert.setHeaderText(null);
+                alert.setContentText("mails envoyés.");
+                alert.showAndWait();
+            } catch (MessagingException ex) {
+                Logger.getLogger(CoachDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
+            } else {
+        // Show an error message if no item was selected
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur d'envoi");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez sélectionner une séance à alerter.");
+        alert.showAndWait();
+    }
    
     }
     
     
-    public void sendmail() throws MessagingException {
-	String host = "smtp.gmail.com";
-	String username = "coachkhalifa31@gmail.com";
-	String password = "jzaisjegdwuldnmk";
+public void sendmail(ArrayList<String> recipients) throws MessagingException {
+    String host = "smtp.gmail.com";
+    String username = "coachkhalifa31@gmail.com";
+    String password = "jzaisjegdwuldnmk";
 
-	Properties props = new Properties();
+    Properties props = new Properties();
 
-        
-        props.put("mail.smtp.user","username"); 
-props.put("mail.smtp.host", "smtp.gmail.com"); 
-props.put("mail.smtp.port", "25"); 
-props.put("mail.debug", "true"); 
-props.put("mail.smtp.auth", "true"); 
-props.put("mail.smtp.starttls.enable","true"); 
-props.put("mail.smtp.EnableSSL.enable","true");
+    props.put("mail.smtp.user","username"); 
+    props.put("mail.smtp.host", "smtp.gmail.com"); 
+    props.put("mail.smtp.port", "25"); 
+    props.put("mail.debug", "true"); 
+    props.put("mail.smtp.auth", "true"); 
+    props.put("mail.smtp.starttls.enable","true"); 
+    props.put("mail.smtp.EnableSSL.enable","true");
 
-props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
-props.setProperty("mail.smtp.socketFactory.fallback", "false");   
-props.setProperty("mail.smtp.port", "465");   
-props.setProperty("mail.smtp.socketFactory.port", "465"); 
+    props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
+    props.setProperty("mail.smtp.socketFactory.fallback", "false");   
+    props.setProperty("mail.smtp.port", "465");   
+    props.setProperty("mail.smtp.socketFactory.port", "465"); 
 
-	Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
+    Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        @Override
+        protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(username, password);
+        }
+    });
 
-	Message message = new MimeMessage(session);
-	message.setFrom(new InternetAddress("coachkhalifa31@gmail.com"));
-	message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hadil.khalifa@esprit.tn"));
-	message.setSubject("Subject line");
-	message.setText("Body of the email");
+    Message message = new MimeMessage(session);
+    message.setFrom(new InternetAddress("coachkhalifa31@gmail.com"));
 
-	Transport.send(message);
+    // Create an array of InternetAddress objects from the ArrayList of email addresses
+    InternetAddress[] addressArray = new InternetAddress[recipients.size()];
+    for (int i = 0; i < recipients.size(); i++) {
+        addressArray[i] = new InternetAddress(recipients.get(i));
+    }
+
+    message.setRecipients(Message.RecipientType.TO, addressArray);
+    message.setSubject("Subject line");
+    message.setText("Body of the email");
+
+    Transport.send(message);
 }
+
 
 }

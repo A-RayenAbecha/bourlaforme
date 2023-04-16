@@ -95,6 +95,24 @@ public class ServiceSeance implements IService<Seance> {
         }
         return listSeances;
     }
+    
+    public ArrayList<String> getEmailsForSeance(int seanceId) {
+    ArrayList<String> emails = new ArrayList<>();
+    try {
+        String query = "select user.email FROM user JOIN reservation ON reservation.id_user_id=user.id join seance on reservation.seance_id = seance.id where seance.id = ?";
+        PreparedStatement statement = cnx.prepareStatement(query);
+        statement.setInt(1, seanceId);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            String email = rs.getString("email");
+            emails.add(email);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    return emails;
+    }
+
 
     public Seance chercher(int id) {
     Seance s = null;

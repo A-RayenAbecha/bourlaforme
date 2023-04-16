@@ -69,6 +69,22 @@ public class ReservationService implements IService<Reservation> {
             System.out.println(ex.getMessage());
         }
     }
+    
+    public void incr_annulation(Reservation r) {
+        try {
+            String requete = "UPDATE user SET nbr_annulation = nbr_annulation + 1 WHERE user.id = ( SELECT user.id FROM reservation r JOIN seance s ON r.idseance = s.id JOIN user ON s.id_user = user.id WHERE r.id = ?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, r.getId());
+            int result = pst.executeUpdate();
+            if (result > 0) {
+                System.out.println("Réservation supprimée avec succès !");
+            } else {
+                System.out.println("Aucune réservation trouvée avec l'identifiant spécifié.");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public int getNombreReservations(int seanceId) throws SQLException {
         int nbrReservations = 0;
