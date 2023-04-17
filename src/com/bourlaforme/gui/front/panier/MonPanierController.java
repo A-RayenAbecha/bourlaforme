@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -40,6 +42,8 @@ public class MonPanierController implements Initializable {
     @FXML
 
     public Button validateButton;
+    @FXML
+    public TextField searchTF;
 
     public static List<PanierArticle> monPanierArticleList = new ArrayList<>();
     @FXML
@@ -49,7 +53,7 @@ public class MonPanierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         panier = new Panier();
 
-        displayData();
+        displayData("");
 
         int prixTotal = 0;
         for (PanierArticle panierArticle : monPanierArticleList) {
@@ -58,14 +62,16 @@ public class MonPanierController implements Initializable {
         totalText.setText("Total : " + prixTotal);
     }
 
-    void displayData() {
+    void displayData(String searchText) {
         mainVBox.getChildren().clear();
 
         int panierArticleCount = 0;
         for (PanierArticle panierArticle : monPanierArticleList) {
             if (panierArticle.getPanier() != null) {
-                panierArticleCount++;
-                mainVBox.getChildren().add(makePanierArticleModel(panierArticle));
+                if (panierArticle.getArticle().getNom().toLowerCase().startsWith(searchText.toLowerCase())) {
+                    panierArticleCount++;
+                    mainVBox.getChildren().add(makePanierArticleModel(panierArticle));
+                }
             }
         }
 
@@ -145,8 +151,12 @@ public class MonPanierController implements Initializable {
             MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_MANAGE_BILLINGADDRESS);
         }
     }
-         @FXML
-    public void Logout (ActionEvent e) throws IOException {
+
+    @FXML
+    private void search(KeyEvent event) {
+        displayData(searchTF.getText());
+    }
+        public void Logout (ActionEvent e) throws IOException {
         Node node = (Node) e.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/Login.fxml"));
@@ -154,4 +164,5 @@ public class MonPanierController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 }
