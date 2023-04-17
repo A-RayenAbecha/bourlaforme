@@ -38,8 +38,8 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_LOGIN,
                 "Connexion",
-                550,
-                250,
+                500,
+                600,
                 true
         );
     }

@@ -14,12 +14,12 @@
     <AnchorPane style="-fx-background-color: #000000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <StackPane prefHeight="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0" />
 
-        <Button fx:id="addButton" layoutX="400.0" layoutY="22.0" mnemonicParsing="false" onAction="#ajouterPanierArticle" prefHeight="27.0" prefWidth="116.0" styleClass="top-button" text="Ajouter un article" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="284.0" AnchorPane.topAnchor="22.0">
+        <Button fx:id="addButton" layoutX="400.0" layoutY="15.0" mnemonicParsing="false" onAction="#ajouterPanierArticle" prefHeight="34.0" prefWidth="143.0" styleClass="top-button" text="Ajouter un article" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="284.0" AnchorPane.topAnchor="15.0">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <Button fx:id="validateButton" layoutX="670.0" layoutY="19.0" mnemonicParsing="false" onAction="#validerPanier" prefHeight="34.0" prefWidth="116.0" style="-fx-background-color: blue;" styleClass="success-button" text="Valider le panier" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="validateButton" layoutX="655.0" layoutY="15.0" mnemonicParsing="false" onAction="#validerPanier" prefHeight="34.0" prefWidth="130.0" style="-fx-background-color: blue;" styleClass="success-button" text="Valider le panier" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="14.600000000000023">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -30,7 +30,7 @@
                  <Font name="Arial Bold" size="23.0" />
              </font>
          </Text>
-      <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" text="return" />
+      <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#Logout" text="return" />
     </AnchorPane>
     <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <opaqueInsets>

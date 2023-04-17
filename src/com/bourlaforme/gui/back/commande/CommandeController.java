@@ -11,9 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -34,23 +32,31 @@ public class CommandeController implements Initializable {
     public Text topText;
     @FXML
     public VBox mainVBox;
+    @FXML
+    public ComboBox<String> sortCB;
+    @FXML
+    public TextField searchTF;
 
     List<Commande> listCommande;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listCommande = CommandeService.getInstance().getAll();
-        displayData();
+        sortCB.getItems().addAll("Montant", "Date", "ConfirmeAdmin");
+        displayData("");
     }
 
-    void displayData() {
+    void displayData(String searchText) {
         mainVBox.getChildren().clear();
 
         Collections.reverse(listCommande);
 
         if (!listCommande.isEmpty()) {
             for (Commande commande : listCommande) {
-                mainVBox.getChildren().add(makeCommandeModel(commande));
+                if (String.valueOf(commande.getMontant()).startsWith(searchText.toLowerCase())) {
+                    mainVBox.getChildren().add(makeCommandeModel(commande));
+                }
+
             }
         } else {
             StackPane stackPane = new StackPane();
@@ -72,7 +78,7 @@ public class CommandeController implements Initializable {
             ((Text) innerContainer.lookup("#montantText")).setText("Montant : " + commande.getMontant());
             ((Text) innerContainer.lookup("#dateText")).setText("Date : " + commande.getDate());
             ((Text) innerContainer.lookup("#idPanierText")).setText("Panier : " + commande.getPanier().getId());
-            ((Text) innerContainer.lookup("#idAddressText")).setText("Nom : " + commande.getBillingAddress().getNom());
+            ((Text) innerContainer.lookup("#idAddressText")).setText("Address : " + commande.getBillingAddress().getAddress());
             ((Text) innerContainer.lookup("#confirmeAdminText")).setText("ConfirmeAdmin : " + commande.isConfirmeAdmin());
 
 
@@ -121,8 +127,24 @@ public class CommandeController implements Initializable {
             }
         }
     }
-   @FXML
-    public void Logout (ActionEvent e)  {
-                    MainWindowController.getInstance().loadInterface(Constants.FXML_LOGIN);
+
+    @FXML
+    public void sort(ActionEvent actionEvent) {
+        Constants.compareVar = sortCB.getValue();
+        Collections.sort(listCommande);
+        displayData("");
+    }
+
+    @FXML
+    private void search(KeyEvent event) {
+        displayData(searchTF.getText());
+    }
+        public void Logout (ActionEvent e) throws IOException {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/Login.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

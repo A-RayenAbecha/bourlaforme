@@ -23,6 +23,9 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class MonPanierController implements Initializable {
 
@@ -141,5 +144,14 @@ public class MonPanierController implements Initializable {
 
             MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_MANAGE_BILLINGADDRESS);
         }
+    }
+         @FXML
+    public void Logout (ActionEvent e) throws IOException {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/Login.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

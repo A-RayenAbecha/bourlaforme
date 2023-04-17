@@ -7,6 +7,7 @@ import com.bourlaforme.gui.front.MainWindowController;
 import com.bourlaforme.services.PanierArticleService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +18,11 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class AjouterPanierArticle implements Initializable {
 
@@ -80,5 +86,14 @@ public class AjouterPanierArticle implements Initializable {
         }
 
         return true;
+    }
+         @FXML
+    public void Return (ActionEvent e) throws IOException {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/front/panier/MonPanier.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
