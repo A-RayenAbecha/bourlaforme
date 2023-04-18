@@ -40,11 +40,33 @@ public class CommandeController implements Initializable {
     List<Commande> listCommande;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        listCommande = CommandeService.getInstance().getAll();
-        sortCB.getItems().addAll("Montant", "Date", "ConfirmeAdmin");
-        displayData("");
+public void initialize(URL url, ResourceBundle rb) {
+    Pagination pagination=new Pagination() ;
+    listCommande = CommandeService.getInstance().getAll();
+    sortCB.getItems().addAll("Montant", "Date", "ConfirmeAdmin");
+
+    int itemsPerPage = 4;
+    int totalPages = (int) Math.ceil(listCommande.size() / (double) itemsPerPage);
+    pagination = new Pagination(totalPages, 0);
+    pagination.setPageFactory(this::createPage);
+
+    mainVBox.getChildren().add(pagination);
+}
+
+public VBox createPage(int pageIndex) {
+    VBox pageBox = new VBox();
+    int itemsPerPage = 4;
+    int startIndex = pageIndex * itemsPerPage;
+    int endIndex = Math.min(startIndex + itemsPerPage, listCommande.size());
+    List<Commande> itemsToShow = listCommande.subList(startIndex, endIndex);
+
+    for (Commande commande : itemsToShow) {
+        Parent commandeModel = makeCommandeModel(commande);
+        pageBox.getChildren().add(commandeModel);
     }
+
+    return pageBox;
+}
 
     void displayData(String searchText) {
         mainVBox.getChildren().clear();
