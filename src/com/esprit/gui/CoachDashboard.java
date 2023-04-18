@@ -14,6 +14,10 @@ import javafx.scene.input.MouseEvent;
 import com.esprit.entities.Seance;
 import com.esprit.entities.User;
 import java.util.regex.*;
+import tray.animations.*;
+import tray.notification.*;
+import tray.notification.TrayNotification;
+
 
 
 import com.esprit.services.ServiceSeance;
@@ -36,7 +40,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.co
+//import org.co
 import javafx.geometry.Pos;
 import javafx.util.Duration;
 import javax.management.Notification;
@@ -277,12 +281,21 @@ void supprimer(ActionEvent event) {
             seancesColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_seance"));
             groupeColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_grp"));
             
-            TrayNotification tray = new Notification("titre","ze", 5);
+      /*      TrayNotification tray = new Notification("titre","ze", 5);
 tray.setTitle("Title of notification");
 tray.setMessage("Message of notification");
 tray.setNotificationType(NotificationType.INFORMATION);
 tray.setAnimationType(AnimationType.POPUP);
-tray.showAndDismiss(Duration.seconds(5));
+tray.showAndDismiss(Duration.seconds(5));*/
+        TrayNotification tray = new TrayNotification();
+        String title = "reservation annulés";
+        String message = "Your download quota has been reached. Panic.";
+
+        tray.setTitle(title);
+        tray.setMessage(message);
+        tray.setNotificationType(NotificationType.NOTICE);
+        tray.setAnimationType(AnimationType.SLIDE);
+        tray.showAndWait();
 
             
 

@@ -4,18 +4,19 @@ import com.esprit.entities.Reservation;
 import com.esprit.entities.Seance;
 import com.esprit.entities.User;
 import com.esprit.services.ReservationService;
+import com.esprit.services.ServiceSeance;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
+import org.controlsfx.control.Rating;
 
 public class ReservationController implements Initializable {
 
@@ -42,6 +43,9 @@ public class ReservationController implements Initializable {
 
     @FXML
     private Label titre;
+     @FXML
+    private Rating rating;
+
 
     public Reservation getReservation() {
         return reservation;
@@ -61,8 +65,10 @@ public class ReservationController implements Initializable {
         if (alert.getResult() == ButtonType.YES) {
             if (reservation != null) {
                 reservationService.supprimer(reservation);
+                reservationService.incr_annulation(reservation);
                 annuler.setDisable(true);
                 annuler.setText("Réservation annulée");
+
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Réservation annulée avec succès !");
                 successAlert.showAndWait();
             } else {
@@ -96,6 +102,59 @@ public class ReservationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
+
+    private void showRatingDialog() {
+    // Create a rating dialog
+    Dialog<Integer> ratingDialog = new Dialog<>();
+    ratingDialog.setTitle("Noter cette séance");
+    ratingDialog.setHeaderText("Veuillez entrer une note de 1 à 5");
+
+    // Create the components of the dialog
+    Label noteLabel = new Label("Note :");
+    Rating rating = new Rating();
+    VBox content = new VBox(noteLabel, rating);
+    ratingDialog.getDialogPane().setContent(content);
+
+    // Add OK and Cancel buttons to the dialog
+    ratingDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+    // Set the result converter to retrieve the selected rating value
+    ratingDialog.setResultConverter(new Callback<ButtonType, Integer>() {
+        @Override
+        public Integer call(ButtonType buttonType) {
+            if (buttonType == ButtonType.OK) {
+                int note = (int) rating.getRating();
+                if (note == 0) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "La note doit être supérieure à 0 !");
+                    alert.showAndWait();
+                    return null;
+                }
+                return note;
+            } else {
+                return null;
+            }
+        }
+    });
+
+    // Show the dialog and retrieve the result
+    ratingDialog.showAndWait().ifPresent(note -> {
+        // Save the rating to the database or do something else with the rating here
+        System.out.println("Note enregistrée : " + note);
+    });
+}
+
+    @FXML
+    void notation(ActionEvent event) {
+        showRatingDialog();
+    }
+      @FXML
+    void noter(MouseEvent event) {
+     System.out.println(rating.getRating()); 
+     ServiceSeance S= new ServiceSeance();
+     S.modifierrating(this.reservation.getSeance(), (int) rating.getRating());    }
+
+
 
 }

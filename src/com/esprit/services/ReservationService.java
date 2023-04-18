@@ -85,7 +85,21 @@ public class ReservationService implements IService<Reservation> {
             System.out.println(ex.getMessage());
         }
     }
-
+public int getnbr_reservationByUser(int user_id) {
+    int nbr_reservation = 0;
+    try {
+        String requete = "SELECT nbr_annulation FROM user WHERE user_id=?";
+        PreparedStatement pst = cnx.prepareStatement(requete);
+        pst.setInt(1, user_id);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            nbr_reservation = rs.getInt("nbr_annulation");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return nbr_reservation;
+}
     public int getNombreReservations(int seanceId) throws SQLException {
         int nbrReservations = 0;
         String requete = "SELECT COUNT(*) AS nb FROM reservation WHERE seance_id=?";

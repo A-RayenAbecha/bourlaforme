@@ -137,6 +137,34 @@ public class ServiceSeance implements IService<Seance> {
     }
     return s;
 }
+public void modifierrating(Seance s, int nouveauRating) {
+    try {
+        // récupérer les informations de la séance existante
+        String requeteSelect = "SELECT * FROM seance WHERE id=?";
+        PreparedStatement pstSelect = cnx.prepareStatement(requeteSelect);
+        pstSelect.setInt(1, s.getId());
+        ResultSet rs = pstSelect.executeQuery();
+        if (rs.next()) {
+            // mettre à jour le nombre de ratings et le rating moyen
+            int nbRatings = rs.getInt("nbrrating") + 1;
+            float ancienMoyen = rs.getFloat("rating");
+            float nouveauMoyen = ((ancienMoyen * rs.getInt("nbrrating")) + nouveauRating) / nbRatings;
 
+            // mettre à jour les informations de la séance
+            String requeteUpdate = "UPDATE seance SET   rating=?, nbrrating=? WHERE id=?";
+            PreparedStatement pstUpdate = cnx.prepareStatement(requeteUpdate);
+            
+            pstUpdate.setFloat(1, nouveauMoyen);
+            pstUpdate.setInt(2, nbRatings);
+            pstUpdate.setInt(3, s.getId());
+            pstUpdate.executeUpdate();
+            System.out.println(nouveauMoyen);
+        } else {
+            System.err.println("Séance non trouvée !");
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+}
     
 }
