@@ -16,8 +16,7 @@ public class MainWindowController implements Initializable {
 
     static AnchorPane staticContent;
     private static MainWindowController instance;
- //private static MainWindowController instance;
-
+   
     @FXML
     private AnchorPane topBar;
     @FXML
@@ -28,7 +27,7 @@ public class MainWindowController implements Initializable {
             instance = new MainWindowController();
         }
         return instance;
-    }
+        }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
