@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class SideBarController implements Initializable {
    // private final Color COLOR_GRAY = new Color(0.9, 0.9, 0.9, 1);
+   // private final Color COLOR_GRAY = new Color(0.9, 0.9, 0.9, 1);
 
     private final Color COLOR_GRAY = new Color(0.9, 0.9, 0.9, 1);
     private final Color COLOR_PRIMARY = Color.web("#000000");
