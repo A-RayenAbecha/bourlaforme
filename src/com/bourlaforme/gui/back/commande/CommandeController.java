@@ -45,7 +45,7 @@ public void initialize(URL url, ResourceBundle rb) {
     listCommande = CommandeService.getInstance().getAll();
     sortCB.getItems().addAll("Montant", "Date", "ConfirmeAdmin");
 
-    int itemsPerPage = 4;
+    int itemsPerPage = 3;
     int totalPages = (int) Math.ceil(listCommande.size() / (double) itemsPerPage);
     pagination = new Pagination(totalPages, 0);
     pagination.setPageFactory(this::createPage);
@@ -55,7 +55,7 @@ public void initialize(URL url, ResourceBundle rb) {
 
 public VBox createPage(int pageIndex) {
     VBox pageBox = new VBox();
-    int itemsPerPage = 4;
+    int itemsPerPage = 3;
     int startIndex = pageIndex * itemsPerPage;
     int endIndex = Math.min(startIndex + itemsPerPage, listCommande.size());
     List<Commande> itemsToShow = listCommande.subList(startIndex, endIndex);
@@ -100,7 +100,7 @@ public VBox createPage(int pageIndex) {
             ((Text) innerContainer.lookup("#montantText")).setText("Montant : " + commande.getMontant());
             ((Text) innerContainer.lookup("#dateText")).setText("Date : " + commande.getDate());
             ((Text) innerContainer.lookup("#idPanierText")).setText("Panier : " + commande.getPanier().getId());
-            ((Text) innerContainer.lookup("#idAddressText")).setText("Address : " + commande.getBillingAddress().getAddress());
+            ((Text) innerContainer.lookup("#idAddressText")).setText("Nom et Prenom : " + commande.getBillingAddress().getNom());
             ((Text) innerContainer.lookup("#confirmeAdminText")).setText("ConfirmeAdmin : " + commande.isConfirmeAdmin());
 
 
