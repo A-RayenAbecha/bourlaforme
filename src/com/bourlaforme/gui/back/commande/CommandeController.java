@@ -44,12 +44,11 @@ public void initialize(URL url, ResourceBundle rb) {
     Pagination pagination=new Pagination() ;
     listCommande = CommandeService.getInstance().getAll();
     sortCB.getItems().addAll("Montant", "Date", "ConfirmeAdmin");
-
     int itemsPerPage = 3;
     int totalPages = (int) Math.ceil(listCommande.size() / (double) itemsPerPage);
     pagination = new Pagination(totalPages, 0);
     pagination.setPageFactory(this::createPage);
-
+    pagination.setPageFactory(this::createPage);
     mainVBox.getChildren().add(pagination);
 }
 
@@ -169,4 +168,27 @@ public VBox createPage(int pageIndex) {
         stage.setScene(scene);
         stage.show();
     }
+       @FXML
+   void prix() {
+        mainVBox.getChildren().clear();
+
+        Collections.reverse(listCommande);
+
+        if (!listCommande.isEmpty()) {
+            for (Commande commande : listCommande) {
+                if ( commande.getMontant()>100 ) {
+                    mainVBox.getChildren().add(makeCommandeModel(commande));
+                }
+            }
+        } else {
+            StackPane stackPane = new StackPane();
+            stackPane.setAlignment(Pos.CENTER);
+            stackPane.setPrefHeight(200);
+            stackPane.getChildren().add(new Text("Aucune donnée"));
+            mainVBox.getChildren().add(stackPane);
+        }
+    } 
+        
+        
 }
+ 

@@ -15,20 +15,20 @@
     <AnchorPane style="-fx-background-color: #000000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <StackPane prefHeight="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0" />
 
-        <Button fx:id="addButton" layoutX="429.0" layoutY="23.0" mnemonicParsing="false" onAction="#ajouterPanierArticle" prefHeight="27.0" prefWidth="116.0" styleClass="top-button" text="Ajouter un article" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="23.0">
+        <Button fx:id="addButton" layoutX="415.0" layoutY="29.0" mnemonicParsing="false" onAction="#ajouterPanierArticle" prefHeight="27.0" prefWidth="116.0" styleClass="top-button" text="Shop" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="29.0">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <Button fx:id="validateButton" layoutX="670.0" layoutY="19.0" mnemonicParsing="false" onAction="#validerPanier" prefHeight="34.0" prefWidth="116.0" style="-fx-background-color: blue;" styleClass="success-button" text="Valider le panier" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="validateButton" layoutX="670.0" layoutY="25.0" mnemonicParsing="false" onAction="#validerPanier" prefHeight="34.0" prefWidth="116.0" style="-fx-background-color: blue;" styleClass="success-button" text="Checkout" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="14.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="searchTF" layoutX="226.0" layoutY="18.0" onKeyReleased="#search" prefHeight="34.0" prefWidth="191.0" promptText="Rechercher un article" styleClass="form-control-white" AnchorPane.leftAnchor="226.0" />
-      <Text fx:id="totalText" fill="WHITE" layoutX="557.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total : " wrappingWidth="106.98307228088379" AnchorPane.rightAnchor="136.0169277191162" />
+      <TextField fx:id="searchTF" layoutX="187.0" layoutY="26.0" onKeyReleased="#search" prefHeight="34.0" prefWidth="191.0" promptText="Rechercher un article" styleClass="form-control-white" AnchorPane.leftAnchor="187.0" />
+      <Text fx:id="totalText" fill="WHITE" layoutX="554.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total : " wrappingWidth="106.98307228088379" AnchorPane.rightAnchor="139.0169277191162" />
       <Button layoutX="5.0" layoutY="3.0" mnemonicParsing="false" onAction="#Logout" prefHeight="16.0" prefWidth="64.0" text="return" />
-         <Text fx:id="topText" boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" layoutX="76.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mon panier" textAlignment="JUSTIFY" textOrigin="CENTER" wrappingWidth="122.67041015625">
+         <Text fx:id="topText" boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" layoutX="37.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mon panier" textAlignment="JUSTIFY" textOrigin="CENTER" wrappingWidth="122.67041015625">
              <font>
                  <Font name="Arial Bold" size="23.0" />
              </font>
