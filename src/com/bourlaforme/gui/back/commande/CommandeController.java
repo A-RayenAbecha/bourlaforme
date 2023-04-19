@@ -99,8 +99,8 @@ public VBox createPage(int pageIndex) {
             ((Text) innerContainer.lookup("#montantText")).setText("Montant : " + commande.getMontant());
             ((Text) innerContainer.lookup("#dateText")).setText("Date : " + commande.getDate());
             ((Text) innerContainer.lookup("#idPanierText")).setText("Panier : " + commande.getPanier().getId());
-            ((Text) innerContainer.lookup("#idAddressText")).setText("Nom et Prenom : " + commande.getBillingAddress().getNom());
             ((Text) innerContainer.lookup("#confirmeAdminText")).setText("ConfirmeAdmin : " + commande.isConfirmeAdmin());
+            ((Text) innerContainer.lookup("#idAddressText")).setText("Description : " + commande.getBillingAddress().getDescription()+"\n"+ "Nom et Prenom : " + commande.getBillingAddress().getNom());
 
 
             ((Button) innerContainer.lookup("#approveButton")).setOnAction((event) -> approve(commande));
@@ -189,6 +189,13 @@ public VBox createPage(int pageIndex) {
         }
     } 
         
-        
+        public void Stat (ActionEvent e) throws IOException {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("Stat.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
  
