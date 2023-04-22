@@ -72,7 +72,7 @@ public class ReservationService implements IService<Reservation> {
     
     public void incr_annulation(Reservation r) {
         try {
-            String requete = "UPDATE user SET nbr_annulation = nbr_annulation + 1 WHERE user.id = ( SELECT user.id FROM reservation r JOIN seance s ON r.idseance = s.id JOIN user ON s.id_user = user.id WHERE r.id = ?";
+            String requete = "UPDATE user SET nbr_annulation = nbr_annulation + 1 WHERE user.id = (SELECT user.id FROM reservation r JOIN seance s ON r.seance_id = s.id JOIN user ON s.user_id = user.id WHERE r.id = ?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1, r.getId());
             int result = pst.executeUpdate();
@@ -195,6 +195,106 @@ public int getnbr_reservationByUser(int user_id) {
         }
         return false;
     }
+    
+    
+    public boolean existsRating(int idUser, int idSeance) {
+        try {
+            String requete = "SELECT COUNT(*) AS nb FROM rating WHERE id_user=? AND id_seance=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, idUser);
+            pst.setInt(2, idSeance);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int nb = rs.getInt("nb");
+                return nb > 0;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    public void ajouterRating(int idUser, int idSeance, int note) {
+        try {
+            if (existsRating(idUser, idSeance)) {
+                String requete = "UPDATE rating SET note=? WHERE id_user=? AND id_seance=?";
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                pst.setInt(1, note);
+                pst.setInt(2, idUser);
+                pst.setInt(3, idSeance);
+                pst.executeUpdate();
+            } else {
+                String requete = "INSERT INTO rating(id_user, id_seance, note) VALUES (?, ?, ?)";
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                pst.setInt(1, idUser);
+                pst.setInt(2, idSeance);
+                pst.setInt(3, note);
+                pst.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public int getNoteByUserAndSeance(int idUser, int idSeance) {
+    try {
+        String requete = "SELECT note FROM rating WHERE id_user=? AND id_seance=?";
+        PreparedStatement pst = cnx.prepareStatement(requete);
+        pst.setInt(1, idUser);
+        pst.setInt(2, idSeance);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("note");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return -1; // or any other default value to indicate that the rating was not found
+}
+    
+    public boolean deleteRating(int idUser, int idSeance) {
+    try {
+        String requete = "DELETE FROM rating WHERE id_user=? AND id_seance=?";
+        PreparedStatement pst = cnx.prepareStatement(requete);
+        pst.setInt(1, idUser);
+        pst.setInt(2, idSeance);
+        int nbRowsAffected = pst.executeUpdate();
+        return nbRowsAffected > 0;
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return false;
+}
+
+    
+    public void resetNbrAnnulation(User user) {
+    try {
+        String requete = "UPDATE user SET nbr_annulation = 0 WHERE id = ?";
+        PreparedStatement pst = cnx.prepareStatement(requete);
+        pst.setInt(1, user.getId());
+        pst.executeUpdate();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+    
+    public int getNbrIncrementation(int userId) {
+    int nbrIncrementation = 0;
+    try {
+        String query = "SELECT nbr_annulation FROM user WHERE id = ?";
+        PreparedStatement pst = cnx.prepareStatement(query);
+        pst.setInt(1, userId);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            nbrIncrementation = rs.getInt("nbr_annulation");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return nbrIncrementation;
+}
+
+
 
 
 

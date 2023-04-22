@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import com.esprit.entities.Seance;
 import com.esprit.entities.User;
+import com.esprit.services.ReservationService;
 import java.util.regex.*;
 import tray.animations.*;
 import tray.notification.*;
@@ -21,7 +22,11 @@ import tray.notification.TrayNotification;
 
 
 import com.esprit.services.ServiceSeance;
-import java.net.Authenticator;
+import com.salesboxai.zoom.ZoomAPI;
+import com.salesboxai.zoom.ZoomAPIException;
+import com.salesboxai.zoom.ZoomAuthorizerJWT;
+import com.salesboxai.zoom.ZoomMeeting;
+import com.salesboxai.zoom.ZoomMeetingRequest;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -40,10 +45,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-//import org.co
-import javafx.geometry.Pos;
-import javafx.util.Duration;
-import javax.management.Notification;
+
+
 
 public class CoachDashboard implements Initializable {
 
@@ -93,6 +96,12 @@ public class CoachDashboard implements Initializable {
     private TableColumn<?, ?> titrecolumn;
     
     private ObservableList<Seance> seancesdata;
+    
+        @FXML
+    private TableColumn<?, ?> noteColumn;
+
+    @FXML
+    private TableColumn<?, ?> reservationsColumn;
     
       @FXML
     private Button btnInviter;
@@ -280,6 +289,8 @@ void supprimer(ActionEvent event) {
             descripttion.setCellValueFactory(new PropertyValueFactory<>("description"));
             seancesColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_seance"));
             groupeColumn.setCellValueFactory(new PropertyValueFactory<>("nbr_grp"));
+            noteColumn.setCellValueFactory(new PropertyValueFactory<>("avg_rating"));
+            reservationsColumn.setCellValueFactory(new PropertyValueFactory<>("total_reservations"));
             
       /*      TrayNotification tray = new Notification("titre","ze", 5);
 tray.setTitle("Title of notification");
@@ -287,9 +298,27 @@ tray.setMessage("Message of notification");
 tray.setNotificationType(NotificationType.INFORMATION);
 tray.setAnimationType(AnimationType.POPUP);
 tray.showAndDismiss(Duration.seconds(5));*/
+        ReservationService reservationService = new  ReservationService();
+        
         TrayNotification tray = new TrayNotification();
-        String title = "reservation annulés";
-        String message = "Your download quota has been reached. Panic.";
+        
+        int nbr_annulation =  reservationService.getNbrIncrementation(connectedUser.getId());
+        
+        String title = "Réservations annulées";
+        String message;
+        switch (nbr_annulation) {
+            case 0:
+                message = "Aucune réservation n'a été annulée.";
+                break;
+            case 1:
+                message = "1 réservation a été annulée.";
+                break;
+            default:
+                message = nbr_annulation + " réservations ont été annulées.";
+                break;
+        }
+        reservationService.resetNbrAnnulation(connectedUser);
+
 
         tray.setTitle(title);
         tray.setMessage(message);
@@ -370,11 +399,72 @@ public void sendmail(ArrayList<String> recipients) throws MessagingException {
     }
 
     message.setRecipients(Message.RecipientType.TO, addressArray);
-    message.setSubject("Subject line");
-    message.setText("Body of the email");
+    message.setSubject("zoom meet");
+        try {
+            message.setText("zoom link" + scheduleMeetingTest());
+            //  ZoomAPI api;
+        } catch (ZoomAPIException ex) {
+            Logger.getLogger(CoachDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     Transport.send(message);
 }
 
+/*
+public String generateGoogleMeetLink(Seance seance) throws IOException, GeneralSecurityException {
+    String meetingLink = null;
+    String calendarId = "primary"; // Replace with your calendar ID
+    DateTime startDateTime = new DateTime(seance.getDateDebut().getTime());
+    DateTime endDateTime = new DateTime(seance.getDateFin().getTime());
 
+    // Build the credentials object
+    GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("path/to/credentials.json"))
+            .createScoped(Collections.singleton(CalendarScopes.CALENDAR));
+
+    // Build the calendar client
+    Calendar calendar = new Calendar.Builder(
+            GoogleNetHttpTransport.newTrustedTransport(),
+            new JacksonFactory(),
+            new HttpCredentialsAdapter(credentials))
+            .setApplicationName("My Application")
+            .build();
+
+    // Create the event
+    Event event = new Event()
+            .setSummary(seance.getTitre())
+            .setDescription(seance.getDescription())
+            .setStart(new EventDateTime().setDateTime(startDateTime))
+            .setEnd(new EventDateTime().setDateTime(endDateTime));
+
+    // Generate the Google Meet link and add it to the event
+    ConferenceSolutionKey conferenceSolutionKey = new ConferenceSolutionKey()
+            .setType("hangoutsMeet");
+    CreateConferenceRequest createConferenceRequest = new CreateConferenceRequest()
+            .setRequestId(UUID.randomUUID().toString())
+            .setConferenceSolutionKey(conferenceSolutionKey);
+    ConferenceData conferenceData = new ConferenceData()
+            .setCreateRequest(createConferenceRequest);
+    event.setConferenceData(conferenceData);
+
+    // Insert the event and get the Google Meet link
+    event = calendar.events().insert(calendarId, event).setConferenceDataVersion(1).execute();
+    ConferenceData conferenceDataResponse = event.getConferenceData();
+    if (conferenceDataResponse != null) {
+        CreateConferenceResponse createConferenceResponse = conferenceDataResponse.getCreateRequest().getConferenceSolution().getEntryPoints().get(0).getUri();
+        meetingLink = createConferenceResponse;
+    }
+
+    return meetingLink;
+}*/
+
+
+static String scheduleMeetingTest() throws ZoomAPIException {
+		ZoomAuthorizerJWT authorizer = new ZoomAuthorizerJWT("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InJ4LThqanpsUUxXLWRqWldhQnFLX1EiLCJleHAiOjE2ODI3ODExMTcsImlhdCI6MTY4MjE3NjMxOH0.bmdxG2xP3FGuUGCxNev7CHdOHVJBG9PzaYZKBKBIRxk");
+		ZoomAPI za = new ZoomAPI(authorizer);
+		ZoomMeetingRequest mreq = ZoomMeetingRequest.requestDefaults("Test Meeting", "Let's talk about the weather");
+		ZoomMeeting meeting = za.createMeeting("me", mreq);
+		System.out.println(meeting);
+        String join_url = meeting.join_url;
+                return join_url;
+	}
 }

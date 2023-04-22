@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +29,9 @@ public class ReservationController implements Initializable {
 
     @FXML
     private Label description;
+    
+     @FXML
+    private Label noteText;
 
     @FXML
     private Label nbr_grp;
@@ -46,6 +50,7 @@ public class ReservationController implements Initializable {
      @FXML
     private Rating rating;
 
+     User user;
 
     public Reservation getReservation() {
         return reservation;
@@ -83,6 +88,7 @@ public class ReservationController implements Initializable {
         this.reservation = reservation;
         Seance seance = reservation.getSeance();
         ReservationService reservationService = new ReservationService();
+        this.user = user;
         int nbr_reser = reservationService.getNombreReservations(seance.getId());
 
         nbr_reservation.setText(String.valueOf(nbr_reser));
@@ -95,6 +101,14 @@ public class ReservationController implements Initializable {
                 "-fx-effect:dropShadow(three-pass-box, rgba(0,0,0,0),10,0,0,10);" +
                 "-fx-background-color: #fff;"
         );
+        int note = reservationService.getNoteByUserAndSeance(user.getId(), seance.getId());
+        if(note==-1){
+            noteText.setText("notez :");
+            rating.setRating(0);
+        }else {
+            rating.setRating(note);
+            noteText.setText("modifier votre note ("+note+") ");
+        }
 
 
 
@@ -105,56 +119,30 @@ public class ReservationController implements Initializable {
 
     }
 
-    private void showRatingDialog() {
-    // Create a rating dialog
-    Dialog<Integer> ratingDialog = new Dialog<>();
-    ratingDialog.setTitle("Noter cette séance");
-    ratingDialog.setHeaderText("Veuillez entrer une note de 1 à 5");
 
-    // Create the components of the dialog
-    Label noteLabel = new Label("Note :");
-    Rating rating = new Rating();
-    VBox content = new VBox(noteLabel, rating);
-    ratingDialog.getDialogPane().setContent(content);
-
-    // Add OK and Cancel buttons to the dialog
-    ratingDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-    // Set the result converter to retrieve the selected rating value
-    ratingDialog.setResultConverter(new Callback<ButtonType, Integer>() {
-        @Override
-        public Integer call(ButtonType buttonType) {
-            if (buttonType == ButtonType.OK) {
-                int note = (int) rating.getRating();
-                if (note == 0) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "La note doit être supérieure à 0 !");
-                    alert.showAndWait();
-                    return null;
-                }
-                return note;
-            } else {
-                return null;
-            }
-        }
-    });
-
-    // Show the dialog and retrieve the result
-    ratingDialog.showAndWait().ifPresent(note -> {
-        // Save the rating to the database or do something else with the rating here
-        System.out.println("Note enregistrée : " + note);
-    });
-}
-
-    @FXML
-    void notation(ActionEvent event) {
-        showRatingDialog();
-    }
+   
       @FXML
     void noter(MouseEvent event) {
      System.out.println(rating.getRating()); 
-     ServiceSeance S= new ServiceSeance();
-     S.modifierrating(this.reservation.getSeance(), (int) rating.getRating());    }
+     ReservationService reservationService = new ReservationService();
+     reservationService.ajouterRating(user.getId(),reservation.getSeance().getId(),(int) rating.getRating());
+      noteText.setText("modifier votre note ("+rating.getRating()+") ");
+             }
 
+@FXML
+void cancelRating(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation de suppression");
+    alert.setHeaderText("Êtes-vous sûr(e) de vouloir supprimer cette note ?");
+    alert.setContentText("Cette action est irréversible !");
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        ReservationService reservationService = new ReservationService();
+        reservationService.deleteRating(user.getId(), reservation.getSeance().getId());
+        noteText.setText("notez :");
+        rating.setRating(0);
+    }
+}
 
 
 }

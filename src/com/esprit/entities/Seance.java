@@ -14,6 +14,25 @@ public class Seance {
     private String description;
     private int nbr_seance;
     private User user;
+    private int total_reservations;
+    private double avg_rating;
+
+    public int getTotal_reservations() {
+        return total_reservations;
+    }
+
+    public void setTotal_reservations(int total_reservations) {
+        this.total_reservations = total_reservations;
+    }
+
+    public double getAvg_rating() {
+        return avg_rating;
+    }
+
+    public void setAvg_rating(double avg_rating) {
+        this.avg_rating = avg_rating;
+    }
+    
 
     public User getUser() {
         return user;

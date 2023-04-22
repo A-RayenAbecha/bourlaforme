@@ -7,60 +7,72 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
-<VBox fx:id="ox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="348.0" style="-fx-background-color: E4E4E4;" styleClass="shadow" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.gui.SeanceController">
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.SeanceController">
    <children>
-      <Pane>
+      <Pane />
+      <VBox fx:id="ox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="350.0" style="-fx-background-color: E4E4E4;" styleClass="shadow" stylesheets="@style.css">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="311.0">
+            <Pane>
                <children>
-                  <Pane prefHeight="55.0" prefWidth="172.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="311.0">
                      <children>
-                        <Label fx:id="titre" layoutX="-12.0" layoutY="9.0" prefHeight="36.0" prefWidth="130.0" text="titre">
+                        <Pane prefHeight="55.0" prefWidth="172.0">
+                           <children>
+                              <Label fx:id="titre" layoutX="-12.0" layoutY="9.0" prefHeight="36.0" prefWidth="130.0" text="titre">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label fx:id="coach" prefHeight="36.0" prefWidth="106.0" text="nom prenom">
                            <font>
-                              <Font name="DejaVu Sans Mono Bold" size="26.0" />
+                              <Font name="FreeSans" size="15.0" />
                            </font>
                         </Label>
                      </children>
-                  </Pane>
-                  <Label fx:id="coach" prefHeight="36.0" prefWidth="106.0" text="nom prenom">
+                  </HBox>
+               </children>
+            </Pane>
+            <Separator maxWidth="-Infinity" prefHeight="15.0" prefWidth="268.0" />
+            <HBox alignment="TOP_CENTER">
+               <children>
+                  <Label fx:id="nbr_seance" prefHeight="27.0" prefWidth="26.0" text="12">
                      <font>
                         <Font name="FreeSans" size="15.0" />
                      </font>
                   </Label>
+                  <Label prefHeight="27.0" prefWidth="74.0" text="session">
+                     <font>
+                        <Font name="FreeSans" size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="0.0" prefWidth="99.0" />
+                  <Label fx:id="nbr_reservation" prefHeight="33.0" prefWidth="21.0" text="5" />
+                  <Label prefHeight="33.0" prefWidth="11.0" text="/" />
+                  <Label fx:id="nbr_grp" prefHeight="33.0" prefWidth="27.0" text="5" />
                </children>
             </HBox>
+            <Separator maxWidth="-Infinity" prefHeight="15.0" prefWidth="268.0" />
+            <Label fx:id="description" prefHeight="56.0" prefWidth="269.0" text="Label" />
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="311.0">
+               <children>
+                  <Button fx:id="reserver" mnemonicParsing="false" onAction="#reserver" prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: FF5056; -fx-border-radius: 50;" text="Reserver">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Pane prefHeight="54.0" prefWidth="350.0">
+               <children>
+                  <Rating fx:id="rating" layoutX="137.0" layoutY="10.0" partialRating="true" />
+                  <Label fx:id="nbr_notes" layoutX="42.0" layoutY="18.0" prefHeight="17.0" prefWidth="74.0" text="0 note(s)" />
+               </children>
+            </Pane>
          </children>
-      </Pane>
-      <Separator maxWidth="-Infinity" prefHeight="15.0" prefWidth="268.0" />
-      <HBox alignment="TOP_CENTER">
-         <children>
-            <Label fx:id="nbr_seance" prefHeight="27.0" prefWidth="26.0" text="12">
-               <font>
-                  <Font name="FreeSans" size="15.0" />
-               </font>
-            </Label>
-            <Label prefHeight="27.0" prefWidth="74.0" text="session">
-               <font>
-                  <Font name="FreeSans" size="15.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="0.0" prefWidth="99.0" />
-            <Label fx:id="nbr_reservation" prefHeight="33.0" prefWidth="21.0" text="5" />
-            <Label prefHeight="33.0" prefWidth="11.0" text="/" />
-            <Label fx:id="nbr_grp" prefHeight="33.0" prefWidth="27.0" text="5" />
-         </children>
-      </HBox>
-      <Separator maxWidth="-Infinity" prefHeight="15.0" prefWidth="268.0" />
-      <Label fx:id="description" prefHeight="56.0" prefWidth="269.0" text="Label" />
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="311.0">
-         <children>
-            <Button fx:id="reserver" mnemonicParsing="false" onAction="#reserver" prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: FF5056; -fx-border-radius: 50;" text="Reserver">
-               <font>
-                  <Font name="System Bold Italic" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
+      </VBox>
    </children>
-</VBox>
+</HBox>

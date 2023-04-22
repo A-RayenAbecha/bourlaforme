@@ -142,7 +142,7 @@ public class MainController implements Initializable {
         for (int i=0;i<seances.size();i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(HelloApplication.class.getResource("../gui/seance.fxml"));
-            VBox seanceBox = fxmlLoader.load();
+            HBox seanceBox = fxmlLoader.load();
             SeanceController seanceController = fxmlLoader.getController();
             seanceController.setData(seances.get(i),connectedUser);
             grid_sessions.add(seanceBox,col,row);

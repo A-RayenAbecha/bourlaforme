@@ -75,7 +75,7 @@ public class ServiceSeance implements IService<Seance> {
     public List<Seance> afficher() {
         List<Seance> listSeances = new ArrayList<>();
         try {
-            String requete = "SELECT * FROM seance";
+            String requete = "SELECT s.*, COUNT(DISTINCT  r.id) AS total_reservations, AVG(rt.note) AS avg_rating FROM seance s LEFT JOIN reservation r ON s.id = r.seance_id LEFT JOIN rating rt ON s.id = rt.id_seance GROUP BY s.id";
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(requete);
             while (rs.next()) {
@@ -88,6 +88,8 @@ public class ServiceSeance implements IService<Seance> {
                         rs.getString("color"),
                         rs.getString("titre")
                 );
+                s.setAvg_rating(rs.getDouble("avg_rating"));
+                s.setTotal_reservations(rs.getInt("total_reservations"));
                 listSeances.add(s);
             }
         } catch (SQLException ex) {
@@ -166,5 +168,47 @@ public void modifierrating(Seance s, int nouveauRating) {
         System.err.println(ex.getMessage());
     }
 }
-    
+  
+//fonction calcule le moyen de note dune seance 
+public double calculerMoyenneNotes(int idSeance) {
+    double moyenne = 0;
+    int count = 0;
+    try {
+        String requete = "SELECT note FROM rating WHERE id_seance=?";
+        PreparedStatement pst = cnx.prepareStatement(requete);
+        pst.setInt(1, idSeance);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            double note = rs.getDouble("note");
+            moyenne += note;
+            count++;
+        }
+        if (count > 0) {
+            moyenne /= count;
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    return moyenne;
+}
+
+public int countRatingsBySeance(int idSeance) {
+    int count = 0;
+    try {
+        String requete = "SELECT COUNT(*) AS nb FROM rating WHERE id_seance=?";
+        PreparedStatement pst = cnx.prepareStatement(requete);
+        pst.setInt(1, idSeance);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("nb");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return count;
+}
+
+
+
+
 }

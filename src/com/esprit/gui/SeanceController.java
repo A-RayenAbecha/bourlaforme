@@ -4,6 +4,7 @@ import com.esprit.entities.Reservation;
 import com.esprit.entities.Seance;
 import com.esprit.entities.User;
 import com.esprit.services.ReservationService;
+import com.esprit.services.ServiceSeance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import org.controlsfx.control.Rating;
 
 public class SeanceController implements Initializable {
 
@@ -42,10 +46,16 @@ public class SeanceController implements Initializable {
 
     @FXML
     private Label titre;
+    
+    @FXML
+    private Rating rating;
 
     User user;
 
     Seance seance;
+    
+      @FXML
+    private Label nbr_notes;
 
     @FXML
     void reserver(ActionEvent event) {
@@ -81,11 +91,13 @@ public class SeanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       
 
     }
 
     public void setData(Seance seance, User user) throws SQLException {
         ReservationService reservationService = new ReservationService();
+        ServiceSeance serviceSeance = new ServiceSeance();
         int nbr_reser = reservationService.getNombreReservations(seance.getId());
         this.seance = seance;
         this.user = user;
@@ -95,6 +107,21 @@ public class SeanceController implements Initializable {
         nbr_grp.setText(String.valueOf(seance.getNbr_grp()));
         nbr_seance.setText(String.valueOf(seance.getNbr_seance()));
         coach.setText(seance.getUser().getPrenom()+" "+seance.getUser().getNom());
+        
+        
+        ///// set le moyen des notes 
+        double moy = serviceSeance.calculerMoyenneNotes(seance.getId());
+        // set moy to stars ....
+        rating.setRating(moy);
+        rating.setDisable(true);
+        nbr_notes.setText(serviceSeance.countRatingsBySeance(seance.getId())+" note");
+        
+        //mercii
+        
+        
+        
+        
+        
         ox.setStyle("-fx-background-radius: 20;" +
                 "-fx-effect:dropShadow(three-pass-box, rgba(0,0,0,0),10,0,0,10);" +
                 "-fx-background-color: #fff;"

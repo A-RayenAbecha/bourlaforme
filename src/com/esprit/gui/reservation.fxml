@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<VBox fx:id="ox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="445.0" style="-fx-background-color: E4E4E4;" styleClass="shadow" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ReservationController">
+<VBox fx:id="ox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="455.0" style="-fx-background-color: E4E4E4;" styleClass="shadow" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ReservationController">
     <children>
         <Pane>
             <children>
@@ -62,17 +62,20 @@
                     <font>
                         <Font name="System Bold Italic" size="13.0" />
                     </font>
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#notation" text="noter" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
                 </Button>
             </children>
         </HBox>
-      <Pane prefHeight="25.0" prefWidth="445.0" />
-      <Rating fx:id="rating" onMouseClicked="#noter" prefHeight="47.0" prefWidth="157.0" />
+      <Pane prefHeight="60.0" prefWidth="455.0">
+         <children>
+            <Rating fx:id="rating" layoutX="215.0" layoutY="14.0" onMouseClicked="#noter" prefHeight="27.0" prefWidth="176.0">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#cancelRating" text="annuler note" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu></Rating>
+            <Label fx:id="noteText" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="195.0" text="Label" />
+         </children></Pane>
     </children>
 </VBox>
