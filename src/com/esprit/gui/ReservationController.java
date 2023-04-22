@@ -69,8 +69,9 @@ public class ReservationController implements Initializable {
         ReservationService reservationService = new ReservationService();
         if (alert.getResult() == ButtonType.YES) {
             if (reservation != null) {
-                reservationService.supprimer(reservation);
+                
                 reservationService.incr_annulation(reservation);
+                reservationService.supprimer(reservation);
                 annuler.setDisable(true);
                 annuler.setText("Réservation annulée");
 
