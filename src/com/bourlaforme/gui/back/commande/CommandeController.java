@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import java.lang.String;
 
 import java.io.IOException;
 import java.net.URL;
@@ -100,7 +101,7 @@ public VBox createPage(int pageIndex) {
             ((Text) innerContainer.lookup("#dateText")).setText("Date : " + commande.getDate());
             ((Text) innerContainer.lookup("#idPanierText")).setText("Panier : " + commande.getPanier().getId());
             ((Text) innerContainer.lookup("#confirmeAdminText")).setText("ConfirmeAdmin : " + commande.isConfirmeAdmin());
-            ((Text) innerContainer.lookup("#idAddressText")).setText("Description : " + commande.getBillingAddress().getDescription()+"\n"+ "Nom et Prenom : " + commande.getBillingAddress().getNom());
+            ((Text) innerContainer.lookup("#idAddressText")).setText("Description : " + filterBadWords(commande.getBillingAddress().getDescription())+"\n"+ "Nom et Prenom : " + commande.getBillingAddress().getNom());
 
 
             ((Button) innerContainer.lookup("#approveButton")).setOnAction((event) -> approve(commande));
@@ -197,5 +198,13 @@ public VBox createPage(int pageIndex) {
         stage.setScene(scene);
         stage.show();
     }
+private String filterBadWords(String description) {
+    String[] badWords = {"rayen", "youssef"}; 
+    for (String word : badWords) {
+        description = description.replaceAll("(?i)" + word, new String(new char[word.length()]).replace('\0', '*'));
+    }
+    return description;
+}
+
 }
  

@@ -26,9 +26,8 @@
                  <Font name="Arial Bold" size="23.0" />
              </font>
          </Text>
-      <Button layoutX="4.0" mnemonicParsing="false" onAction="#Logout" text="return" />
-      <Button fx:id="approveButton" layoutX="469.0" layoutY="22.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#prix" styleClass="light-button" text="Montant&gt;100" />
-      <Button layoutX="4.0" layoutY="36.0" mnemonicParsing="false" onAction="#Stat" text="Stat" />
+      <Button layoutX="6.0" layoutY="22.0" mnemonicParsing="false" onAction="#Logout" text="return" />
+      <Button layoutX="491.0" layoutY="23.0" mnemonicParsing="false" onAction="#Stat" prefHeight="26.0" prefWidth="57.0" text="Stat" />
     </AnchorPane>
     <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <opaqueInsets>

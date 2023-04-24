@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane styleClass="background-white" stylesheets="@../../../utils/MainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bourlaforme.gui.front.payment.PaymentController">
+    <StackPane layoutY="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Text fx:id="topText" strokeType="OUTSIDE" strokeWidth="0.0" text="texte haut">
+            <font>
+                <Font name="Arial Bold" size="23.0" />
+            </font>
+        </Text>
+    </StackPane>
+    <VBox layoutX="50.0" layoutY="56.0" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="56.0">
+    
+        <HBox>
+            
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Card  :">
+                <font>
+                    <Font name="Arial" size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="5.0" />
+                </VBox.margin>
+            </Text>
+            <TextField fx:id="CardTF" alignment="TOP_LEFT" promptText="Saisir numero card" styleClass="form-control" />
+        </VBox>
+
+            
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mois:">
+                <font>
+                    <Font name="Arial" size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="5.0" />
+                </VBox.margin>
+            </Text>
+            <TextField fx:id="MoisTF" alignment="TOP_LEFT" promptText="Saisir mois" styleClass="form-control" />
+        </VBox>
+
+        </HBox>
+    
+        <HBox>
+            
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Annee:">
+                <font>
+                    <Font name="Arial" size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="5.0" />
+                </VBox.margin>
+            </Text>
+            <TextField fx:id="anneeTF" alignment="TOP_LEFT" promptText="Saisir annee" styleClass="form-control" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Text>
+        </VBox>
+
+            
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CVV :">
+                <font>
+                    <Font name="Arial" size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets left="5.0" />
+                </VBox.margin>
+            </Text>
+            <TextField fx:id="cvvTF" alignment="TOP_LEFT" promptText="Saisir CVV" styleClass="form-control" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Text>
+        </VBox>
+
+        </HBox>
+    
+        <HBox>
+            
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </VBox>
+
+            
+        </HBox>
+    
+    </VBox>
+    <Button fx:id="btnAjout" layoutX="265.0" layoutY="434.0" mnemonicParsing="false" onAction="#handlePayment" prefHeight="51.0" prefWidth="150.0" styleClass="success-button" text="manipulation" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
+   <TextField fx:id="emailTF" alignment="TOP_LEFT" layoutX="67.0" layoutY="260.0" prefHeight="27.0" prefWidth="243.0" promptText="Saisir Email" styleClass="form-control" />
+   <TextField fx:id="NomTF" alignment="TOP_LEFT" layoutX="351.0" layoutY="260.0" prefHeight="27.0" prefWidth="243.0" promptText="Saisir Nom" styleClass="form-control" />
+</AnchorPane>

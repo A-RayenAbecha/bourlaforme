@@ -138,6 +138,23 @@ public class CommandeService {
         }
         return false;
     }
+        public boolean updateConfirmeAdmin (int id, boolean Confirm ) {
+
+        String request = "UPDATE `commande` SET  `confirme_admin` = ? WHERE `id`=" + id;
+        try {
+            preparedStatement = connection.prepareStatement(request);
+
+ 
+            preparedStatement.setBoolean(5, Confirm);
+
+            preparedStatement.executeUpdate();
+            System.out.println("Commande edited");
+            return true;
+        } catch (SQLException exception) {
+            System.out.println("Error (edit) commande : " + exception.getMessage());
+        }
+        return false;
+    }
 
     public boolean delete(int id) {
         try {

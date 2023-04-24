@@ -6,6 +6,7 @@ package com.bourlaforme.gui.back.commande;
 
 import com.bourlaforme.entities.Commande;
 import com.bourlaforme.services.CommandeService;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,8 +27,14 @@ import javafx.scene.chart.XYChart;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class StatController implements Initializable {
     @FXML
@@ -86,5 +93,13 @@ public class StatController implements Initializable {
         System.out.println("Montant moyen : " + avgMontant);
 
         statPane.getChildren().add(chart);
+    }
+            public void Logout (ActionEvent e) throws IOException {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/Login.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

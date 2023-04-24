@@ -88,7 +88,7 @@ public class ManageController implements Initializable {
                         AlertUtils.makeInformation("Commande ajouté avec succés");
                         MonPanierController.monPanierArticleList.clear();
                         MonPanierController.panier = new Panier();
-                        MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_DISPLAY_MY_PANIER);
+                        MainWindowController.getInstance().loadInterface("/com/bourlaforme/gui/front/payment/Manage.fxml");
 
 
                     } else {
