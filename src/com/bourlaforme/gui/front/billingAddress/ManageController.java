@@ -87,14 +87,14 @@ public class ManageController implements Initializable {
                             billingAddress,
                             false
                     ))) {
-                                                try {
+                                               
+                        AlertUtils.makeInformation("Commande ajouté avec succés");
+                         AlertUtils.makeSuccessNotification("Commande ajouté avec succés");
+                        try {
                             sendMail(emailTF.getText());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                        AlertUtils.makeInformation("Commande ajouté avec succés");
-                         AlertUtils.makeSuccessNotification("Commande ajouté avec succés");
-
                         MonPanierController.monPanierArticleList.clear();
                         MonPanierController.panier = new Panier();
                         MainWindowController.getInstance().loadInterface("/com/bourlaforme/gui/front/payment/Manage.fxml");

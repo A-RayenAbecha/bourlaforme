@@ -1,8 +1,10 @@
 package com.bourlaforme.gui.front.panier;
 
+import com.bourlaforme.entities.Commande;
 import com.bourlaforme.entities.Panier;
 import com.bourlaforme.entities.PanierArticle;
 import com.bourlaforme.gui.front.MainWindowController;
+import com.bourlaforme.services.CommandeService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
 import javafx.event.ActionEvent;
@@ -60,6 +62,8 @@ public class MonPanierController implements Initializable {
             prixTotal += panierArticle.getQuantity() * panierArticle.getArticle().getPrix();
         }
         totalText.setText("Total : " + prixTotal);
+
+
     }
 
     void displayData(String searchText) {

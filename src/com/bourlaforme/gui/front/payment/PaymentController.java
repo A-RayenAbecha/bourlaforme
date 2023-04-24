@@ -7,6 +7,7 @@ import com.bourlaforme.services.PaymentService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
 import com.stripe.exception.StripeException;
+import static java.time.Clock.system;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -32,6 +33,7 @@ public class PaymentController {
     List<Commande> listCommande = CommandeService.getInstance().getAll();
     Commande lastCommande = listCommande.get(listCommande.size() - 1);
     public void initialize() {
+
      }
 
     @FXML
@@ -52,7 +54,9 @@ public class PaymentController {
                 alert.setHeaderText(null);
                 alert.setContentText("Your payment was successful!");
                 alert.showAndWait();
-                CommandeService.getInstance().updateConfirmeAdmin(lastCommande.getId(), true );
+                lastCommande.setConfirmeAdmin(true);
+                System.out.println(lastCommande.isConfirmeAdmin());
+                CommandeService.getInstance().edit(lastCommande);
                 MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_DISPLAY_MY_PANIER);
                 AlertUtils.makeSuccessNotification("Payment Successful");
 
