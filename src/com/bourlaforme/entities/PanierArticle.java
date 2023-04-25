@@ -21,6 +21,10 @@ public class PanierArticle {
         this.quantity = quantity;
     }
 
+    public PanierArticle() {
+        
+    }
+
     public int getId() {
         return id;
     }

@@ -6,6 +6,7 @@ import com.bourlaforme.entities.PanierArticle;
 import com.bourlaforme.utils.DatabaseConnection;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,7 +74,7 @@ public class PanierArticleService {
     public List<Article> getAllArticle() {
         List<Article> listArticle = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM `article`");
+            preparedStatement = connection.prepareStatement("SELECT * FROM `article` ");
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -146,4 +147,81 @@ public class PanierArticleService {
         }
         return false;
     }
+ 
+public List<PanierArticle> searchByPanier(int panierId) {
+    List<PanierArticle> panierArticles = new ArrayList<>();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+
+    try {
+        // Prepare a statement to retrieve the PanierArticles associated with the given panierId
+        String query = "SELECT * FROM  panier_article WHERE id_panier_id=?";
+        stmt = connection.prepareStatement(query);
+        stmt.setInt(1, panierId);
+        rs = stmt.executeQuery();
+
+        // Iterate over the PanierArticles and retrieve the corresponding Articles
+        while (rs.next()) {
+            int articleId = rs.getInt("id_article_id");
+            int quantity = rs.getInt("quantity");
+
+            // Prepare a statement to retrieve the Article associated with the current PanierArticle
+            query = "SELECT * FROM Article WHERE id=?";
+            stmt = connection.prepareStatement(query);
+            stmt.setInt(1, articleId);
+            ResultSet articleRs = stmt.executeQuery();
+
+            // Create a PanierArticle object from the result set and add it to the list of PanierArticles
+            if (articleRs.next()) {
+                Article article = new Article();
+                article.setId(articleRs.getInt("id"));
+                article.setNom(articleRs.getString("nom"));
+                article.setDescription(articleRs.getString("description"));
+                article.setImage(articleRs.getString("image"));
+                article.setPrix(articleRs.getInt("prix"));
+                article.setEtat(articleRs.getString("etat"));
+
+                PanierArticle panierArticle = new PanierArticle();
+                panierArticle.setArticle(article);
+                panierArticle.setQuantity(quantity);
+
+                panierArticles.add(panierArticle);
+            }
+
+            // Close the article result set
+            if (articleRs != null) {
+                articleRs.close();
+            }
+        }
+
+        // Close the statement and result set
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (rs != null) {
+            rs.close();
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    return panierArticles;
+}
+
+
+
+
+
 }

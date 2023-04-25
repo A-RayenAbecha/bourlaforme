@@ -26,6 +26,10 @@ public class Article {
         this.etat = etat;
     }
 
+    public Article() {
+        
+    }
+
     public int getId() {
         return id;
     }
