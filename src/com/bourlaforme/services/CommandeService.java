@@ -86,6 +86,7 @@ public class CommandeService {
                                 resultSet.getString("z.address"),
                                 resultSet.getInt("z.phone"),
                                 resultSet.getString("z.description")
+                                
                         ),
                         resultSet.getBoolean("confirme_admin")
 
@@ -170,4 +171,7 @@ public class CommandeService {
         }
         return false;
     }
+ 
+
+
 }

@@ -47,7 +47,7 @@ public class PaymentController {
 
         PaymentService paymentService = new PaymentService("sk_test_51MdLLSIdxzsb4CtapSbocwfwsUnBI1w4LtjUDAtRvw1k7SK2y0hdpW5SjZurt6htOehVYAV0tILGgXAubCiYWFvJ00O2fSM0G6");
         try {
-            boolean paymentSuccessful = paymentService.payer(email, name, lastCommande.getMontant(), cardNumber, expMonth, expYear, cvc);
+            boolean paymentSuccessful = paymentService.payer(email, name, lastCommande.getMontant()*100, cardNumber, expMonth, expYear, cvc);
             if (paymentSuccessful) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Payment Successful");

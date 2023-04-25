@@ -48,8 +48,8 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_FRONT_MAIN_WINDOW,
                 "",
-                800,
-                600,
+                1100,
+                700,
                 false
         );
     }
@@ -58,8 +58,8 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_BACK_MAIN_WINDOW,
                 "",
-                1000,
-                600,
+                1100,
+                700,
                 false
         );
     }

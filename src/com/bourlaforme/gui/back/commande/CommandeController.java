@@ -122,7 +122,7 @@ public VBox createPage(int pageIndex) {
             ((Text) innerContainer.lookup("#dateText")).setText("Date : " + commande.getDate());
             ((Text) innerContainer.lookup("#idPanierText")).setText("Panier : " + commande.getPanier().getId());
             ((Text) innerContainer.lookup("#confirmeAdminText")).setText("ConfirmeAdmin : " + commande.isConfirmeAdmin());
-            ((Text) innerContainer.lookup("#idAddressText")).setText("Description : " + filterBadWords(commande.getBillingAddress().getDescription())+"\n"+ "Nom et Prenom : " + commande.getBillingAddress().getNom());
+            ((Text) innerContainer.lookup("#idAddressText")).setText("Description : " + replaceBadWords(commande.getBillingAddress().getDescription(),"C:/Users/rayen/Desktop/BadWords.txt")+"\n"+ "Nom et Prenom : " + commande.getBillingAddress().getNom());
 
 
             ((Button) innerContainer.lookup("#pdfButton")).setOnAction((event) -> genererPDF(commande));
@@ -277,12 +277,27 @@ private void genererPDF(Commande commande) {
         stage.setScene(scene);
         stage.show();
     }
-private String filterBadWords(String description) {
-    String[] badWords = {"rayen", "youssef"}; 
-    for (String word : badWords) {
-        description = description.replaceAll("(?i)" + word, new String(new char[word.length()]).replace('\0', '*'));
-    }
-    return description;
-}
 
+   public static String replaceBadWords(String originalString, String badWordsFilePath) {
+        String cleanedString = originalString;
+        try {
+            // Read bad words from file
+            List<String> badWords = Files.readAllLines(Paths.get(badWordsFilePath));
+
+            // Replace bad words with asterisks
+            for (String badWord : badWords) {
+                if (badWord != null && !badWord.isEmpty()) {
+                   StringBuilder asterisksBuilder = new StringBuilder();
+          for (int i = 0; i < badWord.length(); i++) {
+    asterisksBuilder.append("*");
+}
+String asterisks = asterisksBuilder.toString();
+                    cleanedString = cleanedString.replaceAll("(?i)\\b" + badWord + "\\b", asterisks);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading bad words file: " + e.getMessage());
+        }
+        return cleanedString;
+    }
 }
