@@ -24,7 +24,7 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="77.0" prefWidth="135.0" text="en attente" textAlignment="RIGHT" />
+            <Label fx:id="etat" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="77.0" prefWidth="135.0" text="en attente" textAlignment="RIGHT" />
          </children>
       </HBox>
       <HBox fx:id="ox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="510.0">

@@ -55,6 +55,20 @@ public class ServiceParticipation implements IService<Participation> {
         }
     }
 
+    public void accepter(int id) {
+        try {
+            String requete = "UPDATE participation SET participated=? WHERE id=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, 1);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+            System.out.println("Participation modifiée avec succès !");
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+
     @Override
     public void supprimer(Participation p) {
         try {
@@ -106,6 +120,31 @@ public class ServiceParticipation implements IService<Participation> {
         }
     }
 
+    public List<Participation> getParticipationsByClub(int clubId) {
+        List<Participation> listParticipations = new ArrayList<>();
+        try {
+            String requete = "SELECT * FROM participation WHERE id_club_id = ?";
+            PreparedStatement stm = cnx.prepareStatement(requete);
+            stm.setInt(1, clubId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Participation p = new Participation(
+                        rs.getInt("id"),
+                        rs.getInt("id_club_id"),
+                        rs.getInt("id_user_id"),
+                        new Date(rs.getTimestamp("date_debut").getTime()),
+                        new Date(rs.getTimestamp("date_fin").getTime()),
+                        rs.getInt("participated") == 1
+                );
+                listParticipations.add(p);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return listParticipations;
+    }
+
+
     public List<Participation> afficheReservationByUser(User user) {
         List<Participation> listReservations = new ArrayList<>();
         try {
@@ -129,6 +168,24 @@ public class ServiceParticipation implements IService<Participation> {
         }
         return listReservations;
     }
+
+    
+    public String getEmailForParticipation(int participationId) {
+    String email = null;
+    try {
+        String query = "SELECT u.email FROM participation p INNER JOIN user u ON p.id_user_id = u.id WHERE p.id = ?";
+        PreparedStatement statement = cnx.prepareStatement(query);
+        statement.setInt(1, participationId);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            email = rs.getString("email");
+            System.out.println(email);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    return email;
+}
 
 
 

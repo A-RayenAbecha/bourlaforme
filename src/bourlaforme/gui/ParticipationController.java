@@ -52,6 +52,9 @@ public class ParticipationController {
     Club club;
     User user;
     Participation participation;
+    
+        @FXML
+    private Label etat;
 
     @FXML
     void participer(ActionEvent event) {
@@ -84,6 +87,11 @@ public class ParticipationController {
         prixClub.setText(club.getPrix() + " DT");
         dated.setText(String.valueOf(participation.getDateDebut()));
         daf.setText(String.valueOf(participation.getDateFin()));
+        if(participation.isParticipated()) {
+            etat.setText("accepté");
+        } else {
+              etat.setText("en attente");
+        }
 
         // set image du club
         File file = new File(club.getImage());

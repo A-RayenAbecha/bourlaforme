@@ -132,6 +132,37 @@ public class ServiceClub implements IService<Club> {
         }
         return club;
     }
+    
+    public List<Club> search(String clubName) {
+    List<Club> listClubs = new ArrayList<>();
+    try {
+        String requete = "SELECT * FROM club WHERE nom LIKE ? OR localisation LIKE ?";
+        PreparedStatement stm = cnx.prepareStatement(requete);
+        stm.setString(1, "%" + clubName + "%");
+        stm.setString(2, "%" + clubName + "%");
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            Club c = new Club(
+                    rs.getInt("id"),
+                    rs.getString("nom"),
+                    rs.getString("localisation"),
+                    rs.getString("image"),
+                    rs.getString("type_activite"),
+                    rs.getInt("id_club_owner_id"),
+                    rs.getString("telephone"),
+                    rs.getString("description"),
+                    rs.getString("prix"),
+                    rs.getDouble("longitude"),
+                    rs.getDouble("latitude")
+            );
+            listClubs.add(c);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    return listClubs;
+}
+
 
 
 

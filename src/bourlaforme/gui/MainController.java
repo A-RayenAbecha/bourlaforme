@@ -18,6 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 public class MainController implements Initializable {
@@ -42,7 +43,8 @@ public class MainController implements Initializable {
     @FXML
     private ImageView SessionsIcon;
 
-
+  @FXML
+    private TextField searchField;
 
     @FXML
     private HBox coachs;
@@ -131,8 +133,24 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-   
+           ServiceClub serviceClub = new ServiceClub();
         connectedUser = new User(2);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+    // Code to execute when the text in the search field changes
+    // For example, call the search method with the new search term
+        //    List<Club> results = search(newValue);
+        if(page_seances.isVisible())
+        try {
+            displayClubs(serviceClub.search(newValue));
+        } catch (IOException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+        });
+        
+                page_reservation.setVisible(false);
+        page_seances.setVisible(false);
+
+
     }
 
 

@@ -27,7 +27,7 @@
             <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="42.0" prefWidth="7.0" />
             <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="36.0" prefWidth="277.0" style="-fx-border-color: D7D7D7; -fx-border-radius: 50;">
                <children>
-                  <TextField prefHeight="47.0" prefWidth="223.0" promptText="Search" style="-fx-background-color: rgba(0,0,0,0);" styleClass="transparent" stylesheets="@style.css" />
+                  <TextField fx:id="searchField" prefHeight="47.0" prefWidth="223.0" promptText="Search" style="-fx-background-color: rgba(0,0,0,0);" styleClass="transparent" stylesheets="@style.css" />
                   <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@loop.png" />
@@ -131,7 +131,7 @@
          <children>
             <VBox fx:id="page_seances" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="84.0" prefWidth="1112.0" text="All Sessions">
+                  <Label prefHeight="84.0" prefWidth="1112.0" text="All Clubs">
                      <font>
                         <Font name="DejaVu Sans Mono Bold" size="42.0" />
                      </font>
@@ -149,7 +149,7 @@
             </VBox>
             <VBox fx:id="page_reservation" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="84.0" prefWidth="1112.0" text="My reservations">
+                  <Label prefHeight="84.0" prefWidth="1112.0" text="My participations">
                      <font>
                         <Font name="DejaVu Sans Mono Bold" size="42.0" />
                      </font>
