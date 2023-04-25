@@ -82,10 +82,8 @@ public class TopBarController implements Initializable {
 
     @FXML
     private void afficherMessages(ActionEvent event) {
-        goToLink(Constants.FXML_FRONT_DISPLAY_ALL_MESSAGE);
+               goToLink("/com/bourlaforme/gui/front/message/Messagerie.fxml");
 
-        btnMessages.setTextFill(COLOR_PRIMARY);
-        Animations.animateButton(btnMessages, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
 
     private void goToLink(String link) {

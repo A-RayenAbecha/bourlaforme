@@ -27,6 +27,9 @@ public class Constants {
     public static final String FXML_FRONT_DISPLAY_ALL_MESSAGE = "/com/bourlaforme/gui/front/message/AfficherToutMessage.fxml";
     public static final String FXML_FRONT_MANAGE_MESSAGE = "/com/bourlaforme/gui/front/message/GererMessage.fxml";
     public static final String FXML_FRONT_MODEL_MESSAGE = "/com/bourlaforme/gui/front/message/ModeleMessage.fxml";
+    
+    public static final String FXML_FRONT_MESSAGERIE = "/com/bourlaforme/gui/front/message/Messagerie.fxml";
+
 
     public static final String FXML_LOGIN = "/com/bourlaforme/gui/Login.fxml";
 

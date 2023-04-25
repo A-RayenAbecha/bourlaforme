@@ -11,9 +11,27 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import static com.bourlaforme.MainApp.mainStage;
+import com.bourlaforme.MainApp;
+import com.bourlaforme.utils.Constants;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.Scene;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class MainWindowController implements Initializable {
 
+    private MainApp ma = MainApp.getInstance();
     static AnchorPane staticContent;
     private static MainWindowController instance;
 
@@ -28,6 +46,8 @@ public class MainWindowController implements Initializable {
         }
         return instance;
     }
+    @FXML
+    private AnchorPane main_window;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,6 +75,12 @@ public class MainWindowController implements Initializable {
             System.out.println("Could not load FXML check the path");
         } else {
             try {
+                if (location.contains("Messagerie")) {
+                    ma.mainStage.setWidth(1200);
+                } else {
+                    //ma.mainStage.setWidth(800);
+                    //System.out.println(main_window.getWidth());
+                }
                 Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(location)));
                 AnchorPane.setTopAnchor(parent, 0.0);
                 AnchorPane.setBottomAnchor(parent, 0.0);

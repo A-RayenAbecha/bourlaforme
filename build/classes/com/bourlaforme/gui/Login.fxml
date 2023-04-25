@@ -2,26 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="500.0" style="-fx-background-color: white"
-            stylesheets="@../utils/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bourlaforme.gui.LoginController">
 
-    <Button layoutX="100.0" layoutY="38.0" mnemonicParsing="false" onAction="#frontend" styleClass="success-button"
-            text="Front" textFill="#FFFFFF" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0"
-            AnchorPane.topAnchor="80.0">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="500.0" style="-fx-background-color: white" stylesheets="@../utils/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bourlaforme.gui.LoginController">
+
+    <Button layoutX="100.0" layoutY="38.0" mnemonicParsing="false" onAction="#frontend" styleClass="success-button" text="Front" textFill="#FFFFFF" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="80.0">
         <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
         </font>
     </Button>
 
-    <Button mnemonicParsing="false" onAction="#backend" styleClass="success-button" text="Back" textFill="#FFFFFF"
-            AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+    <Button mnemonicParsing="false" onAction="#backend" styleClass="success-button" text="Back" textFill="#FFFFFF" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
         <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
         </font>
     </Button>
-    <ComboBox fx:id="userCB" layoutX="164.0" layoutY="26.0" prefWidth="150.0" promptText="Choisir un utilisateur"
-              AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="30.0"/>
+   <ComboBox fx:id="userCB" layoutX="164.0" layoutY="26.0" prefWidth="150.0" promptText="Choisir un utilisateur" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="30.0" />
 </AnchorPane>

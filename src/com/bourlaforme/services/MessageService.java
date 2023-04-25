@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +121,55 @@ public class MessageService {
             System.out.println("Error (getAll) user : " + exception.getMessage());
         }
         return listUser;
+    }
+    
+    public User getOneById(int id) {
+        User p = null;
+        try {
+            String req = "Select * from user where id = '" + id + "'";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                 p =new User(rs.getString("email"), rs.getString("roles"), rs.getString("password"),
+                rs.getString("nom"), rs.getString("prenom"),
+                rs.getString("image"), rs.getString("certificates"),
+                rs.getString("specialite"), rs.getString("experiance"),
+                rs.getString("description"), rs.getBoolean("is_coach"), 
+                rs.getBoolean("approved"), rs.getString("likes"), 
+                rs.getFloat("moyenne")
+                );
+            }
+            return p;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return p;
+    }
+    
+    public User getByUsername(String user) {
+        User p = null;
+        try {
+            String req = "Select * from user where prenom = '" + user + "'";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                System.out.println(rs.getString("prenom"));
+                 p = new User(rs.getInt("id") ,rs.getString("email"), rs.getString("roles"), rs.getString("password"),
+                rs.getString("nom"), rs.getString("prenom"),
+                rs.getString("image"), rs.getString("certificates"),
+                rs.getString("specialite"), rs.getString("experiance"),
+                rs.getString("description"), rs.getBoolean("is_coach"), 
+                rs.getBoolean("approved"), rs.getString("likes"), 
+                rs.getFloat("moyenne")
+                );
+                return p;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return p;
     }
 
     public boolean add(Message message) {

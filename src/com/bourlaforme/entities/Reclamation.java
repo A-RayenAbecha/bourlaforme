@@ -17,7 +17,7 @@ public class Reclamation implements Comparable<Reclamation> {
     private String reponse;
     private String type;
     private String message;
-
+    
     public Reclamation(int id, User user, User coach, RelationObject club, RelationObject article, LocalDate dateReclamation, String etat, String reponse, String type, String message) {
         this.id = id;
         this.user = user;
@@ -50,7 +50,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public User getUser() {
         return user;
     }
@@ -58,7 +58,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setUser(User user) {
         this.user = user;
     }
-
+    
     public User getCoach() {
         return coach;
     }
@@ -66,7 +66,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setCoach(User coach) {
         this.coach = coach;
     }
-
+    
     public RelationObject getClub() {
         return club;
     }
@@ -74,7 +74,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setClub(RelationObject club) {
         this.club = club;
     }
-
+    
     public RelationObject getArticle() {
         return article;
     }
@@ -82,7 +82,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setArticle(RelationObject article) {
         this.article = article;
     }
-
+    
     public LocalDate getDateReclamation() {
         return dateReclamation;
     }
@@ -90,7 +90,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setDateReclamation(LocalDate dateReclamation) {
         this.dateReclamation = dateReclamation;
     }
-
+    
     public String getEtat() {
         return etat;
     }
@@ -98,7 +98,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setEtat(String etat) {
         this.etat = etat;
     }
-
+    
     public String getReponse() {
         return reponse;
     }
@@ -106,7 +106,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setReponse(String reponse) {
         this.reponse = reponse;
     }
-
+    
     public String getType() {
         return type;
     }
@@ -114,7 +114,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setType(String type) {
         this.type = type;
     }
-
+    
     public String getMessage() {
         return message;
     }
@@ -122,7 +122,7 @@ public class Reclamation implements Comparable<Reclamation> {
     public void setMessage(String message) {
         this.message = message;
     }
-
+    
 
     @Override
     public int compareTo(Reclamation reclamation) {
@@ -136,19 +136,19 @@ public class Reclamation implements Comparable<Reclamation> {
             case "Article":
                 return Integer.compare(reclamation.getArticle().getId(), this.getArticle().getId());
             case "DateReclamation":
-                return reclamation.getDateReclamation().compareTo(this.getDateReclamation());
+                 return reclamation.getDateReclamation().compareTo(this.getDateReclamation());
             case "Etat":
-                return reclamation.getEtat().compareTo(this.getEtat());
+                 return reclamation.getEtat().compareTo(this.getEtat());
             case "Reponse":
-                return reclamation.getReponse().compareTo(this.getReponse());
+                 return reclamation.getReponse().compareTo(this.getReponse());
             case "Type":
-                return reclamation.getType().compareTo(this.getType());
+                 return reclamation.getType().compareTo(this.getType());
             case "Message":
-                return reclamation.getMessage().compareTo(this.getMessage());
-
+                 return reclamation.getMessage().compareTo(this.getMessage());
+            
             default:
                 return 0;
         }
     }
-
+    
 }
