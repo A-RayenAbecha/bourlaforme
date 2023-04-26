@@ -5,7 +5,7 @@
 package bourlaforme.interfaceController;
 
 import bourlaforme.Entity.User;
-import bourlaforme.utils.LoginController;
+import bourlaforme.utils.ServiceUser;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
@@ -50,33 +50,23 @@ public class LoginFormCTR {
     RadioButton rb_coach;
     
     User us= new User();
-    LoginController Lc = new LoginController();
+    //LoginController Lc = new LoginController();
     
     
     ToggleGroup toggleGroup;
     
     public void isSign(Event e) throws SQLException, IOException{
-        
-        us.setEmail(txtEmail.getText());
-        us.setPassword(txtPassword.getText());
-        if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
-            if(txtPassword.getText().matches("^.{6,}$")){
-                if(Lc.isLoggedIn(us)){
-                    Node node = (Node) e.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-
-                    Parent root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/Home.fxml"));
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                }
-                else
-                    labelMSG.setText("email or password is uncorrect");
-            }
-            else
-                showAlert("Please enter a password.");
-        }else
-            showAlert("Please enter a valid email address.");
+        ServiceUser serviceUser = new ServiceUser();
+        User u = serviceUser.login(txtEmail.getText(), txtPassword.getText());
+        if (u == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de connexion");
+            alert.setHeaderText("Identifiants incorrects");
+            alert.setContentText("Veuillez vérifier votre adresse email et votre mot de passe.");
+            alert.showAndWait();
+        } else {
+            System.out.println("Utilisateur connecté : " + u.getRoles());
+        }
     }
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -105,7 +95,7 @@ public class LoginFormCTR {
     
     @FXML
     public void CreationSuccess(Event e) throws SQLException, IOException{
-        us.setEmail(txtEmail.getText());
+    /*    us.setEmail(txtEmail.getText());
         us.setPassword(txtPassword.getText());
         us.setNom(txtNom.getText());
         us.setPrenom(txtPrenom.getText());
@@ -114,20 +104,7 @@ public class LoginFormCTR {
         rb_coach.setToggleGroup(toggleGroup);
         
         
-        rb_client.setOnAction((ActionEvent e1) -> {
-            if (rb_client.isSelected()) {
-                us.setRole("\"ROLE_CLIENT\"");
-                us.setIs_coach(0);
-                us.setApproved(1);
-            }
-        });
-        rb_coach.setOnAction((ActionEvent e1) -> {
-            if (rb_coach.isSelected()) {
-                us.setRole("\"ROLE_COACH\"");
-                us.setIs_coach(1);
-                us.setApproved(0);
-            }
-        });
+       
         if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
             if(txtNom.getText().matches("[a-zA-Z]+")){
                 if(txtPrenom.getText().matches("[a-zA-Z]+")){
@@ -150,5 +127,6 @@ public class LoginFormCTR {
         }else
             showAlert("Please enter a valid email address.");
     }
-        
+ */       
+}
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="661.0" prefWidth="1596.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bourlaforme.interfaceController.AdminList">
+<AnchorPane id="AnchorPane" prefHeight="646.0" prefWidth="1560.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bourlaforme.interfaceController.AdminList">
    <children>
       <Pane layoutX="1261.0" prefHeight="659.0" prefWidth="334.0" style="-fx-background-color: ababac;">
          <children>

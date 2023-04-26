@@ -33,12 +33,12 @@
                   <Font name="Webdings" size="18.0" />
                </font>
             </Label>
-            <RadioButton fx:id="rb_client" layoutX="149.0" layoutY="350.0" mnemonicParsing="false" text="Client">
+            <RadioButton fx:id="rb_client" layoutX="149.0" layoutY="350.0" mnemonicParsing="false" onAction="#setClient" text="Client">
                <font>
                   <Font name="Webdings" size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="rb_coach" layoutX="149.0" layoutY="384.0" mnemonicParsing="false" text="Coach">
+            <RadioButton fx:id="rb_coach" layoutX="149.0" layoutY="384.0" mnemonicParsing="false" onAction="#setCoach" text="Coach">
                <font>
                   <Font name="Webdings" size="18.0" />
                </font>

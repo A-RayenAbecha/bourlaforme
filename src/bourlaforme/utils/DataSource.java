@@ -13,23 +13,30 @@ import java.sql.SQLException;
  * @author aziz3
  */
 public class DataSource {
+     private Connection cnx;
+    private static DataSource instance;
     
-    private static Connection con =null;
+  private final String URL = "jdbc:mysql://localhost:3306/bourlaforme";
+    private final String USERNAME = "root";
+    private final String PASSWORD = "";
+    
+    private DataSource() {
+        try {
+            cnx = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            System.out.println("Connecting !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static DataSource getInstance() {
+        if(instance == null)
+            instance = new DataSource();
+        return instance;
+    }
 
-    public DataSource() {
-        
-    }
-    
-    
-    public static Connection openConnection() throws SQLException{
-        if (con == null)
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bourlaforme","root","");
-        return con;
-    }
-    public static void closeConnection()
-    {       
-        if(con != null)
-          con = null;
+    public Connection getCnx() {
+        return cnx;
     }
 }
 /*private Connection cnx;

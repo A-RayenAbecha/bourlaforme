@@ -5,7 +5,6 @@
 package bourlaforme.interfaceController;
 
 import bourlaforme.Entity.User;
-import bourlaforme.utils.AdminController;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
@@ -49,7 +48,7 @@ public class AdminAddUserController {
     
     
     User us= new User();
-    AdminController AC= new AdminController();
+ //   AdminController AC= new AdminController();
     ToggleGroup toggleGroup;
     
     @FXML
@@ -65,7 +64,7 @@ public class AdminAddUserController {
     
     @FXML
     public void CreationSuccess(Event e) throws SQLException, IOException{
-        us.setEmail(txtEmail.getText());
+    /*    us.setEmail(txtEmail.getText());
         us.setPassword(txtPassword.getText());
         us.setNom(txtPrenom.getText());
         us.setPrenom(txtNom.getText());
@@ -117,6 +116,7 @@ public class AdminAddUserController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
+    */}
     
 }
+

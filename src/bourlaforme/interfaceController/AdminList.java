@@ -24,7 +24,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import bourlaforme.Entity.User;
-import bourlaforme.utils.AdminController;
 import java.sql.SQLException;
 import java.sql.SQLDataException;
 import java.util.List;
@@ -69,11 +68,11 @@ public class AdminList implements Initializable{
     @FXML
     Button btnAdd;
     
-    AdminController Lc = new AdminController();
+  //  AdminController Lc = new AdminController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<User> u = new ArrayList<>();
+      /*  ArrayList<User> u = new ArrayList<>();
         u = (ArrayList<User>) Lc.getAllUsers();
         ObservableList<User> obs2 = FXCollections.observableArrayList(u);
         table.setItems(obs2);
@@ -86,17 +85,18 @@ public class AdminList implements Initializable{
         specialite.setCellValueFactory(new PropertyValueFactory<>("specialite"));
         experiance.setCellValueFactory(new PropertyValueFactory<>("experiance"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        */
     }
     public void resetTableData() throws SQLDataException, SQLException {
-        AdminController Lu = new AdminController();
+   /*     AdminController Lu = new AdminController();
         List<User> listrec = new ArrayList<>();
         listrec = Lu.getAllUsers();
         ObservableList<User> data = FXCollections.observableArrayList(listrec);
-        table.setItems(data);
+        table.setItems(data);*/
     }
     @FXML
     private void supp(ActionEvent event) throws SQLException {
-         if (event.getSource() == btnsupp) {
+     /*    if (event.getSource() == btnsupp) {
             User rec = new User();
 
         AdminController Lu = new AdminController();
@@ -107,12 +107,12 @@ public class AdminList implements Initializable{
             resetTableData();
  
         }
-         
+         */
     }
     
     @FXML
     private void update(ActionEvent event) throws SQLException {
-        if(txtNEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+      /*  if(txtNEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
             if(txtNNom.getText().matches("[a-zA-Z]+")){
                 if(txtNPrenom.getText().matches("[a-zA-Z]+")){
                     if (event.getSource() == btnupdate) {
@@ -130,6 +130,7 @@ public class AdminList implements Initializable{
                 showAlert("First name should contain only letters.");
         }else
             showAlert("Please enter a valid email address.");
+*/
     }
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
