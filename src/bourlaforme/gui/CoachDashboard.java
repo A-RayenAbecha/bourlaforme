@@ -248,12 +248,13 @@ public class CoachDashboard implements Initializable {
                         tableViewParticipations.setVisible(true);
                         particips = FXCollections.observableList(serviceParticipation.getParticipationsByClub(clubSelected.getId()));
                         tableViewParticipations.setItems(particips);
-                        
-                     String paymentLink = "";   
-                        
-                        
-                        // stripe
-                        Stripe.apiKey = "sk_test_51MijNgFdj6Z5ZOtZhwQv52Tzmw6QI3tzQY2LUFrLqc3Q4CVuaoh4WZXb0v4vAMe1xcoteWelWsYt27ay3x88KoNN00w7x4UGX7"; // replace with your API key
+                      ///////////////////////////////////////////  
+                     String paymentLink = "";
+                      //String paymentLink = "https://buy.stripe.com/test_00g5mKekGda13RK6oo";   
+
+
+// stripe
+Stripe.apiKey = "sk_test_51MijNgFdj6Z5ZOtZhwQv52Tzmw6QI3tzQY2LUFrLqc3Q4CVuaoh4WZXb0v4vAMe1xcoteWelWsYt27ay3x88KoNN00w7x4UGX7"; // replace with your API key
 
 SessionCreateParams params =
   SessionCreateParams.builder()
@@ -262,7 +263,7 @@ SessionCreateParams params =
         .setQuantity(1L)
         .setPriceData(
           SessionCreateParams.LineItem.PriceData.builder()
-            .setCurrency("EUR"+"00")
+            .setCurrency("USD")
             .setUnitAmount(Long.valueOf(clubSelected.getPrix()) )
             .setProductData(
               SessionCreateParams.LineItem.PriceData.ProductData.builder()
@@ -291,7 +292,7 @@ try {
 
 
                     });
-
+////////////////////////////////////////////////////////////
                     declineButton.setOnAction(event -> {
                         Participation p = getTableView().getItems().get(getIndex());
                         // TODO: Implement decline action for the Participation object p
