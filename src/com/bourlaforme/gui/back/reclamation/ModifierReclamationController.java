@@ -126,7 +126,15 @@ public class ModifierReclamationController implements Initializable {
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Notification");
-            String htmlCode = "<h1>Notification</h1> <br/> <h2><b>Une réponse a été ajouté a votre reclamation</b></h2>";
+            String htmlCode = "<h1>Message</h1> <br/> <h2><b>Cher(e) client,\n" +
+"\n" +
+"Nous sommes heureux de vous informer que nous avons traité votre réclamation et que nous avons pris les mesures nécessaires pour résoudre le problème que vous avez rencontré.\n" +
+"\n" +
+"Nous tenons à vous remercier pour votre patience et votre compréhension tout au long de ce processus. Nous sommes conscients de l'importance de votre satisfaction en tant que client, et nous espérons avoir répondu à vos attentes.\n" +
+"\n" +
+"Si vous avez des questions ou des préoccupations supplémentaires, n'hésitez pas à nous contacter à tout moment. Nous sommes toujours disponibles pour vous aider.\n" +
+"\n" +
+"Cordialement,</b></h2>";
             message.setContent(htmlCode, "text/html");
             return message;
         } catch (MessagingException ex) {

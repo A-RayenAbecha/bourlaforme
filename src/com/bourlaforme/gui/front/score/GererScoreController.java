@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
+import org.controlsfx.control.Rating;
 
 public class GererScoreController implements Initializable {
 
@@ -30,8 +32,14 @@ public class GererScoreController implements Initializable {
     public Button btnAjout;
     @FXML
     public Text topText;
+    
+   
 
     Score currentScore;
+    @FXML
+    private Rating rating;
+    @FXML
+    private Label msg;
 
 
     @Override
@@ -52,6 +60,7 @@ public class GererScoreController implements Initializable {
             try {
                 coachCB.setValue(currentScore.getUser());
                 noteTF.setText(String.valueOf(currentScore.getNote()));
+                rating.setRating(currentScore.getNote());
 
             } catch (NullPointerException ignored) {
                 System.out.println("NullPointerException");
@@ -70,7 +79,11 @@ public class GererScoreController implements Initializable {
             Score score = new Score(
                     coachCB.getValue(),
                     MainApp.session,
-                    Integer.parseInt(noteTF.getText())
+                    (int)Math.round(rating.getRating())
+                    
+                  //  Integer.parseInt(Double.toString((rating.getRating())))
+          //  rating.getRating())
+                    
             );
 
             if (currentScore == null) {
@@ -102,28 +115,9 @@ public class GererScoreController implements Initializable {
             return false;
         }
 
-        if (noteTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("note ne doit pas etre vide");
-            return false;
-        }
+       
 
-        try {
-            Integer.parseInt(noteTF.getText());
-        } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("note doit etre un nombre");
-            return false;
-        }
-
-        try {
-            int i = Integer.parseInt(noteTF.getText());
-            if (i < 0 || i > 5) {
-                AlertUtils.makeInformation("note doit etre entre 0 et 5");
-                return false;
-            }
-        } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("note doit etre un nombre");
-            return false;
-        }
+      
 
         return true;
     }

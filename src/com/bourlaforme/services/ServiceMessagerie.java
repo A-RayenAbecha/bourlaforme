@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ahmedsta
+ * @author ASUS
  */
 public class ServiceMessagerie implements IService<Conversation> {
 

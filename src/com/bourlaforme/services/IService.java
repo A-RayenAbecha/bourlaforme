@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author ahmedsta
+ * @author Firas
  */
 public interface IService <T>{
     public void ajouter(T p);
