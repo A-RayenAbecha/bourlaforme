@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import bourlaforme.utils.EmailSender;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -35,7 +36,7 @@ public class ResetpasswordController implements Initializable {
     @FXML
     private Button btnSendMail;
     @FXML
-    private PasswordField txtEmail;
+    private TextField txtEmail;
 
     /**
      * Initializes the controller class.
@@ -57,7 +58,7 @@ public class ResetpasswordController implements Initializable {
         if (!txtEmail.getText().equals("") && verifMail) {
             if (su.ChercherMail(txtEmail.getText()) == 1) {
                 EmailReset = txtEmail.getText();
-                EmailSender.sendEmail("mohamedaziz.hendili@esprit.tn", "223JMT1084", txtEmail.getText(), "Verification code", "Votre code est : " + code);
+                EmailSender.sendEmail("mohamedaziz.hendili@esprit.tn", "ypmvzjtakvjfhgqy", txtEmail.getText(), "Verification code", "Votre code est : " + code);
 
                 try {
 

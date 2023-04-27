@@ -157,7 +157,7 @@ public class LoginFormCTR implements Initializable{
     private void btnForgetAction(ActionEvent event) {
         try {
 
-                    Parent page1 = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/ResetPassword.fxml"));
+                    Parent page1 = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/Resetpassword.fxml"));
 
                     Scene scene = new Scene(page1);
 
