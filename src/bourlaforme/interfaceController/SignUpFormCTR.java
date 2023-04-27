@@ -1,17 +1,19 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package bourlaforme.interfaceController;
 
 import bourlaforme.entity.User;
-import static bourlaforme.interfaceController.SignUpFormCTR.makeSuccessNotification;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -20,23 +22,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
- * FXML Controller class
  *
- * @author aziz3
+ * @author louay
  */
-public class AdminAddUserController implements Initializable{
+public class SignUpFormCTR implements  Initializable{
 
     @FXML
     private TextField txtEmail;
@@ -47,60 +52,51 @@ public class AdminAddUserController implements Initializable{
     @FXML
     private PasswordField txtPassword;
     @FXML
-    private RadioButton rb_coach;
-    @FXML
     private Button btnSignUp;
     @FXML
-    private Button btnCancel;
-    String imagePathAjout="";
-    
-    
-    User us= new User();
- //   AdminController AC= new AdminController();
-    ToggleGroup toggleGroup;
-    @FXML
-    private RadioButton rb_clubOwner;
-    @FXML
-    private RadioButton rb_reservations;
-    @FXML
-    private RadioButton rb_products;
-    
-    
-    String role;
+    private Button btnSignIn;
     @FXML
     private Label path;
     @FXML
-    private AnchorPane role_pane;
+    private RadioButton rb_coach;
     @FXML
-    public void redirectAdminList(Event e) throws IOException{
-        Node node = (Node) e.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        Parent root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/AdminList.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+    private RadioButton rb_client;
+    @FXML
+    private RadioButton coach;
+    @FXML
+    private RadioButton client;
+    
+    private String role;
     
     
-@FXML    
+
+   // String role;
+    private String imagePathAjout="";
+    User us= new User();
+    //LoginController Lc = new LoginController();
+    
+    
+    ToggleGroup toggleGroup ;
+    
+    @FXML
     public void CreationSuccess(Event e) throws SQLException, IOException{
         us.setEmail(txtEmail.getText());
         us.setPassword(txtPassword.getText());
         us.setNom(txtNom.getText());
         us.setPrenom(txtPrenom.getText());
         us.setRole(role);
-       
+        if (role == "ROLE_COACH"){
+            us.setCoach(true);
+        } else 
             us.setCoach(false);
         us.setApproved(false);
         us.setImage(imagePathAjout);
-        if(User.connectedUser.getRole().equals("ROLE_ADMIN_COACH")) role = "ROLE_COACH";
-        else if (User.connectedUser.getRole().equals("ROLE_ADMIN_CLUBOWNER")) role = "ROLE_CLUBOWNER";
 //        toggleGroup = new ToggleGroup();
         
         
         ServiceUser serviceUser = new ServiceUser();
-       if(imagePathAjout!=""){
-        if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+ if(imagePathAjout!=""){
+     if(txtEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
             if(txtNom.getText().matches("[a-zA-Z]+")){
                 if(txtPrenom.getText().matches("[a-zA-Z]+")){
                     if(txtPassword.getText().matches("^.{6,}$")){
@@ -109,7 +105,7 @@ public class AdminAddUserController implements Initializable{
                             Node node = (Node) e.getSource();
                             Stage stage = (Stage) node.getScene().getWindow();
 
-                            Parent root = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/AdminList.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/LoginForm.fxml"));
                             Scene scene = new Scene(root);
                             stage.setScene(scene);
                             stage.show();
@@ -125,44 +121,29 @@ public class AdminAddUserController implements Initializable{
        } else 
            showAlert("Please an image.");
     }
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Input Validation Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    
+    public static void makeSuccessNotification(String message) {
+        TrayNotification tray = new TrayNotification();
+        AnimationType type = AnimationType.POPUP;
+        tray.setAnimationType(type);
+        tray.setTitle("Success");
+        tray.setMessage(message);
+        tray.setNotificationType(NotificationType.SUCCESS);
+        tray.showAndDismiss(Duration.millis(3000));
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        toggleGroup = new ToggleGroup();
-        rb_coach.setToggleGroup(toggleGroup);
-        rb_reservations.setToggleGroup(toggleGroup);
-        rb_products.setToggleGroup(toggleGroup);
-        rb_clubOwner.setToggleGroup(toggleGroup);
-        
-        
-        rb_coach.setOnAction((ActionEvent e1) -> {
-            role = "ROLE_ADMIN_COACH";
-        });
-        rb_reservations.setOnAction((ActionEvent e1) -> {
-            role = "ROLE_ADMIN_RESERVATION";
-        });
-        rb_products.setOnAction((ActionEvent e1) -> {
-            role = "ROLE_ADMIN_PRODUCT";
-        });
-        rb_clubOwner.setOnAction((ActionEvent e1) -> {
-            role = "ROLE_ADMIN_CLUBOWNER";
-        });
-        if (!User.connectedUser.getRole().equals("ROLE_SUPER_ADMIN")){
-            role_pane.setVisible(false);
-        }
-        
-        
-        
+
+    @FXML
+    private void redirectSignIn(ActionEvent e) throws IOException {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/LoginForm.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
-     @FXML
+      @FXML
     void upload(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une image");
@@ -174,6 +155,30 @@ public class AdminAddUserController implements Initializable{
             imagePathAjout = selectedFile.getAbsolutePath();
         }
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+  toggleGroup = new ToggleGroup();
+        ToggleGroup toggleGroup = new ToggleGroup();
+        
+        rb_client.setToggleGroup(toggleGroup);
+        rb_client.setOnAction(event -> {
+            role="ROLE_CLIENT";
+        });
+
+    rb_coach.setToggleGroup(toggleGroup);
+    rb_coach.setOnAction(event -> {
+        // set the role to ROLE_COACH
+        role="ROLE_COACH";
+    });
+    }
+    
+     private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Input Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
     
 }
-

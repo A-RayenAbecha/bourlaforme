@@ -1,45 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package bourlaforme.Entity;
+package bourlaforme.entity;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
-/**
- *
- * @author aziz3
- */
-    public class User {
-
-        private int id;
-        private String email;
-        private List<String> roles;
-        private String password;
-        private String nom;
-        private String prenom;
-        private String image;
-        private String certificates;
-        private String specialite;
-        private String experiance;
-        private String description;
-        private boolean isCoach;
-        private boolean approved;
-        private String likes;
-        private Double moyenne;
+public class User {
+    private int id;
+    private String email;
+    private String role;
+    private String password;
+    private String nom;
+    private String prenom;
+    private String image;
+    private String certificates;
+    private String specialite;
+    private String experiance;
+    private String description;
+    private boolean isCoach;
+    private boolean approved;
+    private String likes;
+    private Double moyenne;
     
     public static User connectedUser;
 
-    public User() {
-    }
-    
-    
 
-    public User(int id, String email, List<String> roles, String password, String nom, String prenom, String image, String certificates, String specialite, String experiance, String description, boolean isCoach, boolean approved, String likes, Double moyenne) {
+    public User(int id, String email, String roles, String password, String nom, String prenom, String image, String certificates, String specialite, String experiance, String description, boolean isCoach, boolean approved, String likes, Double moyenne) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        this.role = roles;
         this.password = password;
         this.nom = nom;
         this.prenom = prenom;
@@ -54,28 +40,13 @@ import java.util.List;
         this.moyenne = moyenne;
     }
 
-   
 
-    public User(String email, List<String> roles, String password, String nom, String prenom, String image, String certificates, String specialite, String experiance, String description, boolean isCoach) {
-        this.email = email;
-        this.roles = roles;
-        this.password = password;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.image = image;
-        this.certificates = certificates;
-        this.specialite = specialite;
-        this.experiance = experiance;
-        this.description = description;
-        this.isCoach = isCoach;
-        this.likes = "" ;
-        moyenne = 0.0;
-        approved = false;
-             
-        
+    public User(int id) {
+        this.id = id;
     }
 
-    
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -93,12 +64,12 @@ import java.util.List;
         this.email = email;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getPassword() {
@@ -165,12 +136,12 @@ import java.util.List;
         this.description = description;
     }
 
-    public boolean isIsCoach() {
+    public boolean isCoach() {
         return isCoach;
     }
 
-    public void setIsCoach(boolean isCoach) {
-        this.isCoach = isCoach;
+    public void setCoach(boolean coach) {
+        isCoach = coach;
     }
 
     public boolean isApproved() {
@@ -196,15 +167,4 @@ import java.util.List;
     public void setMoyenne(Double moyenne) {
         this.moyenne = moyenne;
     }
-
-    public static User getConnectedUser() {
-        return connectedUser;
-    }
-
-    public static void setConnectedUser(User connectedUser) {
-        User.connectedUser = connectedUser;
-    }
-
-    
-    
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="632.0" prefWidth="850.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bourlaforme.interfaceController.LoginFormCTR">
+<AnchorPane id="AnchorPane" prefHeight="632.0" prefWidth="850.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bourlaforme.interfaceController.LoginFormCTR">
    <children>
       <Pane prefHeight="632.0" prefWidth="421.0" style="-fx-background-color: ababac;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,6 +41,11 @@
                   <Font name="Webdings" size="18.0" />
                </font>
             </Label>
+            <Button fx:id="btnForgot" layoutX="90.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnForgetAction" prefHeight="37.0" prefWidth="244.0" styleClass="button2" text="Forgot Password ? ">
+               <font>
+                  <Font name="Webdings" size="19.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

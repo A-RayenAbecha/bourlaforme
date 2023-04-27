@@ -23,7 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import bourlaforme.Entity.User;
+import bourlaforme.entity.User;
+import bourlaforme.utils.ServiceUser;
 import java.sql.SQLException;
 import java.sql.SQLDataException;
 import java.util.List;
@@ -39,8 +40,6 @@ public class AdminList implements Initializable{
     
     @FXML
     private TableView<User> table;
-    @FXML
-    private TableColumn<?, ?> id;
     @FXML
     private TableColumn<?, ?> email;
     @FXML
@@ -72,12 +71,10 @@ public class AdminList implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      /*  ArrayList<User> u = new ArrayList<>();
-        u = (ArrayList<User>) Lc.getAllUsers();
-        ObservableList<User> obs2 = FXCollections.observableArrayList(u);
-        table.setItems(obs2);
-        
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        afficher();
+        if (!User.connectedUser.getRole().equals("ROLE_ADMIN_COACH")){
+            btnupdate.setVisible(false);
+        }
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -85,7 +82,20 @@ public class AdminList implements Initializable{
         specialite.setCellValueFactory(new PropertyValueFactory<>("specialite"));
         experiance.setCellValueFactory(new PropertyValueFactory<>("experiance"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
-        */
+        
+    }
+    void afficher(){
+        ServiceUser serviceUser = new ServiceUser();
+        ArrayList<User> u = new ArrayList<>();
+        if(User.connectedUser.getRole().equals("ROLE_SUPER_ADMIN")){
+            u = (ArrayList<User>) serviceUser.afficher_admins("ADMIN");
+        }else if (User.connectedUser.getRole().equals("ROLE_ADMIN_COACH")){
+            u = (ArrayList<User>) serviceUser.afficher_admins("ROLE_COACH");
+        } else if (User.connectedUser.getRole().equals("ROLE_ADMIN_CLUBOWNER")) {
+            u = (ArrayList<User>) serviceUser.afficher_admins("ROLE_CLUBOWNER");
+        }
+        ObservableList<User> obs2 = FXCollections.observableArrayList(u);
+        table.setItems(obs2);
     }
     public void resetTableData() throws SQLDataException, SQLException {
    /*     AdminController Lu = new AdminController();
@@ -96,41 +106,31 @@ public class AdminList implements Initializable{
     }
     @FXML
     private void supp(ActionEvent event) throws SQLException {
-     /*    if (event.getSource() == btnsupp) {
+         if (event.getSource() == btnsupp) {
             User rec = new User();
 
-        AdminController Lu = new AdminController();
+        ServiceUser Lu = new ServiceUser();
             rec.setId(table.getSelectionModel().getSelectedItem().getId());
             System.out.print(rec.getId());
-            Lu.SupprimerUser(rec.getId());
+            Lu.supprimer(rec.getId());
             System.out.println(rec.getId());
-            resetTableData();
+            afficher();
  
         }
-         */
+         
     }
     
     @FXML
     private void update(ActionEvent event) throws SQLException {
-      /*  if(txtNEmail.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
-            if(txtNNom.getText().matches("[a-zA-Z]+")){
-                if(txtNPrenom.getText().matches("[a-zA-Z]+")){
-                    if (event.getSource() == btnupdate) {
+     
                        User user = table.getSelectionModel().getSelectedItem();
-                       user.setEmail(txtNEmail.getText());
-                       user.setNom(txtNNom.getText());
-                       user.setPrenom(txtNPrenom.getText());
-                       AdminController AC = new AdminController();
-                       AC.updateUser(user);
-                       resetTableData();
-                    }
-                }else
-                    showAlert("Family name should contain only letters.");
-            }else
-                showAlert("First name should contain only letters.");
-        }else
-            showAlert("Please enter a valid email address.");
-*/
+                       user.setApproved(true);
+                       ServiceUser AC = new ServiceUser();
+                       AC.modifier(user);
+                       afficher();
+                    
+                
+
     }
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
