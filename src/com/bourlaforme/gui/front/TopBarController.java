@@ -16,11 +16,12 @@ import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 public class TopBarController implements Initializable {
 
     private final Color COLOR_GRAY = new Color(0.9, 0.9, 0.9, 1);
-    private final Color COLOR_PRIMARY = Color.web("#000000");
+    private final Color COLOR_PRIMARY = Color.web("#FFFFFF");
     private final Color COLOR_DARK = new Color(1, 1, 1, 0.65);
     private Button[] liens;
 
@@ -29,7 +30,6 @@ public class TopBarController implements Initializable {
 
     @FXML
     private Button btnScores;
-
     @FXML
     private Button btnMessages;
 
@@ -41,9 +41,7 @@ public class TopBarController implements Initializable {
 
         liens = new Button[]{
                 btnReclamations,
-                btnScores,
-                btnMessages,
-                btnMessages,
+                btnScores,btnMessages
         };
 
         mainComponent.setBackground(new Background(new BackgroundFill(COLOR_PRIMARY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -57,27 +55,22 @@ public class TopBarController implements Initializable {
         btnReclamations.setTextFill(COLOR_DARK);
 
         btnScores.setTextFill(COLOR_DARK);
+                btnMessages.setTextFill(COLOR_DARK);
 
-        btnMessages.setTextFill(COLOR_DARK);
-
-        btnMessages.setTextFill(COLOR_DARK);
 
     }
 
     @FXML
     private void afficherReclamations(ActionEvent event) {
         goToLink(Constants.FXML_FRONT_DISPLAY_ALL_RECLAMATION);
-
-        btnReclamations.setTextFill(COLOR_PRIMARY);
-        Animations.animateButton(btnReclamations, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
+ 
     }
 
     @FXML
     private void afficherScores(ActionEvent event) {
         goToLink(Constants.FXML_FRONT_DISPLAY_ALL_SCORE);
 
-        btnScores.setTextFill(COLOR_PRIMARY);
-        Animations.animateButton(btnScores, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
+   
     }
 
     @FXML
@@ -97,5 +90,9 @@ public class TopBarController implements Initializable {
     @FXML
     public void logout(ActionEvent ignored) {
         MainApp.getInstance().logout();
+    }
+
+    @FXML
+    private void afficherArticles(MouseEvent event) {
     }
 }

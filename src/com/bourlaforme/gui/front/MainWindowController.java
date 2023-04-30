@@ -1,5 +1,6 @@
 package com.bourlaforme.gui.front;
 
+
 import com.bourlaforme.utils.Constants;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

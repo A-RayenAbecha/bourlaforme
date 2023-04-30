@@ -3,30 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/MessageService.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/Messagerie.fxml</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/TopBarController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ReclamationService.java</file>
             <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/AfficherToutScoreController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/entities/Score.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/Constants.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/MainWindowController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/TopBarController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/BadWords.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/GererScore.fxml</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/MessagerieController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ServiceMessagerie.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/AlertUtils.java</file>
             <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/GererMessageController.java</file>
             <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/back/reclamation/ModifierReclamationController.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/MessagerieController.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/entities/User.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/GererScoreController.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ReclamationService.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/resources/notif.png</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/entities/SessionManager.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/AfficherToutMessageController.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/IService.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/MainApp.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ServiceMessagerie.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/LoginController.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/MainWindowController.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ScoreService.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/Constants.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/AlertUtils.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/RelationObject.java</file>
-            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/DatabaseConnection.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/MessageService.java</file>
             <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/entities/Conversation.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/GererScoreController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/LoginController.java</file>
         </group>
     </open-files>
 </project-private>

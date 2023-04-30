@@ -92,11 +92,16 @@
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
-                <Button fx:id="deleteButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="light-button" text="Supprimer">
-                    <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </VBox.margin>
+              
+                
+                
+                <Button fx:id="deleteButton" mnemonicParsing="false"  prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: FF5056; -fx-border-radius: 50;" text="Supprimer">
+                    <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                    </font>
                 </Button>
+                
+                
             </VBox>
 
         </HBox>
