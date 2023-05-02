@@ -16,22 +16,19 @@ import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.input.MouseEvent;
 
 public class TopBarController implements Initializable {
 
     private final Color COLOR_GRAY = new Color(0.9, 0.9, 0.9, 1);
-    private final Color COLOR_PRIMARY = Color.web("#FFFFFF");
+    private final Color COLOR_PRIMARY = Color.web("#000000");
     private final Color COLOR_DARK = new Color(1, 1, 1, 0.65);
     private Button[] liens;
 
     @FXML
-    private Button btnReclamations;
+    private Button btnArticles;
 
     @FXML
-    private Button btnScores;
-    @FXML
-    private Button btnMessages;
+    private Button btnCommentaires;
 
     @FXML
     private AnchorPane mainComponent;
@@ -40,8 +37,8 @@ public class TopBarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         liens = new Button[]{
-                btnReclamations,
-                btnScores,btnMessages
+                btnArticles,
+                btnCommentaires,
         };
 
         mainComponent.setBackground(new Background(new BackgroundFill(COLOR_PRIMARY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -52,31 +49,27 @@ public class TopBarController implements Initializable {
             Animations.animateButton(lien, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
         }
 
-        btnReclamations.setTextFill(COLOR_DARK);
+        btnArticles.setTextFill(COLOR_DARK);
 
-        btnScores.setTextFill(COLOR_DARK);
-                btnMessages.setTextFill(COLOR_DARK);
-
+        btnCommentaires.setTextFill(COLOR_DARK);
 
     }
 
     @FXML
-    private void afficherReclamations(ActionEvent event) {
-        goToLink(Constants.FXML_FRONT_DISPLAY_ALL_RECLAMATION);
- 
+    private void afficherArticles(ActionEvent event) {
+        goToLink(Constants.FXML_FRONT_DISPLAY_ALL_ARTICLE);
+
+        btnArticles.setTextFill(COLOR_PRIMARY);
+        Animations.animateButton(btnArticles, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
 
     @FXML
-    private void afficherScores(ActionEvent event) {
-        goToLink(Constants.FXML_FRONT_DISPLAY_ALL_SCORE);
+    private void afficherCommentaires(ActionEvent event) {
+        com.bourlaforme.gui.front.article.ShowAllController.currentArticle = null;
+        goToLink(Constants.FXML_FRONT_DISPLAY_ALL_COMMENTAIRE);
 
-   
-    }
-
-    @FXML
-    private void afficherMessages(ActionEvent event) {
-               goToLink("/com/bourlaforme/gui/front/message/Messagerie.fxml");
-
+        btnCommentaires.setTextFill(COLOR_PRIMARY);
+        Animations.animateButton(btnCommentaires, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
 
     private void goToLink(String link) {
@@ -88,11 +81,7 @@ public class TopBarController implements Initializable {
     }
 
     @FXML
-    public void logout(ActionEvent ignored) {
+    public void logout(ActionEvent actionEvent) {
         MainApp.getInstance().logout();
-    }
-
-    @FXML
-    private void afficherArticles(MouseEvent event) {
     }
 }

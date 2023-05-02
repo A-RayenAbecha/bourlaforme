@@ -1,7 +1,5 @@
 package com.bourlaforme;
 
-import com.bourlaforme.entities.User;
-import com.bourlaforme.utils.BadWords;
 import com.bourlaforme.utils.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +15,6 @@ public class MainApp extends Application {
 
     public static Stage mainStage;
     private static MainApp instance;
-    public static User session;
 
     public static void main(String[] args) {
         launch(args);
@@ -33,8 +30,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println("Loading bad words ..");
-        BadWords.loadConfigs();
         mainStage = primaryStage;
         loadLogin();
     }
@@ -44,7 +39,8 @@ public class MainApp extends Application {
                 Constants.FXML_LOGIN,
                 "Connexion",
                 550,
-                250
+                250,
+                true
         );
     }
 
@@ -52,8 +48,9 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_FRONT_MAIN_WINDOW,
                 "",
-                800,
-                700
+                1000,
+                700,
+                false
         );
     }
 
@@ -61,8 +58,9 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_BACK_MAIN_WINDOW,
                 "",
-                1000,
-                700
+                1100,
+                600,
+                false
         );
     }
 
@@ -72,7 +70,7 @@ public class MainApp extends Application {
         loadLogin();
     }
 
-    private void loadScene(String fxmlLink, String title, int width, int height) {
+    private void loadScene(String fxmlLink, String title, int width, int height, boolean isAuthentification) {
         try {
             Stage primaryStage = mainStage;
             primaryStage.close();
@@ -92,7 +90,6 @@ public class MainApp extends Application {
 
             primaryStage.show();
         } catch (IOException ex) {
-            ex.printStackTrace();
             System.out.println(ex.getMessage());
         }
     }

@@ -25,9 +25,9 @@ public class SideBarController implements Initializable {
     private Button[] liens;
 
     @FXML
-    private Button btnReclamations;
+    private Button btnArticles;
     @FXML
-    private Button btnScores;
+    private Button btnCommentaires;
     @FXML
     private AnchorPane mainComponent;
 
@@ -35,8 +35,8 @@ public class SideBarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         liens = new Button[]{
-                btnReclamations,
-                btnScores,
+                btnArticles,
+                btnCommentaires,
         };
 
         mainComponent.setBackground(new Background(new BackgroundFill(COLOR_PRIMARY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -46,24 +46,25 @@ public class SideBarController implements Initializable {
             lien.setBackground(new Background(new BackgroundFill(COLOR_PRIMARY, CornerRadii.EMPTY, Insets.EMPTY)));
             Animations.animateButton(lien, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
         }
-        btnReclamations.setTextFill(Color.WHITE);
-        btnScores.setTextFill(Color.WHITE);
+        btnArticles.setTextFill(Color.WHITE);
+        btnCommentaires.setTextFill(Color.WHITE);
+
     }
 
     @FXML
-    private void afficherReclamations(ActionEvent ignored) {
-        goToLink(Constants.FXML_BACK_DISPLAY_ALL_RECLAMATION);
+    private void afficherArticles(ActionEvent event) {
+        goToLink(Constants.FXML_BACK_DISPLAY_ALL_ARTICLE);
 
-        btnReclamations.setTextFill(COLOR_PRIMARY);
-        Animations.animateButton(btnReclamations, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
+        btnArticles.setTextFill(COLOR_PRIMARY);
+        Animations.animateButton(btnArticles, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
 
     @FXML
-    private void afficherScores(ActionEvent ignored) {
-        goToLink(Constants.FXML_BACK_DISPLAY_ALL_SCORE);
+    private void afficherCommentaires(ActionEvent event) {
+        goToLink(Constants.FXML_BACK_DISPLAY_ALL_COMMENTAIRE);
 
-        btnScores.setTextFill(COLOR_PRIMARY);
-        Animations.animateButton(btnScores, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
+        btnCommentaires.setTextFill(COLOR_PRIMARY);
+        Animations.animateButton(btnCommentaires, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
 
     private void goToLink(String link) {
@@ -75,7 +76,7 @@ public class SideBarController implements Initializable {
     }
 
     @FXML
-    public void logout(ActionEvent ignored) {
+    public void logout(ActionEvent actionEvent) {
         MainApp.getInstance().logout();
     }
 }

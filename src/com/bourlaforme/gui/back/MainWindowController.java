@@ -16,7 +16,7 @@ public class MainWindowController implements Initializable {
 
     static AnchorPane staticContent;
     private static MainWindowController instance;
-
+  // private static MainWindowController instance;
     @FXML
     private AnchorPane sideBar;
     @FXML
