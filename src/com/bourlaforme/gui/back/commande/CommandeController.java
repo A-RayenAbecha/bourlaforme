@@ -132,6 +132,23 @@ public VBox createPage(int pageIndex) {
         }
         return parent;
     }
+        public Parent makeCommandeModel2(
+            Commande commande
+    ) {
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Model2.fxml")));
+            HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
+            ((Text) innerContainer.lookup("#idAddressText")).setText("Nom et Prenom : " + commande.getBillingAddress().getNom());
+
+
+            ((Button) innerContainer.lookup("#pdfButton")).setOnAction((event) -> genererPDF(commande));
+            ((Button) innerContainer.lookup("#deleteButton")).setOnAction((event) -> delete(commande));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return parent;
+    }
 
  
 private void genererPDF(Commande commande) {
@@ -249,16 +266,16 @@ private void genererPDF(Commande commande) {
         stage.show();
     }
        @FXML
-   void prix() {
+   void nom() {
         mainVBox.getChildren().clear();
 
         Collections.reverse(listCommande);
 
         if (!listCommande.isEmpty()) {
             for (Commande commande : listCommande) {
-                if ( commande.getMontant()>100 ) {
-                    mainVBox.getChildren().add(makeCommandeModel(commande));
-                }
+                
+                    mainVBox.getChildren().add(makeCommandeModel2(commande));
+                
             }
         } else {
             StackPane stackPane = new StackPane();

@@ -28,6 +28,11 @@ public class Article implements Comparable<Article> {
         this.etat = etat;
     }
 
+    public Article() {
+    }
+
+ 
+
     public int getId() {
         return id;
     }

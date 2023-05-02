@@ -2,8 +2,8 @@ package com.bourlaforme.services;
 
 import com.bourlaforme.entities.Club;
 import com.bourlaforme.entities.User;
-import com.esprit.utils.DataSource;
-import com.esprit.utils.DataSource;
+import com.bourlaforme.utils.DataSource;
+import com.bourlaforme.utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -163,6 +163,21 @@ public class ServiceClub implements IService<Club> {
     }
     return listClubs;
 }
+
+    @Override
+    public void supprimer(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Club> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Club getOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 

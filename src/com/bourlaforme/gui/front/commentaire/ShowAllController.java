@@ -3,6 +3,7 @@ package com.bourlaforme.gui.front.commentaire;
 import com.bourlaforme.entities.Commentaire;
 import com.bourlaforme.gui.front.MainWindowController;
 import com.bourlaforme.services.CommentaireService;
+import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -19,10 +24,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ShowAllController implements Initializable {
 
@@ -34,6 +36,8 @@ public class ShowAllController implements Initializable {
     public Button addButton;
     @FXML
     public VBox mainVBox;
+    @FXML
+    public TextField searchTF;
 
     List<Commentaire> listCommentaire;
 
@@ -48,17 +52,20 @@ public class ShowAllController implements Initializable {
             listCommentaire = CommentaireService.getInstance().getAll();
         }
 
-        displayData();
+        displayData("");
     }
 
-    void displayData() {
+    void displayData(String searchText) {
         mainVBox.getChildren().clear();
 
         Collections.reverse(listCommentaire);
 
         if (!listCommentaire.isEmpty()) {
             for (Commentaire commentaire : listCommentaire) {
-                mainVBox.getChildren().add(makeCommentaireModel(commentaire));
+                if (commentaire.getContenu().toLowerCase().startsWith(searchText.toLowerCase())) {
+                    mainVBox.getChildren().add(makeCommentaireModel(commentaire));
+                }
+
             }
         } else {
             StackPane stackPane = new StackPane();
@@ -83,6 +90,7 @@ public class ShowAllController implements Initializable {
             ((Text) innerContainer.lookup("#dateText")).setText("Date : " + commentaire.getDate());
 
 
+
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -95,4 +103,12 @@ public class ShowAllController implements Initializable {
         MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_MANAGE_COMMENTAIRE);
     }
 
+    @FXML
+    private void search(KeyEvent event) {
+        displayData(searchTF.getText());
+    }
+
+    private void specialAction(Commentaire commentaire) {
+
+    }
 }

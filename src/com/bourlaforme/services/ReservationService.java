@@ -11,7 +11,7 @@ package com.bourlaforme.services;
 import com.bourlaforme.entities.Reservation;
 import com.bourlaforme.entities.Seance;
 import com.bourlaforme.entities.User;
-import com.esprit.utils.DataSource;
+import com.bourlaforme.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -127,13 +127,6 @@ public int getnbr_reservationByUser(int user_id) {
             Logger.getLogger(ReservationService.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-
-
-
-    @Override
-    public List<Reservation> afficher() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     public List<Reservation> getAll() {
         List<Reservation> reservations = new ArrayList<>();
@@ -293,6 +286,21 @@ public int getnbr_reservationByUser(int user_id) {
     }
     return nbrIncrementation;
 }
+
+    @Override
+    public void supprimer(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Reservation getOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Reservation> afficher() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 

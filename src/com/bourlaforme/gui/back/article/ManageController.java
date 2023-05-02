@@ -32,8 +32,8 @@ public class ManageController implements Initializable {
     public ImageView imageIV;
     @FXML
     public TextField prixTF;
-    @FXML
-    public TextField etatTF;
+  //  @FXML
+  //  public TextField etatTF;
     @FXML
     public Button btnAjout;
     @FXML
@@ -60,7 +60,7 @@ public class ManageController implements Initializable {
                     imageIV.setImage(new Image(selectedImagePath.toUri().toString()));
                 }
                 prixTF.setText(String.valueOf(currentArticle.getPrix()));
-                etatTF.setText(currentArticle.getEtat());
+              //  etatTF.setText(currentArticle.getEtat());
 
             } catch (NullPointerException ignored) {
                 System.out.println("NullPointerException");
@@ -75,6 +75,7 @@ public class ManageController implements Initializable {
     private void manage(ActionEvent event) {
 
         if (controleDeSaisie()) {
+     
 
             String imagePath;
             if (imageEdited) {
@@ -89,10 +90,17 @@ public class ManageController implements Initializable {
                     descriptionTF.getText(),
                     imagePath,
                     Integer.parseInt(prixTF.getText()),
-                    etatTF.getText()
+                  //  etatTF.getText()
+                    "desarchiver"
             );
 
             if (currentArticle == null) {
+                   String nom = nomTF.getText();
+
+        if (!ArticleService.getInstance().isNomUnique(nom)) {
+            AlertUtils.makeError("Nom d'article déjà utilisé. Veuillez choisir un autre nom.");
+            return;
+        }
                 if (ArticleService.getInstance().add(article)) {
                     AlertUtils.makeSuccessNotification("Article ajouté avec succés");
                     MainWindowController.getInstance().loadInterface(Constants.FXML_BACK_DISPLAY_ALL_ARTICLE);
@@ -100,6 +108,12 @@ public class ManageController implements Initializable {
                     AlertUtils.makeError("Erreur");
                 }
             } else {
+                  String nom = nomTF.getText();
+
+        if (!ArticleService.getInstance().isNomUnique2(nom, currentArticle.getId())) {
+            AlertUtils.makeError("Nom d'article déjà utilisé. Veuillez choisir un autre nom.");
+            return;
+        }
                 article.setId(currentArticle.getId());
                 if (ArticleService.getInstance().edit(article)) {
                     AlertUtils.makeSuccessNotification("Article modifié avec succés");
@@ -115,6 +129,7 @@ public class ManageController implements Initializable {
             }
         }
     }
+
 
     @FXML
     public void chooseImage(ActionEvent actionEvent) {
@@ -137,15 +152,34 @@ public class ManageController implements Initializable {
         }
     }
 
-    private boolean controleDeSaisie() {
+     private boolean controleDeSaisie() {
 
 
         if (nomTF.getText().isEmpty()) {
             AlertUtils.makeInformation("nom ne doit pas etre vide");
             return false;
         }
+        String nom = nomTF.getText();
+    if (!nom.matches("^[a-zA-Z_ ]+$")) {
+        AlertUtils.makeInformation("Le nom ne doit contenir que des lettres, des espaces et des tirets bas");
+        return false;
+    }
+ /*    try {
+        Connection conn = DatabaseConnection.getInstance().getConnection();
 
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE nom = ?");
+        stmt.setString(1, nomTF.getText());
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            AlertUtils.makeInformation("Le nom existe déjà");
+            return false;
+        }
+    } catch (SQLException e) {
+    //    AlertUtils.makeError("Erreur lors de la vérification du nom", e);
+        return false;
+    }
 
+*/
         if (descriptionTF.getText().isEmpty()) {
             AlertUtils.makeInformation("description ne doit pas etre vide");
             return false;
@@ -162,20 +196,22 @@ public class ManageController implements Initializable {
             AlertUtils.makeInformation("prix ne doit pas etre vide");
             return false;
         }
-
-
-        try {
-            Integer.parseInt(prixTF.getText());
-        } catch (NumberFormatException ignored) {
-            AlertUtils.makeInformation("prix doit etre un nombre");
+        
+      try {
+        int prix = Integer.parseInt(prixTF.getText());
+        if (prix <= 0) {
+            AlertUtils.makeInformation("Le prix doit être positif");
             return false;
         }
-
-        if (etatTF.getText().isEmpty()) {
+    } catch (NumberFormatException ignored) {
+        AlertUtils.makeInformation("Prix doit être un nombre");
+        return false;
+    }
+      /*  if (etatTF.getText().isEmpty()) {
             AlertUtils.makeInformation("etat ne doit pas etre vide");
             return false;
         }
-
+*/
 
         return true;
     }

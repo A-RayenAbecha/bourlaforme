@@ -27,7 +27,8 @@
              </font>
          </Text>
       <Button layoutX="6.0" layoutY="22.0" mnemonicParsing="false" onAction="#Logout" text="return" />
-      <Button layoutX="491.0" layoutY="23.0" mnemonicParsing="false" onAction="#Stat" prefHeight="26.0" prefWidth="57.0" text="Stat" />
+      <Button layoutX="481.0" layoutY="8.0" mnemonicParsing="false" onAction="#Stat" prefHeight="26.0" prefWidth="57.0" text="Stat" />
+      <Button layoutX="481.0" layoutY="40.0" mnemonicParsing="false" onAction="#nom" prefHeight="26.0" prefWidth="57.0" text="Nom" />
     </AnchorPane>
     <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <opaqueInsets>

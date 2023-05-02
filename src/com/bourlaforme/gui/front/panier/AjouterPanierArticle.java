@@ -50,7 +50,7 @@ public class AjouterPanierArticle implements Initializable {
     @FXML
     private void manage(ActionEvent ignored) {
 
-        if (controleDeSaisie()) {
+        if (controleDeSaisie1()) {
 
             PanierArticle panierArticle = new PanierArticle(
                     articleCB.getValue(),
@@ -65,7 +65,7 @@ public class AjouterPanierArticle implements Initializable {
     }
 
 
-    private boolean controleDeSaisie() {
+    private boolean controleDeSaisie1() {
 
 
         if (articleCB.getValue() == null) {

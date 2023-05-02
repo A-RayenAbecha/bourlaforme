@@ -3,11 +3,17 @@ package com.bourlaforme.services;
 import com.bourlaforme.entities.Commentaire;
 import com.bourlaforme.utils.DatabaseConnection;
 import com.bourlaforme.utils.RelationObject;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class CommentaireService {
 
@@ -29,7 +35,7 @@ public class CommentaireService {
     public List<Commentaire> getAll() {
         List<Commentaire> listCommentaire = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM `commentaire` AS x RIGHT JOIN `article` AS y ON x.article_id = y.id WHERE x.article_id = y.id");
+            preparedStatement = connection.prepareStatement("SELECT * FROM `commentaire` AS x RIGHT JOIN `article` AS y ON x.article_id = y.id WHERE x.article_id = y.id ");
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -81,7 +87,7 @@ public class CommentaireService {
     public List<RelationObject> getAllArticles() {
         List<RelationObject> listArticles = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM `article`");
+            preparedStatement = connection.prepareStatement("SELECT * FROM `article` where etat='desarchiver'");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 listArticles.add(new RelationObject(resultSet.getInt("id"), resultSet.getString("nom")));
@@ -92,7 +98,7 @@ public class CommentaireService {
         return listArticles;
     }
 
-
+/*
     public boolean add(Commentaire commentaire) {
 
         String request = "INSERT INTO `commentaire`(`article_id`, `auteur`, `contenu`, `date`) VALUES(?, ?, ?, ?)";
@@ -112,7 +118,55 @@ public class CommentaireService {
         }
         return false;
     }
+*/
+    
+    
+//C:/Users/Administrateur/OneDrive/Bureau/bourlaforme/bad.txt
+    public boolean add(Commentaire commentaire) {
+        String request = "INSERT INTO `commentaire`(`article_id`, `auteur`, `contenu`, `date`) VALUES(?, ?, ?, ?)";
+        try {
+            preparedStatement = connection.prepareStatement(request);
 
+            preparedStatement.setInt(1, commentaire.getArticle().getId());
+            preparedStatement.setString(2, commentaire.getAuteur());
+            String cleanedContent = replaceBadWords(commentaire.getContenu(), "C:/Users/Administrateur/OneDrive/Bureau/bourlaforme/bad.txt");
+            preparedStatement.setString(3, cleanedContent);
+            preparedStatement.setDate(4, Date.valueOf(commentaire.getDate()));
+
+            preparedStatement.executeUpdate();
+            System.out.println("Commentaire ajouté !");
+            return true;
+        } catch (SQLException exception) {
+            System.out.println("Erreur lors de l'ajout du commentaire : " + exception.getMessage());
+        }
+        return false;
+    }
+
+   public static String replaceBadWords(String originalString, String badWordsFilePath) {
+        String cleanedString = originalString;
+        try {
+            // Read bad words from file
+            List<String> badWords = Files.readAllLines(Paths.get(badWordsFilePath));
+
+            // Replace bad words with asterisks
+            for (String badWord : badWords) {
+                if (badWord != null && !badWord.isEmpty()) {
+                   StringBuilder asterisksBuilder = new StringBuilder();
+          for (int i = 0; i < badWord.length(); i++) {
+    asterisksBuilder.append("*");
+}
+String asterisks = asterisksBuilder.toString();
+                    cleanedString = cleanedString.replaceAll("(?i)\\b" + badWord + "\\b", asterisks);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading bad words file: " + e.getMessage());
+        }
+        return cleanedString;
+    }
+    
+    
+    
     public boolean edit(Commentaire commentaire) {
 
         String request = "UPDATE `commentaire` SET `article_id` = ?, `auteur` = ?, `contenu` = ?, `date` = ? WHERE `id`=" + commentaire.getId();

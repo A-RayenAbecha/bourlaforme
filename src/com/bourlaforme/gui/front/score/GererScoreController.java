@@ -41,7 +41,6 @@ public class GererScoreController implements Initializable {
     @FXML
     private Label msg;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -78,7 +77,7 @@ public class GererScoreController implements Initializable {
 
             Score score = new Score(
                     coachCB.getValue(),
-                    MainApp.session,
+                    User.connectedUser,
                     (int)Math.round(rating.getRating())
                     
                   //  Integer.parseInt(Double.toString((rating.getRating())))

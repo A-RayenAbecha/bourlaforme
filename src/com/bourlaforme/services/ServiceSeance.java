@@ -6,7 +6,7 @@ package com.bourlaforme.services;
 
 import com.bourlaforme.entities.Seance;
 import com.bourlaforme.entities.User;
-import com.esprit.utils.DataSource;
+import com.bourlaforme.utils.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -208,6 +208,21 @@ public int countRatingsBySeance(int idSeance) {
     }
     return count;
 }
+
+    @Override
+    public void supprimer(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Seance> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Seance getOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 

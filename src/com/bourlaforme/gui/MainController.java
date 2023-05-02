@@ -22,7 +22,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
     @FXML
@@ -37,19 +43,13 @@ public class MainController implements Initializable {
     @FXML
     private VBox page_seances;
 
-    @FXML
-    private ImageView CoachIcon;
+    
 
     @FXML
     private ImageView AcceuilIcon;
 
     @FXML
     private ImageView SessionsIcon;
-
-
-
-    @FXML
-    private HBox coachs;
 
     @FXML
     private ImageView image;
@@ -69,14 +69,23 @@ public class MainController implements Initializable {
       @FXML
     private TextField searchField;
 
-
-    User connectedUser;
+    
+    @FXML
+    private Button btnAcceuil;
+    
+    public void redirectAcceuil(Event e) throws IOException{
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/front/MainWindow.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
   
     @FXML
     void coachsClicked(MouseEvent event) {
         // Set the background color of the coachs HBox to gray
-        coachs.setStyle("-fx-background-color: #CCCCCC;");
 
         // Set the background color of the other HBoxes to white
         sessions.setStyle("-fx-background-color: #FFFFFF;");
@@ -93,12 +102,11 @@ public class MainController implements Initializable {
         reservations.setStyle("-fx-background-color: #CCCCCC;");
 
         // Set the background color of the other HBoxes to white
-        coachs.setStyle("-fx-background-color: #FFFFFF;");
         sessions.setStyle("-fx-background-color: #FFFFFF;");
         Acceuil.setStyle("-fx-background-color: #FFFFFF;");
         ReservationService reservationService = new ReservationService();
 
-        displayReservations(reservationService.getReservationsByUser(connectedUser));
+        displayReservations(reservationService.getReservationsByUser(User.connectedUser));
 
         page_seances.setVisible(false);
         page_reservation.setVisible(true);
@@ -111,7 +119,6 @@ public class MainController implements Initializable {
         sessions.setStyle("-fx-background-color: #CCCCCC;");
 
         // Set the background color of the other HBoxes to white
-        coachs.setStyle("-fx-background-color: #FFFFFF;");
         reservations.setStyle("-fx-background-color: #FFFFFF;");
         Acceuil.setStyle("-fx-background-color: #FFFFFF;");
         ServiceSeance serviceSeance = new ServiceSeance();
@@ -137,7 +144,6 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
    
-        connectedUser = new User(4);
     }
 
     void displaySessions(List<Seance> seances) throws IOException, SQLException {
@@ -145,10 +151,10 @@ public class MainController implements Initializable {
         int col=0 , row = 1;
         for (int i=0;i<seances.size();i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HelloApplication.class.getResource("../gui/seance.fxml"));
+            fxmlLoader.setLocation(HelloApplication.class.getResource("/com/bourlaforme/gui/seance.fxml"));
             HBox seanceBox = fxmlLoader.load();
             SeanceController seanceController = fxmlLoader.getController();
-            seanceController.setData(seances.get(i),connectedUser);
+            seanceController.setData(seances.get(i),User.connectedUser);
             grid_sessions.add(seanceBox,col,row);
             col++;
             if (col==4){
@@ -164,10 +170,10 @@ public class MainController implements Initializable {
         for (int i=0;i<reservations.size();i++){
             System.out.println(reservations.get(i));
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HelloApplication.class.getResource("../gui/reservation.fxml"));
+            fxmlLoader.setLocation(HelloApplication.class.getResource("/com/bourlaforme/gui/reservation.fxml"));
             VBox seanceBox = fxmlLoader.load();
             ReservationController reservationController = fxmlLoader.getController();
-            reservationController.setData(reservations.get(i),connectedUser);
+            reservationController.setData(reservations.get(i),User.connectedUser);
             grid_reservations.add(seanceBox,col,row);
             col++;
             if (col==4){

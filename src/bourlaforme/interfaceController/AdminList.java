@@ -23,7 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import bourlaforme.Entity.User;
+import com.bourlaforme.entities.User;
 import bourlaforme.utils.ServiceUser;
 import java.sql.SQLException;
 import java.sql.SQLDataException;
@@ -66,6 +66,8 @@ public class AdminList implements Initializable{
     TextField txtNPrenom;
     @FXML
     Button btnAdd;
+    @FXML
+    Button btnLogout;
     
   //  AdminController Lc = new AdminController();
 
@@ -147,5 +149,29 @@ public class AdminList implements Initializable{
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void logout(ActionEvent actionEvent) {
+        btnLogout.setOnAction(event -> {
+        // Clear the connectedUser variable
+        User.connectedUser = null;
+
+        // Load the login page FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/bourlaforme/interfaces/LoginForm.fxml"));
+        Parent loginPageParent;
+        try {
+            loginPageParent = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Create a new Stage for the login page and show it
+        Stage loginStage = new Stage();
+        loginStage.setScene(new Scene(loginPageParent));
+        loginStage.show();
+
+        // Hide the current window
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        });
     }
 }

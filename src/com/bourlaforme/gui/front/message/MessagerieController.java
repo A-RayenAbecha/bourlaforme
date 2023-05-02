@@ -99,7 +99,7 @@ public class MessagerieController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        p = MainApp.session;
+        p = User.connectedUser;
 
         String msg = "Note that the thread ID returned by getId() is a long value, which uniquely identifies the thread within the JVM.";
 

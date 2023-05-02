@@ -20,6 +20,10 @@ public class PanierArticle {
         this.panier = panier;
         this.quantity = quantity;
     }
+        public PanierArticle(Article article, Panier panier) {
+        this.article = article;
+        this.panier = panier;
+    }
 
     public PanierArticle() {
         

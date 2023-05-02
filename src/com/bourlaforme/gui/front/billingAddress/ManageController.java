@@ -5,6 +5,7 @@ import com.bourlaforme.entities.BillingAddress;
 import com.bourlaforme.entities.Commande;
 import com.bourlaforme.entities.Panier;
 import com.bourlaforme.entities.PanierArticle;
+import com.bourlaforme.entities.User;
 import com.bourlaforme.gui.front.MainWindowController;
 import com.bourlaforme.gui.front.panier.MonPanierController;
 import com.bourlaforme.services.BillingAddressService;

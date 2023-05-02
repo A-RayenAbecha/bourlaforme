@@ -5,7 +5,7 @@
  */
 package bourlaforme.interfaceController;
 
-import bourlaforme.Entity.User;
+import com.bourlaforme.entities.User;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;
 import java.io.IOException;

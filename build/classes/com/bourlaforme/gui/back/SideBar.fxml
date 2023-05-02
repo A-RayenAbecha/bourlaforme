@@ -42,9 +42,20 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </Button>
-
+                <Button fx:id="btnCommandes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                mnemonicParsing="false" onAction="#afficherCommandes" text="Commandes" textFill="WHITE">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+            <font>
+                <Font name="Segoe UI Bold" size="15.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
     </VBox>
-    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+    <Button fx:id="btnLogout" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
             onAction="#logout" style="-fx-background-color: red; -fx-background-radius: 0;" text="Logout"
             textFill="WHITE"
             AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -55,4 +66,5 @@
             <Cursor fx:constant="HAND"/>
         </cursor>
     </Button>
+    
 </AnchorPane>

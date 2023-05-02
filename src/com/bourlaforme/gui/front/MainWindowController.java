@@ -1,5 +1,6 @@
 package com.bourlaforme.gui.front;
 
+import com.bourlaforme.MainApp;
 import com.bourlaforme.utils.Constants;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +16,15 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
 
     static AnchorPane staticContent;
+        private MainApp ma = MainApp.getInstance();
     private static MainWindowController instance;
 
     @FXML
     private AnchorPane topBar;
     @FXML
     private AnchorPane content;
+        @FXML
+    private AnchorPane main_window;
 
     public static MainWindowController getInstance() {
         if (instance == null) {
@@ -47,14 +51,20 @@ public class MainWindowController implements Initializable {
         }
 
         loadInterface(Constants.FXML_FRONT_HOME);
-    }
+        }
 
-    public void loadInterface(String location) {
+   public void loadInterface(String location) {
         staticContent.getChildren().clear();
         if (getClass().getResource(location) == null) {
             System.out.println("Could not load FXML check the path");
         } else {
             try {
+                if (location.contains("Messagerie")) {
+                    ma.mainStage.setWidth(1200);
+                } else {
+                    //ma.mainStage.setWidth(800);
+                    //System.out.println(main_window.getWidth());
+                }
                 Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(location)));
                 AnchorPane.setTopAnchor(parent, 0.0);
                 AnchorPane.setBottomAnchor(parent, 0.0);
@@ -67,4 +77,4 @@ public class MainWindowController implements Initializable {
             }
         }
     }
-}
+    }

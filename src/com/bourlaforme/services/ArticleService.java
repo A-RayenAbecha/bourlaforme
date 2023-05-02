@@ -26,6 +26,30 @@ public class ArticleService {
         }
         return instance;
     }
+    
+    
+    
+        
+   public boolean isNomUnique(String nom) {
+    List<Article> articles = getAll();
+    for (Article article : articles) {
+        if (article.getNom().equals(nom)) {
+            return false;
+        }
+    }
+    return true;
+}
+    
+    public boolean isNomUnique2(String nom, int id) {
+    List<Article> articles = getAll();
+    for (Article article : articles) {
+        if (article.getNom().equals(nom) && article.getId() != id) {
+            return false;
+        }
+    }
+    return true;
+}
+    
 
     public List<Article> getAll() {
         List<Article> listArticle = new ArrayList<>();

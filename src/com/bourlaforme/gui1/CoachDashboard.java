@@ -36,9 +36,15 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 //import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class CoachDashboard implements Initializable {
 
@@ -132,14 +138,14 @@ public class CoachDashboard implements Initializable {
     @FXML
     private TableColumn<?, ?> colParticipated;
 
-    
+    @FXML
+    private Button btnLogout;
 
     @FXML
     private TableView<Participation> tableViewParticipations;
 
     private ObservableList<Participation> particips;
 
-    User connectedUser;
     @FXML
     void selection(MouseEvent event) {
         // Récupération de la ligne sélectionnée
@@ -198,7 +204,6 @@ public class CoachDashboard implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-         connectedUser = new User(2);
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         localisationColumn.setCellValueFactory(new PropertyValueFactory<>("localisation"));
         activiteColumn.setCellValueFactory(new PropertyValueFactory<>("typeActivite"));
@@ -337,7 +342,7 @@ try {
     String localisation = localisationField.getText();
     String image = imagePathAjout; // récupérer l'image à partir de l'upload précédent
     String typeActivite = typeActiviteField.getText();
-    int idClubOwnerId = connectedUser.getId(); // Méthode à implémenter pour récupérer l'id de l'utilisateur courant
+    int idClubOwnerId = User.connectedUser.getId(); // Méthode à implémenter pour récupérer l'id de l'utilisateur courant
     String telephone = telephoneField.getText();
     String description = descriptionField.getText();
     String prix = prixField.getText();
@@ -407,7 +412,7 @@ try {
         String localisation = localisationField1.getText();
         String image = imagePathModif; // récupérer l'image à partir de l'upload précédent
         String typeActivite = typeActiviteField1.getText();
-        int idClubOwnerId = connectedUser.getId(); // Méthode à implémenter pour récupérer l'id de l'utilisateur courant
+        int idClubOwnerId = User.connectedUser.getId(); // Méthode à implémenter pour récupérer l'id de l'utilisateur courant
         String telephone = telephoneField1.getText();
         String description = descriptionField1.getText();
         String prix = prixField1.getText();
@@ -538,5 +543,29 @@ props.setProperty("mail.smtp.socketFactory.port", "465");
 
 	Transport.send(message);
 }
+        
+        public void logout(ActionEvent actionEvent) {
+        btnLogout.setOnAction(event -> {
+        // Clear the connectedUser variable
+        User.connectedUser = null;
+
+        // Load the login page FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/bourlaforme/interfaces/LoginForm.fxml"));
+        Parent loginPageParent;
+        try {
+            loginPageParent = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Create a new Stage for the login page and show it
+        Stage loginStage = new Stage();
+        loginStage.setScene(new Scene(loginPageParent));
+        loginStage.show();
+
+        // Hide the current window
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        });
+    }
 
 }

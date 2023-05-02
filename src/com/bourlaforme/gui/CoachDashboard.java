@@ -27,16 +27,22 @@ import com.salesboxai.zoom.ZoomAPIException;
 import com.salesboxai.zoom.ZoomAuthorizerJWT;
 import com.salesboxai.zoom.ZoomMeeting;
 import com.salesboxai.zoom.ZoomMeetingRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -90,7 +96,6 @@ public class CoachDashboard implements Initializable {
 
     @FXML
     private TextField titreField2;
-    private User connectedUser;
 
     @FXML
     private TableColumn<?, ?> titrecolumn;
@@ -105,6 +110,8 @@ public class CoachDashboard implements Initializable {
     
       @FXML
     private Button btnInviter;
+    @FXML
+    private Button btnLogout;
 
     @FXML
 void ajouter(ActionEvent event) {
@@ -138,7 +145,7 @@ void ajouter(ActionEvent event) {
 
 
     // Création d'une nouvelle séance avec les valeurs des champs de texte et l'utilisateur courant
-    User currentUser = connectedUser;// Méthode à implémenter pour récupérer l'utilisateur courant
+    User currentUser = User.connectedUser;// Méthode à implémenter pour récupérer l'utilisateur courant
     Seance newSeance = new Seance(nbr_grp, description, nbr_seance, titre, currentUser);
 
     // Ajout de la nouvelle séance à la base de données à l'aide de ServiceSeance
@@ -272,7 +279,6 @@ void supprimer(ActionEvent event) {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
      //   sendmail() ;
-        connectedUser = new User(2);
            ServiceSeance serviceSeance = new ServiceSeance();
            nbr_grpField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 30, 5));
            nbr_grpField2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 30, 5));
@@ -302,7 +308,7 @@ tray.showAndDismiss(Duration.seconds(5));*/
         
         TrayNotification tray = new TrayNotification();
         
-        int nbr_annulation =  reservationService.getNbrIncrementation(connectedUser.getId());
+        int nbr_annulation =  reservationService.getNbrIncrementation(User.connectedUser.getId());
         
         String title = "Réservations annulées";
         String message;
@@ -317,7 +323,7 @@ tray.showAndDismiss(Duration.seconds(5));*/
                 message = nbr_annulation + " réservations ont été annulées.";
                 break;
         }
-        reservationService.resetNbrAnnulation(connectedUser);
+        reservationService.resetNbrAnnulation(User.connectedUser);
 
 
         tray.setTitle(title);
@@ -410,6 +416,8 @@ public void sendmail(ArrayList<String> recipients) throws MessagingException {
     Transport.send(message);
 }
 
+
+
 /*
 public String generateGoogleMeetLink(Seance seance) throws IOException, GeneralSecurityException {
     String meetingLink = null;
@@ -458,13 +466,39 @@ public String generateGoogleMeetLink(Seance seance) throws IOException, GeneralS
 }*/
 
 
-static String scheduleMeetingTest() throws ZoomAPIException {
-		ZoomAuthorizerJWT authorizer = new ZoomAuthorizerJWT("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InJ4LThqanpsUUxXLWRqWldhQnFLX1EiLCJleHAiOjE2ODI3ODExMTcsImlhdCI6MTY4MjE3NjMxOH0.bmdxG2xP3FGuUGCxNev7CHdOHVJBG9PzaYZKBKBIRxk");
-		ZoomAPI za = new ZoomAPI(authorizer);
-		ZoomMeetingRequest mreq = ZoomMeetingRequest.requestDefaults("Test Meeting", "Let's talk about the weather");
-		ZoomMeeting meeting = za.createMeeting("me", mreq);
-		System.out.println(meeting);
-        String join_url = meeting.join_url;
-                return join_url;
-	}
+    static String scheduleMeetingTest() throws ZoomAPIException {
+                    ZoomAuthorizerJWT authorizer = new ZoomAuthorizerJWT("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InJ4LThqanpsUUxXLWRqWldhQnFLX1EiLCJleHAiOjE2ODI3ODExMTcsImlhdCI6MTY4MjE3NjMxOH0.bmdxG2xP3FGuUGCxNev7CHdOHVJBG9PzaYZKBKBIRxk");
+                    ZoomAPI za = new ZoomAPI(authorizer);
+                    ZoomMeetingRequest mreq = ZoomMeetingRequest.requestDefaults("Test Meeting", "Let's talk about the weather");
+                    ZoomMeeting meeting = za.createMeeting("me", mreq);
+                    System.out.println(meeting);
+            String join_url = meeting.join_url;
+                    return join_url;
+            }
+    
+    public void logout(ActionEvent actionEvent) {
+        btnLogout.setOnAction(event -> {
+        // Clear the connectedUser variable
+        User.connectedUser = null;
+
+        // Load the login page FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/bourlaforme/interfaces/LoginForm.fxml"));
+        Parent loginPageParent;
+        try {
+            loginPageParent = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Create a new Stage for the login page and show it
+        Stage loginStage = new Stage();
+        loginStage.setScene(new Scene(loginPageParent));
+        loginStage.show();
+
+        // Hide the current window
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        });
+    }
+        
+        
 }

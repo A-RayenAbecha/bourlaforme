@@ -4,7 +4,7 @@
  */
 package bourlaforme.interfaceController;
 
-import bourlaforme.Entity.User;
+import com.bourlaforme.entities.User;
 import static bourlaforme.interfaceController.SignUpFormCTR.makeSuccessNotification;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;

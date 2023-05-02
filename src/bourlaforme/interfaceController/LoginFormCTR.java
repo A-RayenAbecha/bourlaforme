@@ -4,7 +4,7 @@
  */
 package bourlaforme.interfaceController;
 
-import bourlaforme.Entity.User;
+import com.bourlaforme.entities.User;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;
 import java.io.IOException;
@@ -88,8 +88,20 @@ public class LoginFormCTR implements Initializable{
         if(role.equals("ROLE_SUPER_ADMIN") || role.equals("ROLE_ADMIN_COACH") || role.equals("ROLE_ADMIN_CLUBOWNER")){
             System.out.println("addmin connected");
            root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/AdminList.fxml"));
+        }else if(role.equals("ROLE_ADMIN_PRODUIT")){
+            System.out.println("addmin connected");
+            root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/back/MainWindow.fxml"));
+        }else if(role.equals("ROLE_ADMIN_RECLAMATION")){
+            System.out.println("addmin connected");
+            root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/backRec/MainWindow.fxml"));
+        }else if(role.equals("ROLE_COACH")){
+            System.out.println("coach connected");
+            root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/coachDashboard.fxml"));
+        }else if(role.equals("ROLE_CLUBOWNER")){
+            System.out.println("club owner connected");
+            root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui1/coachDashboard.fxml"));
         }else 
-            root=FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/main-front.fxml"));
+            root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/front/MainWindow.fxml"));
         
         Scene scene = new Scene(root);
         stage.setScene(scene);

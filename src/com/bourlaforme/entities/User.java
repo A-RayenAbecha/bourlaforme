@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
     private int id;
     private String email;
-    private List<String> roles;
+    private String roles;
     private String password;
     private String nom;
     private String prenom;
@@ -18,8 +18,11 @@ public class User {
     private boolean approved;
     private String likes;
     private Double moyenne;
+    
+    public static User connectedUser;
 
-    public User(int id, String email, List<String> roles, String password, String nom, String prenom, String image, String certificates, String specialite, String experiance, String description, boolean isCoach, boolean approved, String likes, Double moyenne) {
+
+    public User(int id, String email, String roles, String password, String nom, String prenom, String image, String certificates, String specialite, String experiance, String description, boolean isCoach, boolean approved, String likes, Double moyenne) {
         this.id = id;
         this.email = email;
         this.roles = roles;
@@ -36,12 +39,28 @@ public class User {
         this.likes = likes;
         this.moyenne = moyenne;
     }
+    
+    public User(int id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+    
+     public User(int id, String email, String roles) {
+        this.id = id;
+        this.email = email;
+        this.roles = roles;
+    }
+
 
     public User(int id) {
         this.id = id;
     }
 
     public User() {
+    }
+
+    public User(String string, String string0, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8, boolean aBoolean, boolean aBoolean0, String string9, float aFloat) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getId() {
@@ -60,12 +79,12 @@ public class User {
         this.email = email;
     }
 
-    public List<String> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRoles(String role) {
+        this.roles = role;
     }
 
     public String getPassword() {
@@ -162,5 +181,10 @@ public class User {
 
     public void setMoyenne(Double moyenne) {
         this.moyenne = moyenne;
+    }
+    
+    @Override
+    public String toString() {
+        return "User{" + email + "}";
     }
 }

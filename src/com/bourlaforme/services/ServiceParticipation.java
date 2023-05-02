@@ -3,7 +3,7 @@ package com.bourlaforme.services;
 import com.bourlaforme.entities.Club;
 import com.bourlaforme.entities.Participation;
 import com.bourlaforme.entities.User;
-import com.esprit.utils.DataSource;
+import com.bourlaforme.utils.DataSource;
 
 import java.sql.*;
 import java.util.List;
@@ -186,6 +186,21 @@ public class ServiceParticipation implements IService<Participation> {
     }
     return email;
 }
+
+    @Override
+    public void supprimer(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Participation> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Participation getOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 

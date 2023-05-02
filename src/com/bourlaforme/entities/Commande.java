@@ -13,6 +13,7 @@ public class Commande implements Comparable<Commande> {
     private Panier panier;
     private BillingAddress address;
     private boolean confirmeAdmin;
+    private User user ;
 
     public Commande(int id) {
         this.id = id;
@@ -26,13 +27,23 @@ public class Commande implements Comparable<Commande> {
         this.address = address;
         this.confirmeAdmin = confirmeAdmin;
     }
-
-    public Commande(int montant, LocalDate date, Panier panier, BillingAddress address, boolean confirmeAdmin) {
+  public Commande(int montant, LocalDate date, Panier panier, BillingAddress address, boolean confirmeAdmin ) {
         this.montant = montant;
         this.date = date;
         this.panier = panier;
         this.address = address;
         this.confirmeAdmin = confirmeAdmin;
+ 
+
+    }
+    public Commande(int montant, LocalDate date, Panier panier, BillingAddress address, boolean confirmeAdmin, User user) {
+        this.montant = montant;
+        this.date = date;
+        this.panier = panier;
+        this.address = address;
+        this.confirmeAdmin = confirmeAdmin;
+        this.user = user;
+
     }
 
     public int getId() {
@@ -81,6 +92,14 @@ public class Commande implements Comparable<Commande> {
 
     public void setConfirmeAdmin(boolean confirmeAdmin) {
         this.confirmeAdmin = confirmeAdmin;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

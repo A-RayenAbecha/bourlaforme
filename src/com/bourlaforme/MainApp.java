@@ -1,5 +1,7 @@
 package com.bourlaforme;
 
+import com.bourlaforme.entities.User;
+import com.bourlaforme.utils.BadWords;
 import com.bourlaforme.utils.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +12,52 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import static javafx.application.Application.launch;
+import javafx.scene.Parent;
 
 public class MainApp extends Application {
+    
+    
+    @Override
+    public void start(Stage stage) throws IOException {
+        
+        System.out.println("Loading bad words ..");
+        BadWords.loadConfigs();
+        mainStage = stage;
+        
+        Parent root = FXMLLoader.load(getClass().getResource("/bourlaforme/interfaces/LoginForm.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+        
+        
+        
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // Create a User object with some sample data
+
+
+        launch(args);
+        
+        
+    }
 
     public static Stage mainStage;
     private static MainApp instance;
-
-    public static void main(String[] args) {
+    
+    public static MainApp getInstance() {
+        if (instance == null) {
+            instance = new MainApp();
+        }
+        return instance;
+    }
+    
+    /*public static void main(String[] args) {
         launch(args);
     }
 
@@ -28,8 +69,9 @@ public class MainApp extends Application {
     }
 
 
-    @Override
     public void start(Stage primaryStage) {
+        System.out.println("Loading bad words ..");
+        BadWords.loadConfigs();
         mainStage = primaryStage;
         loadLogin();
     }
@@ -48,8 +90,8 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_FRONT_MAIN_WINDOW,
                 "",
-                1000,
-                700,
+                1300,
+                620,
                 false
         );
     }
@@ -92,5 +134,5 @@ public class MainApp extends Application {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-    }
+    }*/
 }

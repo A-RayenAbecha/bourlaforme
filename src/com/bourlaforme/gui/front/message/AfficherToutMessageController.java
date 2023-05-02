@@ -2,6 +2,7 @@ package com.bourlaforme.gui.front.message;
 
 import com.bourlaforme.MainApp;
 import com.bourlaforme.entities.Message;
+import com.bourlaforme.entities.User;
 import com.bourlaforme.gui.front.MainWindowController;
 import com.bourlaforme.services.MessageService;
 import com.bourlaforme.utils.AlertUtils;
@@ -57,7 +58,7 @@ public class AfficherToutMessageController implements Initializable {
         if (!listMessage.isEmpty()) {
             for (Message message : listMessage) {
                 if (message.getMessage().toLowerCase().startsWith(searchText.toLowerCase())) {
-                    if (message.getSender().getId() == MainApp.session.getId() || message.getReceiver().getId() == MainApp.session.getId()) {
+                    if (message.getSender().getId() == User.connectedUser.getId() || message.getReceiver().getId() == User.connectedUser.getId()) {
                         mainVBox.getChildren().add(makeMessageModel(message));
                     }
                 }
@@ -79,13 +80,13 @@ public class AfficherToutMessageController implements Initializable {
             parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_FRONT_MODEL_MESSAGE)));
 
             HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
-            if (message.getSender().getId() == MainApp.session.getId()) {
+            if (message.getSender().getId() == User.connectedUser.getId()) {
                 ((Text) innerContainer.lookup("#senderText")).setText("Expediteur :\n Vous");
             } else {
                 ((Text) innerContainer.lookup("#senderText")).setText("Expediteur :\n " + message.getSender());
             }
 
-            if (message.getReceiver().getId() == MainApp.session.getId()) {
+            if (message.getReceiver().getId() == User.connectedUser.getId()) {
                 ((Text) innerContainer.lookup("#receiverText")).setText("Destinataire :\n Vous");
             } else {
                 ((Text) innerContainer.lookup("#receiverText")).setText("Destinataire :\n " + message.getReceiver());

@@ -39,7 +39,7 @@ public class GererMessageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         for (User user : MessageService.getInstance().getAllUsers()) {
-            if (MainApp.session.getRoles().equals("[\"ROLE_COACH\"]")) {
+            if (User.connectedUser.getRoles().equals("[\"ROLE_COACH\"]")) {
                 receiverText.setText("Client : ");
                 if (user.getRoles().equals("[\"ROLE_CLIENT\"]")) {
                     receiverCB.getItems().add(user);
@@ -77,7 +77,7 @@ public class GererMessageController implements Initializable {
         if (controleDeSaisie()) {
 
             Message message = new Message(
-                    MainApp.session,
+                    User.connectedUser,
                     receiverCB.getValue(),
                     messageTF.getText()
             );

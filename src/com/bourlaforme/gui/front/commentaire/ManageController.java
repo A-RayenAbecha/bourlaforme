@@ -2,6 +2,7 @@ package com.bourlaforme.gui.front.commentaire;
 
 
 import com.bourlaforme.entities.Commentaire;
+import com.bourlaforme.entities.User;
 import com.bourlaforme.gui.front.MainWindowController;
 import com.bourlaforme.services.CommentaireService;
 import com.bourlaforme.utils.AlertUtils;
@@ -12,19 +13,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ManageController implements Initializable {
 
     @FXML
     public ComboBox<RelationObject> articleCB;
-    @FXML
-    public TextField auteurTF;
+    
     @FXML
     public TextField contenuTF;
     @FXML
@@ -50,7 +52,6 @@ public class ManageController implements Initializable {
 
             try {
                 articleCB.setValue(currentCommentaire.getArticle());
-                auteurTF.setText(currentCommentaire.getAuteur());
                 contenuTF.setText(currentCommentaire.getContenu());
 
             } catch (NullPointerException ignored) {
@@ -69,7 +70,7 @@ public class ManageController implements Initializable {
 
             Commentaire commentaire = new Commentaire(
                     articleCB.getValue(),
-                    auteurTF.getText(),
+                    User.connectedUser.getNom(),
                     contenuTF.getText(),
                     LocalDate.now()
             );
@@ -101,12 +102,6 @@ public class ManageController implements Initializable {
 
         if (articleCB.getValue() == null) {
             AlertUtils.makeInformation("Choisir article");
-            return false;
-        }
-
-
-        if (auteurTF.getText().isEmpty()) {
-            AlertUtils.makeInformation("auteur ne doit pas etre vide");
             return false;
         }
 

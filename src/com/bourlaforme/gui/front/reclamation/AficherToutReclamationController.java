@@ -2,6 +2,7 @@ package com.bourlaforme.gui.front.reclamation;
 
 import com.bourlaforme.MainApp;
 import com.bourlaforme.entities.Reclamation;
+import com.bourlaforme.entities.User;
 import com.bourlaforme.gui.front.MainWindowController;
 import com.bourlaforme.services.ReclamationService;
 import com.bourlaforme.utils.AlertUtils;
@@ -55,7 +56,7 @@ public class AficherToutReclamationController implements Initializable {
 
         if (!listReclamation.isEmpty()) {
             for (Reclamation reclamation : listReclamation) {
-                if (reclamation.getUser().getId() == MainApp.session.getId()){
+                if (reclamation.getUser().getId() == User.connectedUser.getId()){
                     mainVBox.getChildren().add(makeReclamationModel(reclamation));
                 }
             }

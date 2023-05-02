@@ -1,6 +1,6 @@
 package bourlaforme.utils;
 
-import bourlaforme.Entity.User;
+import com.bourlaforme.entities.User;
 
 import java.io.StringReader;
 import java.sql.*;

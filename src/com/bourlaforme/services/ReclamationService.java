@@ -31,15 +31,15 @@ public class ReclamationService {
         List<Reclamation> listReclamation = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM `reclamation` AS x " +
-                            "LEFT JOIN `user` AS u ON x.user_id = u.id " +
-                            "LEFT JOIN `user` AS co ON x.coach_id = co.id " +
-                            "LEFT JOIN `club` AS cl ON x.club_id = cl.id " +
-                            "LEFT JOIN `article` AS a ON x.article_id = a.id " +
-                            "WHERE x.user_id = u.id " +
-                            "OR x.coach_id = co.id " +
-                            "OR x.club_id = cl.id " +
-                            "OR x.article_id = a.id"
+                    "SELECT * FROM reclamation AS x "
+                    + "LEFT JOIN user AS u ON x.user_id = u.id "
+                    + "LEFT JOIN user AS co ON x.coach_id = co.id "
+                    + "LEFT JOIN club AS cl ON x.club_id = cl.id "
+                    + "LEFT JOIN article AS a ON x.article_id = a.id "
+                    + "WHERE x.user_id = u.id "
+                    + "OR x.coach_id = co.id "
+                    + "OR x.club_id = cl.id "
+                    + "OR x.article_id = a.id"
             );
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -49,37 +49,11 @@ public class ReclamationService {
                         resultSet.getInt("id"),
                         new User(
                                 resultSet.getInt("u.id"),
-                                resultSet.getString("u.email"),
-                                resultSet.getString("u.roles"),
-                                resultSet.getString("u.password"),
-                                resultSet.getString("u.nom"),
-                                resultSet.getString("u.prenom"),
-                                resultSet.getString("u.image"),
-                                resultSet.getString("u.certificates"),
-                                resultSet.getString("u.specialite"),
-                                resultSet.getString("u.experiance"),
-                                resultSet.getString("u.description"),
-                                resultSet.getBoolean("u.is_coach"),
-                                resultSet.getBoolean("u.approved"),
-                                resultSet.getString("u.likes"),
-                                resultSet.getFloat("u.moyenne")
+                                resultSet.getString("u.email")
                         ),
                         new User(
                                 resultSet.getInt("co.id"),
-                                resultSet.getString("co.email"),
-                                resultSet.getString("co.roles"),
-                                resultSet.getString("co.password"),
-                                resultSet.getString("co.nom"),
-                                resultSet.getString("co.prenom"),
-                                resultSet.getString("co.image"),
-                                resultSet.getString("co.certificates"),
-                                resultSet.getString("co.specialite"),
-                                resultSet.getString("co.experiance"),
-                                resultSet.getString("co.description"),
-                                resultSet.getBoolean("co.is_coach"),
-                                resultSet.getBoolean("co.approved"),
-                                resultSet.getString("co.likes"),
-                                resultSet.getFloat("co.moyenne")
+                                resultSet.getString("co.email")
                         ),
                         new RelationObject(resultSet.getInt("cl.id"), resultSet.getString("cl.nom")),
                         new RelationObject(resultSet.getInt("a.id"), resultSet.getString("a.nom")),
@@ -88,7 +62,6 @@ public class ReclamationService {
                         resultSet.getString("reponse"),
                         resultSet.getString("type"),
                         resultSet.getString("message")
-
                 ));
             }
         } catch (SQLException exception) {
@@ -100,7 +73,7 @@ public class ReclamationService {
     public List<RelationObject> getAllClubs() {
         List<RelationObject> clubList = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM `club`");
+            preparedStatement = connection.prepareStatement("SELECT * FROM club");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 clubList.add(
@@ -119,7 +92,7 @@ public class ReclamationService {
     public List<RelationObject> getAllArticles() {
         List<RelationObject> articleList = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM `article`");
+            preparedStatement = connection.prepareStatement("SELECT * FROM article");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 articleList.add(
@@ -141,13 +114,13 @@ public class ReclamationService {
 
         switch (reclamationType) {
             case "Coach":
-                request = "INSERT INTO `reclamation`(`user_id`, `coach_id`, `dateReclamation`, `etat`, `reponse`, `type`, `message`) VALUES(?, ?, ?, ?, ?, ?, ?)";
+                request = "INSERT INTO reclamation(user_id, coach_id, dateReclamation, etat, reponse, type, message) VALUES(?, ?, ?, ?, ?, ?, ?)";
                 break;
             case "Club":
-                request = "INSERT INTO `reclamation`(`user_id`, `club_id`, `dateReclamation`, `etat`, `reponse`, `type`, `message`) VALUES(?, ?, ?, ?, ?, ?, ?)";
+                request = "INSERT INTO reclamation(user_id, club_id, dateReclamation, etat, reponse, type, message) VALUES(?, ?, ?, ?, ?, ?, ?)";
                 break;
             case "Article":
-                request = "INSERT INTO `reclamation`(`user_id`, `article_id`, `dateReclamation`, `etat`, `reponse`, `type`, `message`) VALUES(?, ?, ?, ?, ?, ?, ?)";
+                request = "INSERT INTO reclamation(user_id, article_id, dateReclamation, etat, reponse, type, message) VALUES(?, ?, ?, ?, ?, ?, ?)";
                 break;
             default:
                 break;
@@ -155,7 +128,6 @@ public class ReclamationService {
 
         try {
             preparedStatement = connection.prepareStatement(request);
-
 
             preparedStatement.setInt(1, reclamation.getUser() == null ? -1 : reclamation.getUser().getId());
 
@@ -190,7 +162,7 @@ public class ReclamationService {
 
     public boolean edit(Reclamation reclamation) {
 
-        String request = "UPDATE `reclamation` SET `dateReclamation` = ?, `etat` = ?, `reponse` = ? WHERE `id`=" + reclamation.getId();
+        String request = "UPDATE reclamation SET dateReclamation = ?, etat = ?, reponse = ? WHERE `id`=" + reclamation.getId();
         try {
             preparedStatement = connection.prepareStatement(request);
 
@@ -209,7 +181,7 @@ public class ReclamationService {
 
     public boolean delete(int id) {
         try {
-            preparedStatement = connection.prepareStatement("DELETE FROM `reclamation` WHERE `id`=?");
+            preparedStatement = connection.prepareStatement("DELETE FROM reclamation WHERE `id`=?");
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();

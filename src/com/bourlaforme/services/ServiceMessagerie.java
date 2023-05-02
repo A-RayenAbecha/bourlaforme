@@ -337,4 +337,14 @@ public class ServiceMessagerie implements IService<Conversation> {
         this.cl = l;
     }
 
+    @Override
+    public void supprimer(Conversation t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Conversation> afficher() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

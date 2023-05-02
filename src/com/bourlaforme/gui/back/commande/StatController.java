@@ -6,6 +6,7 @@ package com.bourlaforme.gui.back.commande;
 
 import com.bourlaforme.entities.Commande;
 import com.bourlaforme.services.CommandeService;
+import com.bourlaforme.utils.Constants;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -97,7 +98,7 @@ public class StatController implements Initializable {
             public void Logout (ActionEvent e) throws IOException {
         Node node = (Node) e.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/Login.fxml"));
+        Parent root=FXMLLoader.load(getClass().getResource(Constants.FXML_BACK_DISPLAY_ALL_COMMANDE));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

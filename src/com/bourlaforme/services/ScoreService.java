@@ -32,11 +32,11 @@ public class ScoreService {
         List<Score> listScore = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM `score` AS x " +
-                            "RIGHT JOIN `user` AS c ON x.coach_id = c.id " +
-                            "RIGHT JOIN `user` AS u ON x.user_id = u.id " +
-                            "WHERE x.coach_id = c.id " +
-                            "AND x.user_id = u.id"
+                    "SELECT * FROM score AS x "
+                    + "RIGHT JOIN user AS c ON x.coach_id = c.id "
+                    + "RIGHT JOIN user AS u ON x.user_id = u.id "
+                    + "WHERE x.coach_id = c.id "
+                    + "AND x.user_id = u.id"
             );
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -46,40 +46,13 @@ public class ScoreService {
                         resultSet.getInt("id"),
                         new User(
                                 resultSet.getInt("c.id"),
-                                resultSet.getString("c.email"),
-                                resultSet.getString("c.roles"),
-                                resultSet.getString("c.password"),
-                                resultSet.getString("c.nom"),
-                                resultSet.getString("c.prenom"),
-                                resultSet.getString("c.image"),
-                                resultSet.getString("c.certificates"),
-                                resultSet.getString("c.specialite"),
-                                resultSet.getString("c.experiance"),
-                                resultSet.getString("c.description"),
-                                resultSet.getBoolean("c.is_coach"),
-                                resultSet.getBoolean("c.approved"),
-                                resultSet.getString("c.likes"),
-                                resultSet.getFloat("c.moyenne")
+                                resultSet.getString("c.email")
                         ),
                         new User(
                                 resultSet.getInt("u.id"),
-                                resultSet.getString("u.email"),
-                                resultSet.getString("u.roles"),
-                                resultSet.getString("u.password"),
-                                resultSet.getString("u.nom"),
-                                resultSet.getString("u.prenom"),
-                                resultSet.getString("u.image"),
-                                resultSet.getString("u.certificates"),
-                                resultSet.getString("u.specialite"),
-                                resultSet.getString("u.experiance"),
-                                resultSet.getString("u.description"),
-                                resultSet.getBoolean("u.is_coach"),
-                                resultSet.getBoolean("u.approved"),
-                                resultSet.getString("u.likes"),
-                                resultSet.getFloat("u.moyenne")
+                                resultSet.getString("u.email")
                         ),
                         resultSet.getInt("note")
-
                 ));
             }
         } catch (SQLException exception) {
@@ -90,7 +63,7 @@ public class ScoreService {
 
     public boolean add(Score score) {
 
-        String request = "INSERT INTO `score`(`coach_id`, `user_id`, `note`) VALUES(?, ?, ?)";
+        String request = "INSERT INTO score`(coach_id`, user_id, note) VALUES(?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement(request);
 
@@ -109,7 +82,7 @@ public class ScoreService {
 
     public boolean edit(Score score) {
 
-        String request = "UPDATE `score` SET `coach_id` = ?, `user_id` = ?, `note` = ? WHERE `id`=" + score.getId();
+        String request = "UPDATE score SET coach_id = ?, user_id = ?, note = ? WHERE `id`=" + score.getId();
         try {
             preparedStatement = connection.prepareStatement(request);
 
@@ -128,7 +101,7 @@ public class ScoreService {
 
     public boolean delete(int id) {
         try {
-            preparedStatement = connection.prepareStatement("DELETE FROM `score` WHERE `id`=?");
+            preparedStatement = connection.prepareStatement("DELETE FROM score WHERE `id`=?");
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();

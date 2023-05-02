@@ -54,7 +54,7 @@ public class AjouterReclamationController implements Initializable {
         clubVBox.setVisible(false);
         articleVBox.setVisible(false);
 
-        reclamerSurCB.getItems().add("User");
+        
         reclamerSurCB.getItems().add("Coach");
         reclamerSurCB.getItems().add("Club");
         reclamerSurCB.getItems().add("Article");
@@ -130,7 +130,7 @@ public class AjouterReclamationController implements Initializable {
             }
 
             Reclamation reclamation = new Reclamation(
-                    MainApp.session,
+                    User.connectedUser,
                     coach,
                     club,
                     article,

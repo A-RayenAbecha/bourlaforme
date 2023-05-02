@@ -5,6 +5,7 @@ import com.bourlaforme.gui.back.MainWindowController;
 import com.bourlaforme.services.CommentaireService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,6 +34,8 @@ public class ShowAllController implements Initializable {
     public Text topText;
     @FXML
     public VBox mainVBox;
+    @FXML
+    public TextField searchTF;
 
     List<Commentaire> listCommentaire;
 
@@ -46,17 +49,20 @@ public class ShowAllController implements Initializable {
             listCommentaire = CommentaireService.getInstance().getAll();
         }
 
-        displayData();
+        displayData("");
     }
 
-    void displayData() {
+    void displayData(String searchText) {
         mainVBox.getChildren().clear();
 
         Collections.reverse(listCommentaire);
 
         if (!listCommentaire.isEmpty()) {
             for (Commentaire commentaire : listCommentaire) {
+                if (commentaire.getContenu().toLowerCase().startsWith(searchText.toLowerCase())) {
                     mainVBox.getChildren().add(makeCommentaireModel(commentaire));
+                }
+
             }
         } else {
             StackPane stackPane = new StackPane();
@@ -104,6 +110,11 @@ public class ShowAllController implements Initializable {
                 AlertUtils.makeError("Could not delete commentaire");
             }
         }
+    }
+
+    @FXML
+    private void search(KeyEvent event) {
+        displayData(searchTF.getText());
     }
 
     private void specialAction(Commentaire commentaire) {

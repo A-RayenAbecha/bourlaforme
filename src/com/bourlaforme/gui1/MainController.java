@@ -18,8 +18,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
     @FXML
@@ -60,9 +66,20 @@ public class MainController implements Initializable {
     @FXML
     private HBox Acceuil;
 
-    User connectedUser;
     @FXML
     private StackPane stackpane;
+    
+    @FXML
+    private Button btnAcceuil;
+    
+    public void redirectAcceuil(Event e) throws IOException{
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root=FXMLLoader.load(getClass().getResource("/com/bourlaforme/gui/front/MainWindow.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
   
     @FXML
@@ -88,7 +105,7 @@ public class MainController implements Initializable {
         Acceuil.setStyle("-fx-background-color: #FFFFFF;");
         ServiceParticipation serviceParticipation = new ServiceParticipation();
 
-        displayParticipations(serviceParticipation.afficheReservationByUser(connectedUser));
+        displayParticipations(serviceParticipation.afficheReservationByUser(User.connectedUser));
 
         page_seances.setVisible(false);
         page_reservation.setVisible(true);
@@ -125,8 +142,8 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-           ServiceClub serviceClub = new ServiceClub();
-        connectedUser = new User(2);
+        sessionsClicked(null);
+        ServiceClub serviceClub = new ServiceClub();
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
     // Code to execute when the text in the search field changes
     // For example, call the search method with the new search term
@@ -152,10 +169,10 @@ public class MainController implements Initializable {
         int col=0 , row = 1;
         for (int i=0;i<clubs.size();i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HelloApplication.class.getResource("../gui1/club.fxml"));
+            fxmlLoader.setLocation(HelloApplication.class.getResource("/com/bourlaforme/gui1/club.fxml"));
             HBox seanceBox = fxmlLoader.load();
             ClubController clubController  = fxmlLoader.getController();
-            clubController.setData(clubs.get(i),connectedUser);
+            clubController.setData(clubs.get(i),User.connectedUser);
             grid_sessions.add(seanceBox,col,row);
             col++;
             if (col==3){
@@ -170,10 +187,10 @@ public class MainController implements Initializable {
         int col=0 , row = 1;
         for (int i=0;i<participations.size();i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HelloApplication.class.getResource("../gui1/participation.fxml"));
+            fxmlLoader.setLocation(HelloApplication.class.getResource("/com/bourlaforme/gui1/participation.fxml"));
             VBox seanceBox = fxmlLoader.load();
             ParticipationController participationController = fxmlLoader.getController();
-            participationController.setData(participations.get(i),connectedUser);
+            participationController.setData(participations.get(i),User.connectedUser);
             grid_reservations.add(seanceBox,col,row);
             col++;
             if (col==4){
