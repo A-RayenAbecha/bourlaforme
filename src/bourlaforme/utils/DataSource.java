@@ -39,25 +39,3 @@ public class DataSource {
         return cnx;
     }
 }
-/*private Connection cnx;
-    private static DataSource instance;
-    
-    private final String URL = "jdbc:mysql://localhost:3306/bourlaforme";
-    private final String USERNAME = "root";
-    private final String PASSWORD="";
-    
-    private DataSource() {
-        try {
-            cnx = DriverManager.getConnection (URL, USERNAME, PASSWORD); 
-            System.out.println("Connecting !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-    public static DataSource getInstance(){
-        if (instance == null)
-            instance=new DataSource();
-        return instance;
-
-    }*/
