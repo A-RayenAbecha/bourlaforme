@@ -10,14 +10,13 @@ import java.sql.SQLException;
 
 /**
  *
- * @author abdel
+ * @author aziz3
  */
 public class DataSource {
-    
-    private Connection cnx;
+     private Connection cnx;
     private static DataSource instance;
     
-    private final String URL = "jdbc:mysql://localhost:3306/bourlaforme";
+  private final String URL = "jdbc:mysql://localhost:3306/bourlaforme";
     private final String USERNAME = "root";
     private final String PASSWORD = "";
     
