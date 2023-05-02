@@ -3,35 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui/acceuil.png</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/services/ServiceParticipation.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui1/ClubController.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/salesboxai/zoom/AsJsonString.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui/MainController.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/hadil_jfx/HelloController.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/services/ReservationService.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui1/CoachDashboard.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui1/Test.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/services/ServiceClub.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui1/ParticipationController.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/services/ServiceSeance.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/hadil_jfx/HelloApplication.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/entities/User.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/salesboxai/zoom/ZoomAccessToken.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/entities/Reservation.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/esprit/utils/DataSource.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/entities/Seance.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui1/MainController.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/entities/Club.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui/Test.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/tests/MainProg.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/salesboxai/zoom/Config.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui/CoachDashboard.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/entities/Participation.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/salesboxai/zoom/ZoomAuthorizerJWT.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui/SeanceController.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/services/IService.java</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/bourlaforme/src/com/bourlaforme/gui/ReservationController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ReclamationService.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/AfficherToutScoreController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/entities/Score.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/Constants.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/MainWindowController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/TopBarController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/BadWords.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/GererScore.fxml</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/MessagerieController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/ServiceMessagerie.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/utils/AlertUtils.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/message/GererMessageController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/back/reclamation/ModifierReclamationController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/services/MessageService.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/entities/Conversation.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/front/score/GererScoreController.java</file>
+            <file>file:/C:/Users/ahmed/Downloads/bourlaforme-apimetiers%20(1)/bourlaforme/src/com/bourlaforme/gui/LoginController.java</file>
         </group>
     </open-files>
 </project-private>
