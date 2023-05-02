@@ -17,13 +17,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ToolWindowBuild.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Projects/JavaFX/bourlaforme/src/com/bourlaforme/gui/back",
+    "last_opened_file_path": "D:/Projects/JavaFX/bourlaforme",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.2"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -33,14 +32,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\JavaFX\bourlaforme\src\com\bourlaforme\gui\back" />
-      <recent name="D:\Projects\JavaFX\bourlaforme\src\com\bourlaforme\gui\front" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\JavaFX\bourlaforme\src\com\bourlaforme\gui\front\panier" />
+      <recent name="D:\Projects\JavaFX\bourlaforme\dependencies" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.bourlaforme.entities" />
+      <recent name="com.bourlaforme.gui.front.article" />
     </key>
   </component>
   <component name="RunManager">
@@ -105,8 +100,8 @@
       <option name="presentableId" value="Default" />
       <updated>1649954449805</updated>
       <workItem from="1649954454352" duration="230000" />
-      <workItem from="1681153017703" duration="11756000" />
-      <workItem from="1681239645896" duration="4317000" />
+      <workItem from="1680645075786" duration="2910000" />
+      <workItem from="1680812943860" duration="458000" />
     </task>
     <servers />
   </component>

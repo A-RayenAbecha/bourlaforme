@@ -1,6 +1,8 @@
 package com.bourlaforme.entities;
 
-public class Article {
+import com.bourlaforme.utils.Constants;
+
+public class Article implements Comparable<Article> {
 
     private int id;
     private String nom;
@@ -24,10 +26,6 @@ public class Article {
         this.image = image;
         this.prix = prix;
         this.etat = etat;
-    }
-
-    public Article() {
-        
     }
 
     public int getId() {
@@ -78,8 +76,24 @@ public class Article {
         this.etat = etat;
     }
 
+
     @Override
-    public String toString() {
-        return nom + ", prix : " + prix;
+    public int compareTo(Article article) {
+        switch (Constants.compareVar) {
+            case "Nom":
+                return article.getNom().compareTo(this.getNom());
+            case "Description":
+                return article.getDescription().compareTo(this.getDescription());
+            case "Image":
+                return article.getImage().compareTo(this.getImage());
+            case "Prix":
+                return Integer.compare(article.getPrix(), this.getPrix());
+            case "Etat":
+                return article.getEtat().compareTo(this.getEtat());
+
+            default:
+                return 0;
+        }
     }
+
 }

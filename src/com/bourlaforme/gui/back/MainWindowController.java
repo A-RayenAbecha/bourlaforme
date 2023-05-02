@@ -16,7 +16,9 @@ public class MainWindowController implements Initializable {
 
     static AnchorPane staticContent;
     private static MainWindowController instance;
-
+  // private static MainWindowController instance;
+    @FXML
+    private AnchorPane sideBar;
     @FXML
     private AnchorPane content;
 
@@ -29,7 +31,20 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        staticContent = content;
+        try {
+            staticContent = content;
+
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_BACK_SIDE_BAR)));
+            AnchorPane.setTopAnchor(parent, 0.0);
+            AnchorPane.setBottomAnchor(parent, 0.0);
+            AnchorPane.setRightAnchor(parent, 0.0);
+            AnchorPane.setLeftAnchor(parent, 0.0);
+            sideBar.getChildren().add(parent);
+
+        } catch (IOException e) {
+            System.out.println("Error loading " + e.getMessage());
+            e.printStackTrace();
+        }
 
         loadInterface(Constants.FXML_BACK_HOME);
     }

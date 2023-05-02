@@ -38,8 +38,8 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_LOGIN,
                 "Connexion",
-                500,
-                600,
+                550,
+                250,
                 true
         );
     }
@@ -48,7 +48,7 @@ public class MainApp extends Application {
         loadScene(
                 Constants.FXML_FRONT_MAIN_WINDOW,
                 "",
-                1100,
+                1000,
                 700,
                 false
         );
@@ -59,7 +59,7 @@ public class MainApp extends Application {
                 Constants.FXML_BACK_MAIN_WINDOW,
                 "",
                 1100,
-                700,
+                600,
                 false
         );
     }
