@@ -4,7 +4,7 @@
  */
 package bourlaforme.interfaceController;
 
-import bourlaforme.entity.User;
+import bourlaforme.Entity.User;
 import static bourlaforme.interfaceController.SignUpFormCTR.makeSuccessNotification;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;
@@ -88,13 +88,13 @@ public class AdminAddUserController implements Initializable{
         us.setPassword(txtPassword.getText());
         us.setNom(txtNom.getText());
         us.setPrenom(txtPrenom.getText());
-        us.setRole(role);
+        us.setRoles(role);
        
             us.setCoach(false);
         us.setApproved(false);
         us.setImage(imagePathAjout);
-        if(User.connectedUser.getRole().equals("ROLE_ADMIN_COACH")) role = "ROLE_COACH";
-        else if (User.connectedUser.getRole().equals("ROLE_ADMIN_CLUBOWNER")) role = "ROLE_CLUBOWNER";
+        if(User.connectedUser.getRoles().equals("ROLE_ADMIN_COACH")) role = "ROLE_COACH";
+        else if (User.connectedUser.getRoles().equals("ROLE_ADMIN_CLUBOWNER")) role = "ROLE_CLUBOWNER";
 //        toggleGroup = new ToggleGroup();
         
         
@@ -154,7 +154,7 @@ public class AdminAddUserController implements Initializable{
         rb_clubOwner.setOnAction((ActionEvent e1) -> {
             role = "ROLE_ADMIN_CLUBOWNER";
         });
-        if (!User.connectedUser.getRole().equals("ROLE_SUPER_ADMIN")){
+        if (!User.connectedUser.getRoles().equals("ROLE_SUPER_ADMIN")){
             role_pane.setVisible(false);
         }
         

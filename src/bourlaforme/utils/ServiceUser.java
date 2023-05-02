@@ -1,6 +1,6 @@
 package bourlaforme.utils;
 
-import bourlaforme.entity.User;
+import bourlaforme.Entity.User;
 
 import java.io.StringReader;
 import java.sql.*;
@@ -60,7 +60,7 @@ public class ServiceUser {
             String requete = "INSERT INTO user (email, roles, password, nom, prenom, image, certificates, specialite, experiance, description, is_coach, approved, likes, moyenne) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, u.getEmail());
-            pst.setString(2, setRole(u.getRole()));
+            pst.setString(2, setRole(u.getRoles()));
             pst.setString(3, u.getPassword());
             pst.setString(4, u.getNom());
             pst.setString(5, u.getPrenom());
@@ -152,7 +152,7 @@ public class ServiceUser {
             String requete = "UPDATE user SET email=?, roles=?, password=?, nom=?, prenom=?, image=?, certificates=?, specialite=?, experiance=?, description=?, is_coach=?, approved=?, likes=?, moyenne=? WHERE id=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, u.getEmail());
-            pst.setString(2, setRole(u.getRole()));
+            pst.setString(2, setRole(u.getRoles()));
             pst.setString(3, u.getPassword());
             pst.setString(4, u.getNom());
             pst.setString(5, u.getPrenom());

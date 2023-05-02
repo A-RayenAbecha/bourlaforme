@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Firas
+ * @author aziz3
  */
 public class ResetPasswordfController implements Initializable {
 

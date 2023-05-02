@@ -27,7 +27,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author Firas
+ * @author aziz3
  */
 public class ResetpasswordController implements Initializable {
     

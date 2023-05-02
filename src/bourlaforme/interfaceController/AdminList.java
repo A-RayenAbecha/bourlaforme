@@ -23,7 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import bourlaforme.entity.User;
+import bourlaforme.Entity.User;
 import bourlaforme.utils.ServiceUser;
 import java.sql.SQLException;
 import java.sql.SQLDataException;
@@ -33,7 +33,7 @@ import javafx.scene.control.TextField;
 
 /**
  *
- * @author Mega-PC
+ * @author aziz3
  */
 
 public class AdminList implements Initializable{
@@ -72,7 +72,7 @@ public class AdminList implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         afficher();
-        if (!User.connectedUser.getRole().equals("ROLE_ADMIN_COACH")){
+        if (!User.connectedUser.getRoles().equals("ROLE_ADMIN_COACH")){
             btnupdate.setVisible(false);
         }
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -87,11 +87,11 @@ public class AdminList implements Initializable{
     void afficher(){
         ServiceUser serviceUser = new ServiceUser();
         ArrayList<User> u = new ArrayList<>();
-        if(User.connectedUser.getRole().equals("ROLE_SUPER_ADMIN")){
+        if(User.connectedUser.getRoles().equals("ROLE_SUPER_ADMIN")){
             u = (ArrayList<User>) serviceUser.afficher_admins("ADMIN");
-        }else if (User.connectedUser.getRole().equals("ROLE_ADMIN_COACH")){
+        }else if (User.connectedUser.getRoles().equals("ROLE_ADMIN_COACH")){
             u = (ArrayList<User>) serviceUser.afficher_admins("ROLE_COACH");
-        } else if (User.connectedUser.getRole().equals("ROLE_ADMIN_CLUBOWNER")) {
+        } else if (User.connectedUser.getRoles().equals("ROLE_ADMIN_CLUBOWNER")) {
             u = (ArrayList<User>) serviceUser.afficher_admins("ROLE_CLUBOWNER");
         }
         ObservableList<User> obs2 = FXCollections.observableArrayList(u);

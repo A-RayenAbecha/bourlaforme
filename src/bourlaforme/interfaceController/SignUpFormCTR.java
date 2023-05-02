@@ -5,7 +5,7 @@
  */
 package bourlaforme.interfaceController;
 
-import bourlaforme.entity.User;
+import bourlaforme.Entity.User;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +39,7 @@ import tray.notification.TrayNotification;
 
 /**
  *
- * @author louay
+ * @author aziz3
  */
 public class SignUpFormCTR implements  Initializable{
 
@@ -84,7 +84,7 @@ public class SignUpFormCTR implements  Initializable{
         us.setPassword(txtPassword.getText());
         us.setNom(txtNom.getText());
         us.setPrenom(txtPrenom.getText());
-        us.setRole(role);
+        us.setRoles(role);
         if (role == "ROLE_COACH"){
             us.setCoach(true);
         } else 

@@ -4,7 +4,7 @@
  */
 package bourlaforme;
 
-import bourlaforme.entity.User;
+import bourlaforme.Entity.User;
 import bourlaforme.utils.ServiceUser;
 import java.io.IOException;
 import java.util.ArrayList;

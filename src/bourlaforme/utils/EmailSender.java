@@ -13,7 +13,7 @@ import java.util.*;
 
 /**
  *
- * @author Firas
+ * @author aziz3
  */
 public class EmailSender {
     

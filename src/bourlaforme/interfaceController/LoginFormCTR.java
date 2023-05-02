@@ -4,7 +4,7 @@
  */
 package bourlaforme.interfaceController;
 
-import bourlaforme.entity.User;
+import bourlaforme.Entity.User;
 import bourlaforme.utils.ServiceUser;
 import java.io.File;
 import java.io.IOException;
@@ -76,13 +76,13 @@ public class LoginFormCTR implements Initializable{
             alert.setContentText("Veuillez vérifier votre adresse email et votre mot de passe.");
             alert.showAndWait();
         } else {
-            System.out.println("Utilisateur connecté : " + u.getRole());
+            System.out.println("Utilisateur connecté : " + u.getRoles());
             User.connectedUser = u;
             makeSuccessNotification("logged in");
             
             Node node = (Node) e.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        String role = User.connectedUser.getRole();
+        String role = User.connectedUser.getRoles();
         Parent root;
             System.out.println(role);
         if(role.equals("ROLE_SUPER_ADMIN") || role.equals("ROLE_ADMIN_COACH") || role.equals("ROLE_ADMIN_CLUBOWNER")){

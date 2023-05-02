@@ -1,11 +1,11 @@
-package bourlaforme.entity;
+package bourlaforme.Entity;
 
 import java.util.List;
 
 public class User {
     private int id;
     private String email;
-    private String role;
+    private String roles;
     private String password;
     private String nom;
     private String prenom;
@@ -25,7 +25,7 @@ public class User {
     public User(int id, String email, String roles, String password, String nom, String prenom, String image, String certificates, String specialite, String experiance, String description, boolean isCoach, boolean approved, String likes, Double moyenne) {
         this.id = id;
         this.email = email;
-        this.role = roles;
+        this.roles = roles;
         this.password = password;
         this.nom = nom;
         this.prenom = prenom;
@@ -64,12 +64,12 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(String role) {
+        this.roles = role;
     }
 
     public String getPassword() {
