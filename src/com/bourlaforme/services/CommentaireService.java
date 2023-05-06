@@ -129,7 +129,7 @@ public class CommentaireService {
 
             preparedStatement.setInt(1, commentaire.getArticle().getId());
             preparedStatement.setString(2, commentaire.getAuteur());
-            String cleanedContent = replaceBadWords(commentaire.getContenu(), "C:/Users/Administrateur/OneDrive/Bureau/bourlaforme/bad.txt");
+            String cleanedContent = replaceBadWords(commentaire.getContenu(), "C:/User/aziz3/OneDrive/Bureau/projet/bourlaforme/bad.txtt");
             preparedStatement.setString(3, cleanedContent);
             preparedStatement.setDate(4, Date.valueOf(commentaire.getDate()));
 

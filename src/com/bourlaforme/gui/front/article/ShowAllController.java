@@ -290,18 +290,22 @@ private void AjouterPanier(Article article) {
     boolean articleExists = false;
     for (PanierArticle panierArticle : MonPanierController.monPanierArticleList) {
         if (panierArticle.getArticle().equals(article)) {
-            panierArticle.setQuantity(panierArticle.getQuantity()+ 1);
+            panierArticle.setQuantity(panierArticle.getQuantity() + 1);
             articleExists = true;
             break;
         }
     }
     if (!articleExists) {
-        PanierArticle panierArticle = new PanierArticle(article, MonPanierController.panier, 0);
-        MonPanierController.monPanierArticleList.add(panierArticle);
+        if (MonPanierController.monPanierArticleList.isEmpty()) {
+            PanierArticle panierArticle = new PanierArticle(article, MonPanierController.panier, 1);
+            MonPanierController.monPanierArticleList.add(panierArticle);
+        } else {
+            PanierArticle panierArticle = new PanierArticle(article, MonPanierController.panier, 0);
+            MonPanierController.monPanierArticleList.add(panierArticle);
+        }
     }
-    else 
 
-    AlertUtils.makeSuccessNotification("Article ajouté avec succés");
+    AlertUtils.makeSuccessNotification("Article ajouté avec succès");
     MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_DISPLAY_ALL_PANIER_ARTICLE);
 }
 
