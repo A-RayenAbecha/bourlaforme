@@ -8,16 +8,44 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication6.jar" size="6493861" download="eager" />
+    <jar href="JavaFXApplication6.jar" size="6493867" download="eager" />
     <jar href="lib\TrayNotification.jar" size="41019" download="eager" />
     <jar href="lib\TrayTester.jar" size="52070" download="eager" />
     <jar href="lib\barcode.jar" size="259748" download="eager" />
     <jar href="lib\controlsfx-8.0.1.jar" size="296347" download="eager" />
     <jar href="lib\controlsfx-8.40.11.jar" size="985420" download="eager" />
     <jar href="lib\gson-2.10.1.jar" size="283367" download="eager" />
+    <jar href="lib\gson-2.9.0.jar" size="249277" download="eager" />
+    <jar href="lib\itextpdf-5.5.9.jar" size="2287148" download="eager" />
     <jar href="lib\jBCrypt-0.4.1.jar" size="17570" download="eager" />
+    <jar href="lib\jackson-annotations-2.15.0-rc3.jar" size="75549" download="eager" />
+    <jar href="lib\jackson-core-2.15.0-rc3.jar" size="542659" download="eager" />
+    <jar href="lib\jackson-databind-2.15.0-rc3.jar" size="1619601" download="eager" />
+    <jar href="lib\javafx-base-18-ea+1-linux.jar" size="781440" download="eager" />
+    <jar href="lib\javafx-base-18-ea+1.jar" size="302" download="eager" />
+    <jar href="lib\javafx-base-18-ea1-linux.jar" size="781440" download="eager" />
+    <jar href="lib\javafx-base-18-ea1.jar" size="302" download="eager" />
+    <jar href="lib\javafx-controls-18-ea+1-linux.jar" size="2563781" download="eager" />
+    <jar href="lib\javafx-controls-18-ea+1.jar" size="306" download="eager" />
+    <jar href="lib\javafx-controls-18-ea1-linux.jar" size="2563781" download="eager" />
+    <jar href="lib\javafx-controls-18-ea1.jar" size="306" download="eager" />
+    <jar href="lib\javafx-graphics-18-ea+1-linux.jar" size="6952008" download="eager" />
+    <jar href="lib\javafx-graphics-18-ea+1.jar" size="306" download="eager" />
+    <jar href="lib\javafx-graphics-18-ea1-linux.jar" size="6952008" download="eager" />
+    <jar href="lib\javafx-graphics-18-ea1.jar" size="306" download="eager" />
     <jar href="lib\javax.json-1.1.4.jar" size="128770" download="eager" />
+    <jar href="lib\javax.mail-1.6.1.jar" size="654100" download="eager" />
     <jar href="lib\javax.mail.jar" size="659033" download="eager" />
+    <jar href="lib\jquery-dist-3.6.4.jar" size="487283" download="eager" />
+    <jar href="lib\mail.jar" size="666983" download="eager" />
+    <jar href="lib\mysql-connector.jar" size="2415211" download="eager" />
+    <jar href="lib\poi-3.9.jar" size="1869113" download="eager" />
+    <jar href="lib\qrgen-1.0.jar" size="4932" download="eager" />
+    <jar href="lib\stripe-java-21.15.0.jar" size="7081116" download="eager" />
+    <jar href="lib\stripe-java-22.16.0.jar" size="7561306" download="eager" />
+    <jar href="lib\zoom-1.7.21.jar" size="143458" download="eager" />
+    <jar href="lib\zxing-core-1.7.jar" size="352719" download="eager" />
+    <jar href="lib\zxing-j2se-1.7.jar" size="22051" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaFXApp" >
     <param name="requiredFXVersion" value="8.0+"/>

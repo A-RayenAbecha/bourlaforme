@@ -158,7 +158,7 @@ private void genererPDF(Commande commande) {
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Facture.pdf"));
         document.open();
          
-        com.itextpdf.text.Image companyLogo = com.itextpdf.text.Image.getInstance("C:/Users/rayen/Documents/NetBeansProjects/bourlaforme/src/com/bourlaforme/images/uploads/BourLaForme.jpg"); // Update with the path to your company logo image
+        com.itextpdf.text.Image companyLogo = com.itextpdf.text.Image.getInstance("C:/Users/aziz3/OneDrive/Bureau/projet/bourlaforme/src/bourlaforme/Images/Logo.PNG"); // Update with the path to your company logo image
                         companyLogo.scaleAbsoluteWidth(100);
                         companyLogo.scaleAbsoluteHeight(100);
                         document.add(companyLogo);

@@ -126,9 +126,9 @@ public class ManageController implements Initializable {
         properties.put("mail.smtp.port", "587");
 
         //Your gmail address
-        String myAccountEmail = "pidev.app.esprit@gmail.com";
+        String myAccountEmail = "mohamedaziz.hendili@esprit.tn";
         //Your gmail password
-        String password = "jkemsuddgeptmcsb";
+        String password = "vhartjzcdxqzgukw";
 
         //Create a session with account credentials
         Session session = Session.getInstance(properties, new Authenticator() {
