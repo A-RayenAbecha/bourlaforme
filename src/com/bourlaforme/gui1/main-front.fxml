@@ -39,11 +39,6 @@
             <Pane prefHeight="60.0" prefWidth="568.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="57.0" prefWidth="155.0" text="Nour Obba">
-                     <font>
-                        <Font name="DejaVu Sans Bold" size="17.0" />
-                     </font>
-                  </Label>
                   <ImageView fx:id="image" fitHeight="56.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>

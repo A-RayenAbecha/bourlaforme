@@ -226,12 +226,12 @@ private void genererPDF(Article article) {
     logo.setAlignment(Element.ALIGN_LEFT);
     logo.scaleToFit(100, 100);
     document.add(logo);
-} catch (IOException e) {
-    AlertUtils.makeError("Logo not found, PDF will display without logo");
-}
-        
+    } catch (IOException e) {
+        AlertUtils.makeError("Logo not found, PDF will display without logo");
+    }
+
         // Add title
-Paragraph title = new Paragraph("Fiche article : " + article.getNom(), new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 22, com.itextpdf.text.Font.BOLD));
+        Paragraph title = new Paragraph("Fiche article : " + article.getNom(), new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 22, com.itextpdf.text.Font.BOLD));
         title.setAlignment(Element.ALIGN_CENTER);
         document.add(title);
 
@@ -262,7 +262,7 @@ Paragraph title = new Paragraph("Fiche article : " + article.getNom(), new com.i
         // Add QR code
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         String qrCodeData = article.getNom(); // Use article name as QR code data
-       //String qrCodeData = "http://127.0.0.1:8000/article2/" + article.getId(); 
+       //String qrCodeData = "http://127.0.0.1:8000/client/article2/" + article.getId(); 
         BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeData, BarcodeFormat.QR_CODE, 300, 300);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", out);
@@ -273,7 +273,7 @@ Paragraph title = new Paragraph("Fiche article : " + article.getNom(), new com.i
 
         // Add link to article
         Chunk link = new Chunk("Cliquez ici pour voir l'article", new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.UNDERLINE));
-        link.setAction(new PdfAction("http://127.0.0.1:8000/article2/" + article.getId()));
+        link.setAction(new PdfAction("http://127.0.0.1:8000/client/article2/" + article.getId()));
         Paragraph linkParagraph = new Paragraph(link);
         linkParagraph.setAlignment(Element.ALIGN_CENTER);
         document.add(linkParagraph);
