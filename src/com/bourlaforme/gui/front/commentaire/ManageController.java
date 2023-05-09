@@ -1,9 +1,11 @@
 package com.bourlaforme.gui.front.commentaire;
 
 
+import com.bourlaforme.entities.Article;
 import com.bourlaforme.entities.Commentaire;
 import com.bourlaforme.entities.User;
 import com.bourlaforme.gui.front.MainWindowController;
+import com.bourlaforme.services.ArticleService;
 import com.bourlaforme.services.CommentaireService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
@@ -19,8 +21,11 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 
 public class ManageController implements Initializable {
 
@@ -39,10 +44,15 @@ public class ManageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        List<Article> articles = ArticleService.getInstance().getAll();
+        List<RelationObject> articleObjects = new ArrayList<>();
 
-        for (RelationObject article : CommentaireService.getInstance().getAllArticles()) {
-            articleCB.getItems().add(article);
+        for (Article article : articles) {
+            RelationObject relationObject = new RelationObject(article.getId(), article.getNom());
+            articleObjects.add(relationObject);
         }
+
+        articleCB.setItems(FXCollections.observableArrayList(articleObjects));
 
         currentCommentaire = ShowAllController.currentCommentaire;
 
@@ -51,7 +61,7 @@ public class ManageController implements Initializable {
             btnAjout.setText("Modifier");
 
             try {
-                articleCB.setValue(currentCommentaire.getArticle());
+                articleCB.setValue(new RelationObject(currentCommentaire.getArticle().getId(), currentCommentaire.getArticle().getName()));
                 contenuTF.setText(currentCommentaire.getContenu());
 
             } catch (NullPointerException ignored) {
@@ -62,6 +72,7 @@ public class ManageController implements Initializable {
             btnAjout.setText("Ajouter");
         }
     }
+
 
     @FXML
     private void manage(ActionEvent event) {

@@ -91,7 +91,7 @@ public class AdminAddUserController implements Initializable{
         us.setRoles(role);
        
             us.setCoach(false);
-        us.setApproved(false);
+        us.setApproved(true);
         us.setImage(imagePathAjout);
         if(User.connectedUser.getRoles().equals("ROLE_ADMIN_COACH")) role = "ROLE_COACH";
         else if (User.connectedUser.getRoles().equals("ROLE_ADMIN_CLUBOWNER")) role = "ROLE_CLUBOWNER";

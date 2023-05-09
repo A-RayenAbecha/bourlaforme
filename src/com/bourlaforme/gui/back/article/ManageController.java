@@ -91,7 +91,7 @@ public class ManageController implements Initializable {
                     imagePath,
                     Integer.parseInt(prixTF.getText()),
                   //  etatTF.getText()
-                    "desarchiver"
+                    "desarchive"
             );
 
             if (currentArticle == null) {
@@ -132,21 +132,31 @@ public class ManageController implements Initializable {
 
 
     @FXML
-    public void chooseImage(ActionEvent actionEvent) {
-
-        final FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(MainApp.mainStage);
-        if (file != null) {
-            selectedImagePath = Paths.get(file.getPath());
-            imageIV.setImage(new Image(file.toURI().toString()));
+public void chooseImage(ActionEvent actionEvent) {
+    final FileChooser fileChooser = new FileChooser();
+    File file = fileChooser.showOpenDialog(MainApp.mainStage);
+    if (file != null) {
+        selectedImagePath = Paths.get(file.getPath());
+        String imageName = selectedImagePath.getFileName().toString();
+        Path newPath = Paths.get("C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + imageName);
+        try {
+            Files.copy(selectedImagePath, newPath, StandardCopyOption.REPLACE_EXISTING);
+            selectedImagePath = newPath;
+            imageIV.setImage(new Image("file:/C:/Users/aziz3/OneDrive/Bureau/projet/Projet_Anarchy/public/uploads/articles/" + imageName));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+}
+
+
 
     public void createImageFile() {
         try {
-            Path newPath = FileSystems.getDefault().getPath("src/com/bourlaforme/images/uploads/" + selectedImagePath.getFileName());
-            Files.copy(selectedImagePath, newPath, StandardCopyOption.REPLACE_EXISTING);
-            selectedImagePath = newPath;
+            Path sourcePath = selectedImagePath;
+            Path destinationPath = Paths.get("C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + selectedImagePath.getFileName());
+            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            selectedImagePath = destinationPath.getFileName();
         } catch (IOException e) {
             e.printStackTrace();
         }

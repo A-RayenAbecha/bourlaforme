@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -83,41 +84,47 @@ public class ShowAllController implements Initializable {
         }
     }
 
-    public Parent makeArticleModel(
-            Article article
-    ) {
-        Parent parent = null;
-        try {
-            parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_BACK_MODEL_ARTICLE)));
+    public Parent makeArticleModel(Article article) {
+    Parent parent = null;
+    try {
+        parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_BACK_MODEL_ARTICLE)));
 
-            HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
-            ((Text) innerContainer.lookup("#nomText")).setText("Nom : " + article.getNom());
-            ((Text) innerContainer.lookup("#descriptionText")).setText("Description : " + article.getDescription());
+        HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
+        ((Text) innerContainer.lookup("#nomText")).setText("Nom : " + article.getNom());
+        ((Text) innerContainer.lookup("#descriptionText")).setText("Description : " + article.getDescription());
+        ((Text) innerContainer.lookup("#prixText")).setText("Prix : " + article.getPrix());
+        ((Text) innerContainer.lookup("#etatText")).setText("Etat : " + article.getEtat());
 
-            ((Text) innerContainer.lookup("#prixText")).setText("Prix : " + article.getPrix());
-            ((Text) innerContainer.lookup("#etatText")).setText("Etat : " + article.getEtat());
-            Path selectedImagePath = FileSystems.getDefault().getPath(article.getImage());
+        // Load image
+        if (article.getImage() != null && !article.getImage().isEmpty()) {
+            Path selectedImagePath = Paths.get("C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + article.getImage());
             if (selectedImagePath.toFile().exists()) {
-                ((ImageView) innerContainer.lookup("#imageIV")).setImage(new Image(selectedImagePath.toUri().toString()));
-            }
-
-            ((Button) innerContainer.lookup("#editButton")).setOnAction((event) -> modifierArticle(article));
-            ((Button) innerContainer.lookup("#deleteButton")).setOnAction((event) -> supprimerArticle(article));
-             ((Button) innerContainer.lookup("#showCommentsButton")).setOnAction((event) -> displayComments(article));
-            Button archiveButton = ((Button) innerContainer.lookup("#archiverButton"));
-            archiveButton.setOnAction((event) -> specialAction(article, archiveButton));
-
-            if (article.getEtat().equals("supprimer")) {
-                archiveButton.setText("Désarchiver");
+                Image image = new Image(selectedImagePath.toUri().toString());
+                ((ImageView) innerContainer.lookup("#imageIV")).setImage(image);
             } else {
-                archiveButton.setText("Archiver");
+                System.out.println("Image not found at " + selectedImagePath);
             }
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
         }
-        return parent;
+
+        ((Button) innerContainer.lookup("#editButton")).setOnAction((event) -> modifierArticle(article));
+        ((Button) innerContainer.lookup("#deleteButton")).setOnAction((event) -> supprimerArticle(article));
+        ((Button) innerContainer.lookup("#showCommentsButton")).setOnAction((event) -> displayComments(article));
+
+        Button archiveButton = ((Button) innerContainer.lookup("#archiverButton"));
+        archiveButton.setOnAction((event) -> specialAction(article, archiveButton));
+        if (article.getEtat().equals("supprimer")) {
+            archiveButton.setText("Désarchiver");
+        } else {
+            archiveButton.setText("Archiver");
+        }
+
+    } catch (IOException ex) {
+        System.out.println(ex.getMessage());
     }
+    return parent;
+}
+
+
 
     @FXML
     private void ajouterArticle(ActionEvent event) {
@@ -221,7 +228,7 @@ public class ShowAllController implements Initializable {
             Optional<ButtonType> action = alert.showAndWait();
 
             if (action.get() == ButtonType.OK) {
-                article.setEtat("desarchiver");
+                article.setEtat("desarchive");
                 button.setText("Archiver");
 
                 if (ArticleService.getInstance().edit(article)) {

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication6.jar" size="6491931" download="eager" />
+    <jar href="JavaFXApplication6.jar" size="6493904" download="eager" />
     <jar href="lib\TrayNotification.jar" size="41019" download="eager" />
     <jar href="lib\TrayTester.jar" size="52070" download="eager" />
     <jar href="lib\barcode.jar" size="259748" download="eager" />

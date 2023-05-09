@@ -90,7 +90,7 @@ public class ParticipationController {
         if(participation.isParticipated()) {
             etat.setText("accepté");
         } else {
-              etat.setText("en attente");
+            etat.setText("en attente");
         }
 
         // set image du club
@@ -98,6 +98,16 @@ public class ParticipationController {
         Image image = new Image(file.toURI().toString());
 
         imageClub.setImage(image);
+
+        // set custom image path for the club
+        String imagePath = club.getImage();
+        String imageName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+        String imageFolderPath = "C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\";
+        String imagePathInFolder = imageFolderPath + imageName;
+        File imageFile = new File(imagePathInFolder);
+        Image customImage = new Image(imageFile.toURI().toString());
+        imageClub.setImage(customImage);
+
         // vérification de l'appartenance de l'utilisateur au club
 
         // customisation de la VBox ox
@@ -105,5 +115,6 @@ public class ParticipationController {
                 "-fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.14), 10, 0, 0, 10); " +
                 "-fx-background-color: #fff;");
     }
+
 
 }

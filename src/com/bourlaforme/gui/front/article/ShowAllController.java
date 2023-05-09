@@ -127,33 +127,36 @@ public class ShowAllController implements Initializable {
         }
     }
 
-    public Parent makeArticleModel(
-            Article article
-    ) {
-        Parent parent = null;
-        try {
-            parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_FRONT_MODEL_ARTICLE)));
+    public Parent makeArticleModel(Article article) {
+    Parent parent = null;
+    try {
+        parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_FRONT_MODEL_ARTICLE)));
 
-            HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
-            ((Text) innerContainer.lookup("#nomText")).setText("Nom : " + article.getNom());
-            ((Text) innerContainer.lookup("#descriptionText")).setText("Description : " + article.getDescription());
+        HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
+        ((Text) innerContainer.lookup("#nomText")).setText("Nom : " + article.getNom());
+        ((Text) innerContainer.lookup("#descriptionText")).setText("Description : " + article.getDescription());
 
-            ((Text) innerContainer.lookup("#prixText")).setText("Prix : " + article.getPrix());
-            ((Text) innerContainer.lookup("#etatText")).setText("Etat : " + article.getEtat());
-            Path selectedImagePath = FileSystems.getDefault().getPath(article.getImage());
-            if (selectedImagePath.toFile().exists()) {
-                ((ImageView) innerContainer.lookup("#imageIV")).setImage(new Image(selectedImagePath.toUri().toString()));
-            }
+        ((Text) innerContainer.lookup("#prixText")).setText("Prix : " + article.getPrix());
+        ((Text) innerContainer.lookup("#etatText")).setText("Etat : " + article.getEtat());
 
-            ((Button) innerContainer.lookup("#showCommentsButton")).setOnAction((event) -> specialAction(article));
-            ((Button) innerContainer.lookup("#showPdfButton")).setOnAction((event) -> genererPDF(article));
-            ((Button) innerContainer.lookup("#showPanier")).setOnAction((event) -> AjouterPanier(article));
+        String imageName = article.getImage();
+        String imagePath = "C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + imageName;
+        Path selectedImagePath = FileSystems.getDefault().getPath(imagePath);
 
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        if (selectedImagePath.toFile().exists()) {
+            ((ImageView) innerContainer.lookup("#imageIV")).setImage(new Image(selectedImagePath.toUri().toString()));
         }
-        return parent;
+
+        ((Button) innerContainer.lookup("#showCommentsButton")).setOnAction((event) -> specialAction(article));
+        ((Button) innerContainer.lookup("#showPdfButton")).setOnAction((event) -> genererPDF(article));
+        ((Button) innerContainer.lookup("#showPanier")).setOnAction((event) -> AjouterPanier(article));
+
+    } catch (IOException ex) {
+        System.out.println(ex.getMessage());
     }
+    return parent;
+}
+
     
     
      public Parent makeArticleModel2(
@@ -290,22 +293,18 @@ private void AjouterPanier(Article article) {
     boolean articleExists = false;
     for (PanierArticle panierArticle : MonPanierController.monPanierArticleList) {
         if (panierArticle.getArticle().equals(article)) {
-            panierArticle.setQuantity(panierArticle.getQuantity() + 1);
+            panierArticle.setQuantity(panierArticle.getQuantity()+ 1);
             articleExists = true;
             break;
         }
     }
     if (!articleExists) {
-        if (MonPanierController.monPanierArticleList.isEmpty()) {
-            PanierArticle panierArticle = new PanierArticle(article, MonPanierController.panier, 1);
-            MonPanierController.monPanierArticleList.add(panierArticle);
-        } else {
-            PanierArticle panierArticle = new PanierArticle(article, MonPanierController.panier, 0);
-            MonPanierController.monPanierArticleList.add(panierArticle);
-        }
+        PanierArticle panierArticle = new PanierArticle(article, MonPanierController.panier, 0);
+        MonPanierController.monPanierArticleList.add(panierArticle);
     }
+    else 
 
-    AlertUtils.makeSuccessNotification("Article ajouté avec succès");
+    AlertUtils.makeSuccessNotification("Article ajouté avec succés");
     MainWindowController.getInstance().loadInterface(Constants.FXML_FRONT_DISPLAY_ALL_PANIER_ARTICLE);
 }
 

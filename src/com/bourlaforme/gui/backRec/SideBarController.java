@@ -1,6 +1,5 @@
 package com.bourlaforme.gui.backRec;
 
-import com.bourlaforme.gui.back.*;
 import com.bourlaforme.MainApp;
 import com.bourlaforme.entities.User;
 import com.bourlaforme.utils.Animations;
@@ -32,17 +31,12 @@ public class SideBarController implements Initializable {
     private final Color COLOR_DARK = new Color(1, 1, 1, 0.65);
     private Button[] liens;
 
-
-    
     @FXML
     private Button btnReclamations;
     @FXML
     private Button btnScores;
-   
     @FXML
     private Button btnLogout;
-     
-     
     @FXML
     private AnchorPane mainComponent;
 
@@ -51,8 +45,7 @@ public class SideBarController implements Initializable {
 
         liens = new Button[]{
                 btnReclamations,
-                btnScores
-                
+                btnScores,
         };
 
         mainComponent.setBackground(new Background(new BackgroundFill(COLOR_PRIMARY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -64,20 +57,8 @@ public class SideBarController implements Initializable {
         }
         btnReclamations.setTextFill(Color.WHITE);
         btnScores.setTextFill(Color.WHITE);
-
     }
 
-    
-
-        private void goToLink(String link) {
-        for (Button lien : liens) {
-            lien.setTextFill(COLOR_DARK);
-            Animations.animateButton(lien, COLOR_GRAY, COLOR_DARK, COLOR_PRIMARY, 0, false);
-        }
-        MainWindowController.getInstance().loadInterface(link);
-    }
-
-    
     @FXML
     private void afficherReclamations(ActionEvent ignored) {
         goToLink(Constants.FXML_BACK_DISPLAY_ALL_RECLAMATION);
@@ -94,8 +75,14 @@ public class SideBarController implements Initializable {
         Animations.animateButton(btnScores, COLOR_GRAY, Color.WHITE, COLOR_PRIMARY, 0, false);
     }
 
-    
-    
+    private void goToLink(String link) {
+        for (Button lien : liens) {
+            lien.setTextFill(COLOR_DARK);
+            Animations.animateButton(lien, COLOR_GRAY, COLOR_DARK, COLOR_PRIMARY, 0, false);
+        }
+        MainWindowController.getInstance().loadInterface1(link);
+    }
+
     @FXML
     public void logout(ActionEvent actionEvent) {
         btnLogout.setOnAction(event -> {

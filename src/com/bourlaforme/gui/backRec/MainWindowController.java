@@ -1,6 +1,5 @@
 package com.bourlaforme.gui.backRec;
 
-import com.bourlaforme.gui.back.*;
 import com.bourlaforme.utils.Constants;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +34,7 @@ public class MainWindowController implements Initializable {
         try {
             staticContent = content;
 
-            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/bourlaforme/gui/backRec/SideBar.fxml")));
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Constants.FXML_BACK_SIDE_BAR1)));
             AnchorPane.setTopAnchor(parent, 0.0);
             AnchorPane.setBottomAnchor(parent, 0.0);
             AnchorPane.setRightAnchor(parent, 0.0);
@@ -47,10 +46,10 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
 
-        loadInterface(Constants.FXML_BACK_HOME1);
+        loadInterface1(Constants.FXML_BACK_HOME1);
     }
 
-    public void loadInterface(String location) {
+    public void loadInterface1(String location) {
         staticContent.getChildren().clear();
         if (getClass().getResource(location) == null) {
             System.out.println("Could not load FXML check the path");

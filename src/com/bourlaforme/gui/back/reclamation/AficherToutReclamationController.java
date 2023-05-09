@@ -1,7 +1,7 @@
 package com.bourlaforme.gui.back.reclamation;
 
 import com.bourlaforme.entities.Reclamation;
-import com.bourlaforme.gui.back.MainWindowController;
+import com.bourlaforme.gui.backRec.MainWindowController;
 import com.bourlaforme.services.ReclamationService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
@@ -110,7 +110,7 @@ public class AficherToutReclamationController implements Initializable {
 
     private void modifierReclamation(Reclamation reclamation) {
         currentReclamation = reclamation;
-        MainWindowController.getInstance().loadInterface(Constants.FXML_BACK_MANAGE_RECLAMATION);
+        MainWindowController.getInstance().loadInterface1(Constants.FXML_BACK_MANAGE_RECLAMATION);
     }
 
     private void supprimerReclamation(Reclamation reclamation) {
@@ -125,7 +125,7 @@ public class AficherToutReclamationController implements Initializable {
         if (action.isPresent()) {
             if (action.get() == ButtonType.OK) {
                 if (ReclamationService.getInstance().delete(reclamation.getId())) {
-                    MainWindowController.getInstance().loadInterface(Constants.FXML_BACK_DISPLAY_ALL_RECLAMATION);
+                    MainWindowController.getInstance().loadInterface1(Constants.FXML_BACK_DISPLAY_ALL_RECLAMATION);
                 } else {
                     AlertUtils.makeError("Could not delete reclamation");
                 }

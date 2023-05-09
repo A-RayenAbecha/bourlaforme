@@ -37,6 +37,10 @@ import com.stripe.exception.StripeException;
 //import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -185,7 +189,20 @@ public class CoachDashboard implements Initializable {
         );
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            imagePathAjout = selectedFile.getAbsolutePath();
+            // Get the selected file name
+            String fileName = selectedFile.getName();
+
+            // Set the image path with the new file name
+            imagePathAjout = fileName;
+
+            // Copy the selected file to the uploads folder
+            Path sourcePath = Paths.get(selectedFile.getAbsolutePath());
+            Path destinationPath = Paths.get("C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + fileName);
+            try {
+                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -198,7 +215,20 @@ public class CoachDashboard implements Initializable {
         );
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            imagePathAjout = selectedFile.getAbsolutePath();
+            // Get the selected file name
+            String fileName = selectedFile.getName();
+
+            // Set the image path with the new file name
+            imagePathAjout = fileName;
+
+            // Copy the selected file to the uploads folder
+            Path sourcePath = Paths.get(selectedFile.getAbsolutePath());
+            Path destinationPath = Paths.get("C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + fileName);
+            try {
+                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

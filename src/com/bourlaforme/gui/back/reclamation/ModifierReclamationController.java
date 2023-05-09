@@ -2,7 +2,7 @@ package com.bourlaforme.gui.back.reclamation;
 
 
 import com.bourlaforme.entities.Reclamation;
-import com.bourlaforme.gui.back.MainWindowController;
+import com.bourlaforme.gui.backRec.MainWindowController;
 import com.bourlaforme.services.ReclamationService;
 import com.bourlaforme.utils.AlertUtils;
 import com.bourlaforme.utils.Constants;
@@ -78,7 +78,7 @@ public class ModifierReclamationController implements Initializable {
                 }
                 AlertUtils.makeSuccessNotification("Reclamation modifié avec succés");
                 AficherToutReclamationController.currentReclamation = null;
-                MainWindowController.getInstance().loadInterface(Constants.FXML_BACK_DISPLAY_ALL_RECLAMATION);
+                MainWindowController.getInstance().loadInterface1(Constants.FXML_BACK_DISPLAY_ALL_RECLAMATION);
             } else {
                 AlertUtils.makeError("reclamation erreur");
             }

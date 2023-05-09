@@ -90,7 +90,7 @@ public class ClubController {
         prixClub.setText(club.getPrix() + " DT");
 
         // set image du club
-        File file = new File(club.getImage());
+        File file = new File("C:/Users/aziz3/OneDrive/Bureau/projet/Projet_Anarchy/public/uploads/articles/" + club.getImage());
         Image image = new Image(file.toURI().toString());
 
         imageClub.setImage(image);

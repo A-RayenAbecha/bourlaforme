@@ -10,6 +10,10 @@ import bourlaforme.utils.ServiceUser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -89,7 +93,7 @@ public class SignUpFormCTR implements  Initializable{
             us.setCoach(true);
         } else 
             us.setCoach(false);
-        us.setApproved(false);
+        us.setApproved(true);
         us.setImage(imagePathAjout);
 //        toggleGroup = new ToggleGroup();
         
@@ -152,7 +156,20 @@ public class SignUpFormCTR implements  Initializable{
         );
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            imagePathAjout = selectedFile.getAbsolutePath();
+            // Get the selected file name
+            String fileName = selectedFile.getName();
+
+            // Set the image path with the new file name
+            imagePathAjout = fileName;
+
+            // Copy the selected file to the uploads folder
+            Path sourcePath = Paths.get(selectedFile.getAbsolutePath());
+            Path destinationPath = Paths.get("C:\\Users\\aziz3\\OneDrive\\Bureau\\projet\\Projet_Anarchy\\public\\uploads\\articles\\" + fileName);
+            try {
+                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -164,12 +181,14 @@ public class SignUpFormCTR implements  Initializable{
         rb_client.setToggleGroup(toggleGroup);
         rb_client.setOnAction(event -> {
             role="ROLE_CLIENT";
+            us.setCoach(false);
         });
 
     rb_coach.setToggleGroup(toggleGroup);
     rb_coach.setOnAction(event -> {
         // set the role to ROLE_COACH
         role="ROLE_COACH";
+        us.setCoach(true);
     });
     }
     

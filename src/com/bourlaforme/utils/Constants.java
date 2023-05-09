@@ -82,4 +82,6 @@ public class Constants {
   
     public static final String FXML_BACK_HOME1 = FXML_BACK_DISPLAY_ALL_RECLAMATION;
     public static final String FXML_FRONT_HOME1 = FXML_FRONT_DISPLAY_ALL_RECLAMATION;
+    
+    public static final String FXML_BACK_SIDE_BAR1 = "/com/bourlaforme/gui/backRec/SideBar.fxml";
 }
